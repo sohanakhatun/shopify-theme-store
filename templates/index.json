@@ -1,0 +1,158 @@
+{
+  "sections": {
+    "custom_reviews_bGe6QG": {
+      "type": "custom-reviews",
+      "blocks": {
+        "ratings_WUipCp": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_EnFDXj": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_PqETkJ": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_dwHN3Q": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_8BU4GL": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_gzVCz3": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_PheQ6F": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_3wULaq": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_c9Wi9K": {
+          "type": "ratings",
+          "settings": {
+            "review": "Give your Review Here",
+            "customer_name": "Verified Customer"
+          }
+        }
+      },
+      "block_order": [
+        "ratings_WUipCp",
+        "ratings_EnFDXj",
+        "ratings_PqETkJ",
+        "ratings_dwHN3Q",
+        "ratings_8BU4GL",
+        "ratings_gzVCz3",
+        "ratings_PheQ6F",
+        "ratings_3wULaq",
+        "ratings_c9Wi9K"
+      ],
+      "settings": {
+        "heading": "Reviews",
+        "heading_size": "h0",
+        "show_customer_name": true,
+        "show_pagination": true,
+        "show_arrows": false,
+        "auto_play_duration": 3000,
+        "padding_top": 20,
+        "padding_bottom": 50
+      }
+    },
+    "custom-blog": {
+      "type": "custom-blog",
+      "settings": {
+        "heading": "Our Journal",
+        "heading_size": "h1",
+        "blog": "how-to-wear-streetwear-like-a-grown-up-men-s-fashion",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": false,
+        "padding_top": 72,
+        "padding_bottom": 64
+      }
+    },
+    "custom_testimonials_rLNVHA": {
+      "type": "custom-testimonials",
+      "blocks": {
+        "ratings_ceigx3": {
+          "type": "ratings",
+          "settings": {
+            "review": "As an industry expert with deep knowledge and understanding of this space. I cannot say enough good things about this company and their products as they are modern, clean, with sophisticated designs, quality materials and top-level support.",
+            "customer_name": "John Doe",
+            "customer_image": "shopify:\/\/shop_images\/Rectangle_78.webp"
+          }
+        },
+        "ratings_3EJLJw": {
+          "type": "ratings",
+          "settings": {
+            "review": "As an industry expert with deep knowledge and understanding of this space. I cannot say enough good things about this company and their products as they are modern, clean, with sophisticated designs, quality materials and top-level support.",
+            "customer_name": "John Doe",
+            "customer_image": "shopify:\/\/shop_images\/Rectangle_78.webp"
+          }
+        },
+        "ratings_M4TctW": {
+          "type": "ratings",
+          "settings": {
+            "review": "As an industry expert with deep knowledge and understanding of this space. I cannot say enough good things about this company and their products as they are modern, clean, with sophisticated designs, quality materials and top-level support.",
+            "customer_name": "John Doe",
+            "customer_image": "shopify:\/\/shop_images\/Rectangle_78.webp"
+          }
+        }
+      },
+      "block_order": [
+        "ratings_ceigx3",
+        "ratings_3EJLJw",
+        "ratings_M4TctW"
+      ],
+      "settings": {
+        "heading": "Reviews",
+        "heading_size": "h1",
+        "show_customer_name": true,
+        "show_pagination": true,
+        "show_arrows": false,
+        "auto_play_duration": 2000,
+        "padding_top": 40,
+        "padding_bottom": 50
+      }
+    }
+  },
+  "order": [
+    "custom_reviews_bGe6QG",
+    "custom-blog",
+    "custom_testimonials_rLNVHA"
+  ]
+}

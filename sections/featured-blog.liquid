@@ -1,0 +1,223 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% assign show_image = section.settings.show_image %}
+{% assign show_author = section.settings.show_author %}
+<section>
+  <div class="page-width blog">
+    <div class="{{section.settings.heading_size}}">
+      {{ section.settings.heading }}
+    </div>
+
+    <div class="blog-posts" id="slider">
+      <div class="splide" id="splide">
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for article in section.settings.blog.articles %}
+              <li class="blog-card">
+                {% if show_image %}
+                  <div class="blog-image">
+
+                    <img src="{{ article.image.src | image_url: width: 370 }}" alt="{{ article.image.src.alt | escape }}">
+                  </div>
+                {% endif %}
+                <div class="blog-text">
+                  <h3>{{ article.title }}</h3>
+                  {% if show_author %}
+                    <p>{{ article.author }}</p>
+                  {% endif %}
+                  <p>{{ article.published_at | date: "%B %d, %Y" }}</p>
+                  <p>{{ article.content | truncate: 170 }}</p>
+                  <div class="read-more">
+                    <a href="#" class="read-more">Read more</a>
+                    <div class="line"></div>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<script>
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var splideInstance = new Splide('#splide', {
+      type: 'slide',
+      perPage: 1,
+      autoplay: false,
+      interval: 3000,
+      gap: 10, // Gap between slides
+      pagination: false,
+      perMove: 1,
+      breakpoints: {
+        780: {
+          perPage: 1
+        }
+      }
+    }).mount();
+  });
+</script>
+
+</script>
+
+<style>
+  .read-more {
+    color: #3A837E;
+    text-decoration: none;
+  }
+  .line {
+    width: 4px;
+    height: 12px;
+    background-color: #3A837E;
+  }
+  .blog {
+    padding: 36px;
+  }
+  .blog-posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 13px;
+
+  }
+  .blog-card {
+
+    height: 100%;
+    box-shadow: 0 0 6px #cecece;
+
+  }
+  .blog-text {
+    padding: 32px;
+  }
+  .blog-card img {
+
+    object-fit: cover;
+  }
+
+</style>
+{% schema %}
+  {
+    "name": "t:sections.featured-blog.name",
+    "tag": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "Blog posts",
+        "label": "t:sections.featured-blog.settings.heading.label"
+      },
+      {
+        "type": "select",
+        "id": "heading_size",
+        "options": [
+          {
+            "value": "h2",
+            "label": "t:sections.all.heading_size.options__1.label"
+          }, {
+            "value": "h1",
+            "label": "t:sections.all.heading_size.options__2.label"
+          }, {
+            "value": "h0",
+            "label": "t:sections.all.heading_size.options__3.label"
+          }
+        ],
+        "default": "h1",
+        "label": "t:sections.all.heading_size.label"
+      },
+      {
+        "type": "blog",
+        "id": "blog",
+        "label": "t:sections.featured-blog.settings.blog.label"
+      },
+      {
+        "type": "range",
+        "id": "post_limit",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 3,
+        "label": "t:sections.featured-blog.settings.post_limit.label"
+      }, {
+        "type": "range",
+        "id": "columns_desktop",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 3,
+        "label": "t:sections.featured-blog.settings.columns_desktop.label"
+      }, {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "info": "t:sections.all.colors.has_cards_info",
+        "default": "scheme-1"
+      }, {
+        "type": "checkbox",
+        "id": "show_image",
+        "default": true,
+        "label": "t:sections.featured-blog.settings.show_image.label",
+        "info": "t:sections.featured-blog.settings.show_image.info"
+      }, {
+        "type": "checkbox",
+        "id": "show_date",
+        "default": true,
+        "label": "t:sections.featured-blog.settings.show_date.label"
+      }, {
+        "type": "checkbox",
+        "id": "show_author",
+        "default": false,
+        "label": "t:sections.featured-blog.settings.show_author.label"
+      }, {
+        "type": "checkbox",
+        "id": "show_view_all",
+        "default": true,
+        "label": "t:sections.featured-blog.settings.show_view_all.label"
+      }, {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.featured-blog.presets.name"
+      }
+    ]
+  }
+{% endschema %}

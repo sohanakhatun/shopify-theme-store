@@ -1,0 +1,95 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "link_list_HLkVbc": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SHOP",
+            "menu": "footer"
+          }
+        },
+        "link_list_AX6wHL": {
+          "type": "link_list",
+          "settings": {
+            "heading": "ABOUT",
+            "menu": "footer"
+          }
+        },
+        "link_list_kQ96K9": {
+          "type": "link_list",
+          "settings": {
+            "heading": "ACCOUNT",
+            "menu": "about-menu"
+          }
+        },
+        "text_VGdTda": {
+          "type": "text",
+          "settings": {
+            "heading": "COMPANY",
+            "subtext": "<p>Effortless is a quick-launch value concept that is optimized for success.Learn More<\/p>"
+          }
+        },
+        "text_timing": {
+          "type": "text",
+          "settings": {
+            "heading": "Number",
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+          }
+        },
+        "text_contact": {
+          "type": "text",
+          "settings": {
+            "heading": "Email",
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+          }
+        },
+        "text_chat": {
+          "type": "text",
+          "settings": {
+            "heading": "Live Chat",
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+          }
+        },
+        "text_help": {
+          "type": "text",
+          "settings": {
+            "heading": "Help Center",
+            "subtext": "<p>Find answers online anytime<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_HLkVbc",
+        "link_list_AX6wHL",
+        "link_list_kQ96K9",
+        "text_VGdTda",
+        "text_timing",
+        "text_contact",
+        "text_chat",
+        "text_help"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe and Save Stay in touch.",
+        "enable_follow_on_shop": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 100,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
