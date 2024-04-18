@@ -1,0 +1,180 @@
+{{ 'custom-testimonials.css' | asset_url | stylesheet_tag }}
+{% style %}
+  .custom-testimonials--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media screen and (min-width: 749px) {
+    .custom-testimonials--{{ section.id }} {
+      padding-top: {{ section.settings.padding_top |  divided_by: 2 }}px;
+      padding-bottom: {{ section.settings.padding_bottom |  divided_by: 2 }}px;
+    }
+  }
+{% endstyle %}
+<section>
+  <div class="custom-testimonials--{{section.id}} custom-testimonials-wrapper" id="testimonial-slider">
+
+    <div class="custom-testimonials-wrapper--testimonials-wrapper page-width">
+
+      <div class="splide">
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for block in section.blocks %}
+
+              <li class="splide__slide custom-testimonials-wrapper--testimonials-wrapper--testimonial-card">
+                <div class="custom-testimonials-wrapper--testimonials-wrapper--testimonial-card--testimonials-quote">
+                  <span class="">“</span>
+                </div>
+                {% if block.settings.customer_image != blank %}
+                  <img
+                    src="{{ block.settings.customer_image |  image_url }}"
+                    alt="customer_image"
+                    width="400"
+                    height="400" />
+                {% endif %}
+                <div class="custom-testimonials-wrapper--testimonials-wrapper--testimonial-card--testimonial-text">
+                  <p>{{ block.settings.review }}</p>
+                  {% render 'testimonials_ratings_star' %}
+                  <h3>-{{ block.settings.customer_name }}</h3>
+                </div>
+
+              </li>
+
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var splideInstance = new Splide('#testimonial-slider .splide', {
+      type: 'slide',
+      perPage: 1,
+      autoplay: true,
+      arrows: false,
+      interval: 2000,
+      gap: 15, 
+      pagination: true,
+      perMove: 1,
+      animation: 'slide',
+      easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)', 
+    
+    transitionDuration: 1000,
+    }).mount();
+  });
+</script>
+{% schema %}
+  {
+    "name": "custom-testimonials",
+    "class": "section",
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "Reviews",
+        "label": "Reviews"
+      },
+      {
+        "type": "select",
+        "id": "heading_size",
+        "options": [
+          {
+            "value": "h2",
+            "label": "Small"
+          }, {
+            "value": "h1",
+            "label": "Medium"
+          }, {
+            "value": "h0",
+            "label": "Large"
+          }
+        ],
+        "default": "h1",
+        "label": "Medium"
+      },
+      {
+        "type": "header",
+        "content": "Ratings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_customer_name",
+        "label": "Show Customer Name",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_pagination",
+        "label": "Show dots",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_arrows",
+        "label": "Show Arrows",
+        "default": false
+      }, {
+        "type": "range",
+        "id": "auto_play_duration",
+        "label": "Autoplay duration",
+        "min": 1000,
+        "max": 5000,
+        "step": 1000,
+        "unit": "ms",
+        "default": 2000
+      }, {
+        "type": "header",
+        "content": "Section Padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "default": 0
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "ratings",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "text",
+            "id": "review",
+            "label": "Review",
+            "default": "Give your Review Here"
+          }, {
+            "type": "text",
+            "id": "customer_name",
+            "label": "Customer Name",
+            "default": "Verified Customer"
+          }, {
+            "type": "image_picker",
+            "id": "customer_image",
+            "label": "Customer Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Customer Testimonials",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}

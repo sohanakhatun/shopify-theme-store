@@ -1,0 +1,40 @@
+.custom-reviews-wrapper--reviews-slider--view-all {
+  background-color: rgb(56, 131, 126);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  width: 12rem;
+  justify-content: center;
+  margin: 80px auto auto;
+  font-weight: 700;
+  font-size: medium;
+  text-transform: capitalize;
+}
+
+.custom-reviews-wrapper--reviews-slider--view-all:hover {
+  cursor: pointer;
+}
+
+.custom-reviews-wrapper--reviews-slider {
+  margin-top: 23px;
+}
+
+.custom-reviews-wrapper--reviews-slider--review-card {
+  box-sizing: border-box;
+  height: fit-content;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 6px #cecece;
+  padding: 22px;
+width: 100%;
+
+}
+

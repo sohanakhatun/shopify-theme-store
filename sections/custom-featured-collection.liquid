@@ -1,0 +1,28 @@
+<h2>
+    {% for Product in section.settings.product_list %}
+        {% render 'custom-product-card',product:Product %}
+    {% endfor %}
+</h2>
+
+{% schema %}
+  {
+    "name": "custom-feature",
+    "settings": [
+      {
+        "type": "text",
+        "id": "name",
+        "label": "name"
+      },
+      {
+        "type": "product_list",
+        "id": "product_list",
+        "label": "Product List"
+      }
+    ],
+    "presets": [
+      {
+        "name": "custom feature"
+      }
+    ]
+  }
+{% endschema %}

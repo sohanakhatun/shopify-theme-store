@@ -1,0 +1,83 @@
+<section class="more-info">
+  <div class="more-info-wrapper">
+    {% if section.settings.text != blank %}
+      <p>{{ section.settings.text }}</p>
+    {% endif %}
+    {% if section.settings.text2 != blank %}
+      <p>{{ section.settings.text2 }}</p>
+    {% endif %}
+    <button>Shop Now</button>
+  </div>
+</section>
+<style>
+  .more-info {
+    background: {{ section.settings.background }};
+    color: {{ section.settings.text_color }};
+    display: flex;
+    justify-content: center;
+    font-family: Arial
+    , Helvetica
+    , sans-serif;
+  }
+
+  .more-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .more-info-wrapper h1 {
+    font-size: 50px;
+
+  }
+
+  .more-info-wrapper button {
+    padding: 10px 20px;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .more-info-wrapper button:hover {
+    background-color: rgb(185, 185, 185);
+
+  }
+</style>
+
+{% schema %}
+{
+  "name": "More Info Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    }, {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    }, {
+      "type": "text",
+      "id": "text",
+      "label": "Text 1",
+      "default": "Default Text 1"
+    }, {
+      "type": "text",
+      "id": "text2",
+      "label": "Text 2",
+      "default": "Default Text 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "More Info Section"
+    }
+  ]
+}
+{% endschema %}
