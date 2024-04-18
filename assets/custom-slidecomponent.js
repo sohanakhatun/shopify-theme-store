@@ -23,7 +23,6 @@ if (!customElements.get("carousel-component")) {
             }).mount();
           }
         });
-
         // Sync testimonial slider with main image slider
         if (testimonialSlider && mainImageSlider) {
           testimonialSlider.on("moved", function (newIndex) {
