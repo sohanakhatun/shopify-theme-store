@@ -325,6 +325,9 @@
     },
     "custom_blog_reKUq4": {
       "type": "custom-blog",
+      "custom_css": [
+
+      ],
       "settings": {
         "heading": "<strong>Our Journal<\/strong>",
         "heading_size": "h1",
