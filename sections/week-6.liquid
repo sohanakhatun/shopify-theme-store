@@ -58,7 +58,7 @@
       </carousel-component>
       <carousel-component
         class="splide slider-wrapper--text-slider"
-        data-desktopperpage="2"
+        data-desktopperpage="1.5"
         data-mobilePerPage="1"
         data-autoplay="{{ section.settings.auto_play }}"
         data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
@@ -121,6 +121,7 @@
 </section>
 
 {% if customer %}
+
   <section class="subscribe-wrapper">
     {% for block in section.blocks %}
       {% if block.type == 'newsletter' %}

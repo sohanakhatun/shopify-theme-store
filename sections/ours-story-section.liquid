@@ -1,0 +1,585 @@
+
+{% style %}
+
+.ourstory-section--{{ section.id }}{
+  padding-top:{{ section.settings.padding_top | divided_by:2 }}px;
+  padding-bottom:{{ section.settings.padding_bottom | divided_by:2 }}px;
+  background-color: {{section.settings.backgrond_color}};
+  min-height: 100vh;
+
+
+}
+@media screen and (min-width:749px){
+  .ourstory-section--{{ section.id }}{
+  padding-top:{{ section.settings.padding_top }}px;
+  padding-bottom:{{ section.settings.padding_bottom }}px;
+  
+}
+
+}
+
+*{
+  font-family: "Montserrat";
+}
+
+*, :after, :before {
+    box-sizing: inherit;
+    
+}
+.our-story-content-container{
+    display: flex;
+    justify-content: center;
+
+}
+.our-story-text-contentainer{
+    padding: 5rem;
+}
+
+.our-story-iamge-container{
+    width: 60%;
+    border:none;
+}
+.our-story-text-contentainer{
+    width: 40%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.img-ele{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.heading-Ele{
+    color: #ffffff;
+    font-size: 40px;
+}
+
+ .para-Ele{
+  font-size:20px;
+    opacity: .7;
+    color: #ffffff;
+    font-family: "Roboto";
+    font-weight:0;
+}  
+.button-ele {
+    padding: 10px 30px;
+    font-size: 16px;
+    height: 40px;
+    width: 160px;
+    border-radius:8px ;
+    outline: none;
+    background-color: #3A837E;
+    border: none;
+    color: #ffffff;
+    margin-top: 20px;
+    font-weight:bold;
+
+}
+
+@media screen and (max-width:1000px) {
+    .our-story-content-container{
+        flex-direction: column;
+    }
+    .our-story-iamge-container{
+        width: 100%;
+    }
+    .our-story-text-contentainer{
+        width: auto;
+    }
+    .our-story-text-contentainer{
+        padding: 3rem;
+    }
+}
+.splide__slide{
+  position: "relative"
+}
+
+
+#ourStorySplider .splide__pagination__page{
+    bottom: -50px;
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    margin: 5px;
+}
+#ourStorySplider .splide__pagination__page.is-active{
+    background-color: #3A837E;
+    transform: scale(1);
+}
+.product-tag-circle-top{
+  position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    z-index: 9;
+    border-radius: 100%;
+    top: 0%;
+    left: 0%;
+
+}
+.hotspot-container-top .product-tag-circle-top:before {
+    position: absolute;
+    content: "";
+    border-radius: 100%;
+    transition: all .4s;
+    border: 15px solid #ffffff80;
+    width: 36px;
+    height: 36px;
+    left: -10px;
+    z-index: 8;
+    top: -10px;
+}
+.product-tag-circle-bottom{
+  position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    z-index: 9;
+    border-radius: 100%;
+    top: 0%;
+    left: 0%;
+
+}
+.hotspot-container-bottom .product-tag-circle-bottom:before {
+    position: absolute;
+    content: "";
+    border-radius: 100%;
+    transition: all .4s;
+    border: 15px solid #ffffff80;
+    width: 36px;
+    height: 36px;
+    left: -10px;
+    z-index: 8;
+    top: -10px;
+}
+.top-card_hover_show{
+  padding: 8px;
+  display: flex;
+  background-color:#fff;
+  position:absolute;
+  align-items:center;
+  top:10%;
+  left:10%;
+  z-index: 10;
+}
+.view_deatails_btn{
+  font-size: 1.5rem;
+    color: rgb(58, 131, 126,1);
+    font-weight: 700;
+    text-decoration: underline;
+    padding-top: 10px;
+    display: block;
+}
+.hover_card_image_container{
+  display: flex;
+    margin-right: 10px;
+    width: 82px;
+    max-height: 82px;
+}
+.hover_card_image{
+  width:100%;
+  object-position:center;
+  object-fit:cover;
+
+}
+.card-text-container{
+  background-color: #fff;
+  max-width: 150px;
+}
+.product_card_title{
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration:underline;
+    padding: 0;
+    margin:0;
+    color:#000;
+    font-weight:0;
+}
+.product_card_price{
+  font-size: 1.5rem;
+    color: #000;
+    text-decoration:underline;
+    padding: 0;
+    margin:0;
+    font-weight:0;
+}
+
+.bottom-card_hover_show{
+  padding: 8px;
+  display: flex;
+  background-color:#fff;
+  position:absolute;
+  align-items:center;
+  top:20%;
+  left:20%;
+  z-index: 10;
+
+}
+
+.card-container-link-bottom{
+  opacity:0;
+}
+.card-container-link-top{
+ opacity:0;
+}
+.hotspot-container-top:hover~.card-container-link-top{
+  opacity:1;
+}
+.hotspot-container-bottom:hover~.card-container-link-bottom{
+  opacity:1;
+}
+.card-container-link-top:hover{
+  opacity:1;
+}
+.card-container-link-bottom:hover{
+  opacity:1;
+}
+
+{% endstyle %}
+
+
+
+<div class="our-story-bg-container ourstory-section--{{ section.id }}" >
+  <div class="our-story-content-container page-width">
+   <div class="our-story-iamge-container">
+       <div class="splide" id="ourStorySplider">
+           <div class="splide__track">
+               <ul class="splide__list">
+                  {% for block in section.blocks %}
+                   <li class="splide__slide">
+                      {% if block.settings.Image_id != blank %}
+                        <img src="{{ block.settings.Image_id | image_url}}" height="auto" width="auto" class="img-ele">
+                        {% if block.settings.first_checkbox == true %}
+                        <div class="hotspot-container-top">
+                         <span class="product-tag-circle-top" style="top:{{ block.settings.first_hotspot_top_position }}%; left:{{ block.settings.first_hotspot_left_position }}%; transform:translate(-50%)"></span>
+                        </div>
+                        <a href= "{{ block.settings.first_card_link }}" class="card-container-link-top">
+                          <div class="top-card_hover_show" style="top:{{ block.settings.first_card_top_position }}%; left:{{ block.settings.first_card_left_position }}%;">
+                            
+                              <div class="hover_card_image_container">
+                                <img src= "{{ block.settings.first_product.featured_image | image_url }} "  height=82 width=82 class="hover_card_image">
+                              </div>
+                              <div class="card-text-container">
+                                <p class= "product_card_title">{{ block.settings.first_product.title }}</p>
+                                <p class= "product_card_price">BZ${{ block.settings.first_product.price | money_without_currency }}</p>
+                                <span class="view_deatails_btn">View full details</span>
+  
+                              </div>
+  
+                          </div>
+                          
+                        </a>
+                        {%  endif %}
+                        {% if block.settings.second_checkbox == true %}
+                        <div class="hotspot-container-bottom">
+                          <span class="product-tag-circle-bottom" style="top:{{ block.settings.second_hotspot_top_position}}%; left:{{ block.settings.second_hotspot_left_position}}%;"></span>
+                         </div>
+                         <a href= "{{ block.settings.second_card_link }}"  class="card-container-link-bottom">
+                          <div class="bottom-card_hover_show" style="top:{{ block.settings.second_card_top_position }}%; left:{{ block.settings.second_card_left_position }}%; transform:translate(-50%)">
+                            
+                              <div class="hover_card_image_container">
+                                {% if block.settings.second_product.featured_image != blank %}
+                                <img src= "{{ block.settings.second_product.featured_image | image_url }} "  height=82 width=82 class="hover_card_image" alt="product-image">
+                              {% endif %}
+                              </div>
+                              <div class="card-text-container">
+                                {% if  block.settings.second_product.title != blank %}
+                                <p class= "product_card_title">{{ block.settings.second_product.title }}</p>
+                                {% endif %}
+                                {% if block.settings.second_product.price != blank  %}
+                                <p class= "product_card_price">BZ${{ block.settings.second_product.price | money_without_currency }}</p>
+                                {% endif %}
+                                <span class="view_deatails_btn">View full details</span>
+  
+                              </div>
+                        
+  
+                          </div>
+                        </a>
+                        {%  endif %}
+                        
+                      {% endif %}
+                   </li>
+                   {% endfor %}
+               </ul>
+           </div>
+       </div>
+   </div>
+   <div class="our-story-text-contentainer" data-aos="fade-up" data-aos-duration="2000" >
+       <div class="heading-container">
+           {% if section.settings.heading != blank %}
+            <h1 class="heading-Ele">{{section.settings.heading  }}</h1>
+            {% endif %}
+            {% if section.settings.text != blank %}
+              <p class="para-Ele">{{ section.settings.text }}</p>
+            {% endif %}
+             {% if section.settings.button_label != blank  %}
+              <div class="button-container">
+                <a href="{{ section.settings.button_linkEl  }}"> <button class="button-ele"> {{ section.settings.button_label }}   </button></a>
+            </div>
+
+              {% endif %}
+           
+       </div>
+
+   </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var splide = new Splide('#ourStorySplider', {
+        autoplay: false,
+        pagination: true,
+        arrows: false
+    }).mount();
+  });
+</script> 
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+<script>
+  AOS.init({once:true});
+</script>
+
+
+
+
+{% schema %}
+{
+  "name": "our story section",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Our Story",
+      "label": "t:sections.image-with-text.blocks.heading.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Effortless was designed and developed by leading ecommerce professionals who are passionate about design and user experience, creating intuitive, user-friendly layouts that are optimized for success and sure to delight our customers.",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Shop Now",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_linkEl",
+      "label": "Button Url"
+    },
+    { 
+      "type": "color_background",
+      "id": "backgrond_color",
+      "label": "Background color",
+      "default":"#2d2d2d"
+    
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+  },
+  {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+  },
+  {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+  }
+   
+  ],
+  "blocks": [
+    { 
+      "name": "Image Picker",
+      "type": "image_picker",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Slider Image"
+        },
+        {
+           "type": "image_picker",
+           "id": "Image_id",
+           "label": "Pick an Image"
+        },
+        {
+          "type": "header",
+          "content": "First Hostpot Position"
+        },
+        {
+          "type": "checkbox",
+          "id": "first_checkbox",
+          "label": "Display first Hotspot",
+          "default": false
+        },
+        {
+          "type": "product",
+          "id": "first_product",
+          "label": "First Product"
+        },
+        {
+          "type": "range",
+          "id": "first_hotspot_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "first_hotspot_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Hotspot Left position",
+          "default": 0
+        },
+        {
+          "type": "paragraph",
+          "content": "First Product Card Positions"
+        },
+        {
+          "type": "range",
+          "id": "first_card_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Card Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "first_card_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Card Left position",
+          "default": 0
+        },
+        {
+          "type": "url",
+          "id": "first_card_link",
+          "label": "First Card Link"
+        },
+        {
+          "type": "header",
+          "content": "Second Hotspot Position"
+        },
+        {
+          "type": "checkbox",
+          "id": "second_checkbox",
+          "label": "Display Second Hotspot",
+          "default": false
+        },
+        {
+          "type": "product",
+          "id": "second_product",
+          "label": "Second Product"
+        },
+        {
+          "type": "range",
+          "id": "second_hotspot_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Hotspot Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "second_hotspot_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Hotspot Left position",
+          "default": 0
+        },
+        {
+          "type": "paragraph",
+          "content": "Second Product Card Positions"
+        },
+        {
+          "type": "range",
+          "id": "second_card_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Card Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "second_card_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Card Left position",
+          "default": 0
+        },
+        {
+          "type": "url",
+          "id": "second_card_link",
+          "label": "Second Card Link"
+        }
+
+      ]
+    
+    
+    }
+   
+   
+  ],
+  "presets": [
+    {
+      "name": "Our Story Section",
+      "blocks": [
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,84 @@
+{{ 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css' | stylesheet_tag }}
+<script src="{{ "https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"}}" defer></script>
+
+
+{{ 'featured-in.css' | asset_url | stylesheet_tag }}
+
+<div class="featuredIn-section">
+  <div class="heading">
+    {% if section.settings.rich_text != blank %}
+      <h1>{{ section.settings.rich_text }}</h1>
+    {% endif %}
+  </div>
+  <div class="slider" >
+    <div class="splide" id="featuredIn-slider">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {% for block in section.blocks %}
+            <li class="splide__slide">
+              <div class="slide-content">
+                <img
+                  src="{{ block.settings.image | image_url }}"
+                  alt="Slide Image"
+                  height="68"
+                  width="150">
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Splide('#featuredIn-slider.splide', {
+      pagination: true,
+      perPage: 3,
+      gap: '60px',
+      breakpoints: {
+        425: {
+          perPage: 1,
+          gap: '20px',
+        },
+        768: {
+          perPage: 3,
+        },
+      },
+    }).mount();
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Featured In",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "rich_text",
+        "label": "Rich Text"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured In"
+      }
+    ]
+  }
+{% endschema %}

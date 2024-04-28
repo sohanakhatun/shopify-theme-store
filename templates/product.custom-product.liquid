@@ -1,0 +1,105 @@
+<script src="{{'custom-splide-component.js' |  asset_url}}" defer></script>
+
+{{ "custom-product-card.css" | asset_url | stylesheet_tag }}
+
+
+<div class="product-wrapper">
+  <div class="product-wrapper--container page-width">
+    <div class="product-image-slider">
+      {% comment %} Slider Section {% endcomment %}
+      <div class="product-image-slider--thumbnail-slider">
+        <carousel-component class="splide product-card-slider">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for image in product.images %}
+                <li class="splide__slide thumbnail_image_list">
+                  <img
+                    src="{{image | image_url}}"
+                    alt="{{product.title}}"
+                    width="300"
+                    height="300" />
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </carousel-component>
+      </div>
+
+      <div class="product-image-slider--main-image">
+        <carousel-component class="splide slider-wrapper--image-splide product-card-slider">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for image in product.images %}
+
+                <li class="splide__slide">
+
+                  <img
+                    src="{{image |  image_url}}"
+                    alt="{{product.title}}"
+                    width="{{image.width}}"
+                    height="{{image.height}}" />
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </carousel-component>
+      </div>
+    </div>
+    <div class="product-details-wrapper">
+        <p class="product-title">{{ product.title }}</p>
+        {%- if product.available -%}
+            <p class="avaliable">Avaliable</p>
+          {%- else -%}
+            <p class="not-avaliable">Not Avaliable</p>
+          {%- endif -%}
+          <p class="product-price">{{ product.price | money_with_currency }}</p>
+      <div class="color-picker">
+        {% comment %} variants {% endcomment %}
+      </div>
+      <a href="#" class="size-chart">View Size Chart</a>
+      <div class="qtydiv">
+        <label for="Quantity" class="quantity-selector">Quantity</label>
+        <div class="qtybox">
+          <span class="btnqty qtyminus icon icon-minus">-</span>
+          <input
+            type="text"
+            id="quantity"
+            name="quantity"
+            value="1"
+            min="1"
+            class="quantity-selector quantity-input"
+            readonly="">
+          <span class="btnqty qtyplus icon icon-plus">+</span>
+        </div>
+      </div>
+      <div class="gift-wrap-checkbox">
+        <label for="checkbox">Add gift wrap to this item</label>
+        <input type="checkbox" />
+      </div>
+      <button class="add-to-cart-btn">Add To Cart</button>
+      <button class="buy-with-shop">Buy With Shop</button>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.querySelectorAll('.qtybox .btnqty').forEach(function(button) {
+  button.addEventListener('click', function() {
+    var qtyBox = this.parentElement;
+    var quantityInput = qtyBox.querySelector('.quantity-input');
+    var qty = parseInt(quantityInput.value);
+  
+    if (this.classList.contains('qtyplus')) {
+      qty++;
+    } else {
+      if (qty > 1) {
+        qty--;
+      }
+    }
+  
+    qty = isNaN(qty) ? 1 : qty;
+    quantityInput.value = qty;
+  });
+  });
+</script>
+

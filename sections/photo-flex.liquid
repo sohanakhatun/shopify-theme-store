@@ -1,0 +1,90 @@
+{{ 'flex-photo.css' | asset_url | stylesheet_tag }}
+
+<div class="photo-flex-section">
+  {% for block in section.blocks %}
+    {% assign num = forloop.index | divided_by: 2 %}
+    <div class="photo-flex-section--wrapper photo-flex-section--info{%if num == 0 %}-row {% else %}-row-reverse {% endif %}">
+      <div class="photo-flex-section--image">
+        {% render 'responsive-picture'
+          , desktopImage: block.settings.image_desktop
+          , mobileImage: block.settings.image_mobile
+        %}
+      </div>
+      <div class="photo-flex-section--content">
+        <div class="photo-flex-section--content--heading">
+          <h2>
+            {{ block.settings.heading }}
+          </h2>
+        </div>
+        <div class="photo-flex-section--content--sub-heading">
+          <p>{{ block.settings.sub_heading }}</p>
+        </div>
+        <div class="photo-flex-section--content--button">
+          <a href="{{block.settings.button_link}}">{{ block.settings.button_label }}</a>
+        </div>
+      </div>
+    </div>
+
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Photo flex",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "label": "header",
+        "id": "header",
+        "default": "Photo flex section"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "row",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image_desktop",
+            "label": "Desktop image",
+            "info": "Recommended dimensions: 1440 x 600"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Mobile image",
+            "info": "Recommended dimensions: 600 x 400"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "sub_heading",
+            "label": "Sub Heading"
+          }, {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button Label",
+            "default": "Shop Now"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Photo flex"
+      }
+    ]
+
+  }
+{% endschema %}

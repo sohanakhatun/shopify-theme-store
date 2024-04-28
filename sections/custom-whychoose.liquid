@@ -1,0 +1,69 @@
+{{ 'custom-whychoose.css' | asset_url | stylesheet_tag }}
+
+<div class="Whychooseheader_parent">
+  <h1>{{ section.settings.topheading }}</h1>
+  <div class="whychooseheader_child">
+    {% for block in section.blocks %}
+      <div class="whychooseheading">
+        <div class="svgimages">
+          {% if block.settings.image_select != blank %}
+            <img
+              src="{{ block.settings.image_select | image_url  }}"
+              width="50px"
+              height="50px"
+            >
+          {% endif %}
+        </div>
+
+        <h3 class="headingtop">{{ block.settings.header }}</h3>
+        <p class="paradescription">{{ block.settings.para_view }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "USP Section",
+  "tag": "section",
+  "class": "section",
+
+  "settings": [
+    {
+      "type": "text",
+      "id": "topheading",
+      "label": "Topheading",
+      "default": "Why Choose Effortless?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "imageBox",
+      "name": "imageBox",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_select",
+          "label": "Select Image",
+          "info": "Select an Image"
+        }, {
+          "type": "text",
+          "id": "header",
+          "label": "Heading"
+        }, {
+          "type": "textarea",
+          "id": "para_view",
+          "label": "Description"
+        }
+
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Why choose Effort Header"
+    }
+  ]
+}
+{% endschema %}

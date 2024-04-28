@@ -1,0 +1,225 @@
+{% style %}
+  .custom-announcementbar--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | divided_by:2 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | divided_by:2 }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+  .custom-announcementbar--text {
+    line-height: 1.5;
+    text-align: center;
+    font-size: {{ section.settings.font_size_for_mobile }}px;
+    color: {{ section.settings.text_color }};
+    font-weight: {{ section.settings.font_weight }};
+  }
+
+
+  .custom-announcementbar--navigation_styles {
+    text-decoration: none;
+    outline: none;
+    margin-left: 10px;
+    color: {{ section.settings.text_color }}
+  }
+
+
+  @media screen and (min-width: 749px) {
+    .custom-announcementbar--{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .custom-announcementbar--splide-container {
+      width: 600px;
+      margin: 0 auto;
+    }
+    .custom-announcementbar--text {
+      font-size: {{ section.settings.fontsize_for_desktop }}px;
+    }
+  }
+
+
+{% endstyle %}
+<section class="custom-announcementbar--{{ section.id }} .announcement-bar-section" id="announcement_bar_slider">
+  <div class="splide  custom-announcementbar--splide-container">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% for block in section.blocks %}
+          <li class="splide__slide custom-announcementbar--text">{{ block.settings.announcement }}
+            <span>
+              <a
+                href="{{block.settings.navigation_url}}"
+                class="custom-announcementbar--navigation_styles"
+                style="border-bottom: 1px solid {{ block.settings.underline_color }}; color: {{block.settings.text_color }};">
+                {{ block.settings.navigation_text }}
+              </a>
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var splide = new Splide('.splide', {
+        type   : 'loop',
+        permove:1,
+        autoplay: {{ section.settings.auto_play }},
+        interval: {{ section.settings.auto_play_duration }} * 1000, 
+        pagination: {{ section.settings.show_pagination }},
+        arrows: {{ section.settings.show_arrows }},
+      }).mount();
+      
+    });
+</script>
+
+{% schema %}
+  {
+    "name": "custom-announcement-bar",
+    "tag": "section",
+    "class": "section",
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Slider options"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#000000"
+      },
+
+      {
+        "type": "checkbox",
+        "id": "auto_play",
+        "label": "Enable auto play",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_pagination",
+        "label": "Show dots",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "show_arrows",
+        "label": "Show arrows",
+        "default": true
+      }, {
+        "type": "range",
+        "id": "auto_play_duration",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "unit": "sec",
+        "label": "Autoplay duration",
+        "default": 4
+      }, {
+        "type": "header",
+        "content": "Text customization"
+      }, {
+        "type": "range",
+        "id": "font_size_for_mobile",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "label": "Fontsize for mobile",
+        "default": 12
+      }, {
+        "type": "range",
+        "id": "fontsize_for_desktop",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Fontsize for desktop",
+        "default": 20
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#ffffff"
+      }, {
+        "type": "range",
+        "id": "font_weight",
+        "min": 100,
+        "max": 1000,
+        "step": 100,
+        "label": "Font Weight",
+        "default": 300
+      }, {
+        "type": "header",
+        "content": "Section padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 20
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 20
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Slide",
+        "type": "slide",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Text customization"
+          },
+          {
+            "type": "text",
+            "id": "announcement",
+            "label": "Pre announcement",
+            "default": "An Effortless Shipping Experience"
+          },
+          {
+            "type": "text",
+            "id": "navigation_text",
+            "label": "Navigation Label",
+            "default": "Learn More",
+            "info": "Navigation Label"
+          },
+          {
+            "type": "url",
+            "id": "navigation_url",
+            "label": "Navigation Url"
+          }, {
+            "type": "color",
+            "id": "underline_color",
+            "label": "Navigation link Underline color",
+            "default": "#06aaa1"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "custom-announcement-bar",
+        "blocks": [
+          {
+            "type": "slide"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

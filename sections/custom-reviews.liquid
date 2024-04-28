@@ -1,4 +1,5 @@
 {{ 'custom-reviews.css' | asset_url | stylesheet_tag }}
+
 {% style %}
   .custom-reviews--{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
@@ -17,24 +18,24 @@
 {% assign show_pagination = section.settings.show_pagination %}
 {% assign auto_play_duration = section.settings.auto_play_duration %}
 {% assign show_arrows = section.settings.show_arrows %}
-<section>
+<section class="review-slider-wrapper container">
   <div class="custom-reviews--{{ section.id }} custom-reviews-wrapper" id="reviews-slider">
     <div class="page-width">
-      <div class="custom-reviews-wrapper--header-wrapper">
-        <div class="{{section.settings.heading_size}}">{{ section.settings.heading }}</div>
-      </div>
+      <div class="{{section.settings.heading_size}}">{{ section.settings.heading }}</div>
+    </div>
+    <div class="page-width">
       <div class="custom-reviews-wrapper--reviews-slider">
         <div class="splide">
           <div class="splide__track">
             <ul class="splide__list">
               {% for block in section.blocks %}
-                <li class="splide__slide">
+                <li class="splide__slide slide-list">
                   <div class="custom-reviews-wrapper--reviews-slider--review-card">
                     <div class="custom-reviews-wrapper--reviews-slider--review-card--review-image">
                       {% render 'ratings-star' %}
                     </div>
-  
-                    <p>{{ block.settings.review | truncatewords: 10 }}</p>
+
+                    <p>{{ block.settings.review  }}</p>
                     {% if show_customer_name %}
                       <h3>- {{ block.settings.customer_name }}</h3>
                     {% endif %}
@@ -44,10 +45,14 @@
             </ul>
           </div>
         </div>
-        <button class="custom-reviews-wrapper--reviews-slider--view-all">View all</button>
+        <div class="view-all-wrapper">
+          <button class="primary-button">View all</button>
+        </div>
+      
       </div>
     </div>
-  
+
+
   </div>
 </section>
 
@@ -60,7 +65,7 @@
     
         arrows: {{show_arrows}},
         interval: {{auto_play_duration}},
-        gap: 15,
+        gap: 2,
         pagination: {{show_pagination}},
         perMove: 1,
         breakpoints: {
@@ -160,7 +165,7 @@
         "name": "Review",
         "settings": [
           {
-            "type": "text",
+            "type": "textarea",
             "id": "review",
             "label": "Review",
             "default": "Give your Review Here",
