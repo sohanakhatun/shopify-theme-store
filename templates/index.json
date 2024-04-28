@@ -34,6 +34,7 @@
         "slide_DXxUEc",
         "slide_FFijCz"
       ],
+      "disabled": true,
       "settings": {
         "autoplay": true,
         "show_pagination": true,
@@ -77,6 +78,7 @@
         "image_box_Pm98Yc",
         "image_box_BwVwfy"
       ],
+      "disabled": true,
       "settings": {
         "topheading": "Why Choose Effortless?"
       }
@@ -115,6 +117,7 @@
         "featured_collection_6gKRKc",
         "featured_collection_JEGtTf"
       ],
+      "disabled": true,
       "settings": {
         "title": "Collections",
         "fontSize": 39,
