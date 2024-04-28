@@ -53,7 +53,7 @@
   </div>
 
   <div>
-    {% if show_view_all%}
+    {% if show_view_all %}
       <a href="{{ section.settings.blog.url }}" class="blog-wrapper--view-all-button">View All</a>
     {% endif %}
   </div>
@@ -63,7 +63,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var splideInstance = new Splide('.blog-posts-wrapper .splide', {
       type: 'slide',
-      perPage: 3,
+      perPage: {{section.settings.columns_desktop}},
       autoplay: true,
       arrows: false,
       interval: 2000,
