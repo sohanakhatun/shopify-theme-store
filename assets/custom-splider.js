@@ -2,52 +2,52 @@ if (!customElements.get("splider-component")) {
   class Carousel extends HTMLElement {
     constructor() {
       super();
-      this.carouselElement = this;
+      this.splideElement = this;
 
       // Carousel element should have class splide
-      if (!this.carouselElement.classList.contains("splide")) return;
+      if (!this.splideElement.classList.contains("splide")) return;
 
-      this.desktopPerPage = this.carouselElement.dataset["desktopperpage"] || 3;
-      this.mobilePerPage = this.carouselElement.dataset["mobileperpage"] || 1;
-      this.focus = this.carouselElement.dataset["focus"] || "center";
-      this.type = this.carouselElement.dataset["type"] || "slide";
-      this.gap = this.carouselElement.dataset["gapbetweenslides"] || 10;
+      this.desktopPerPage = this.splideElement.dataset["desktopperpage"] || 3;
+      this.mobilePerPage = this.splideElement.dataset["mobileperpage"] || 1;
+      this.focus = this.splideElement.dataset["focus"] || "center";
+      this.type = this.splideElement.dataset["type"] || "slide";
+      this.gap = this.splideElement.dataset["gapbetweenslides"] || 10;
       this.gapMobile =
-        this.carouselElement.dataset["gapbetweenslidesonmobile"] || 10;
+        this.splideElement.dataset["gapbetweenslidesonmobile"] || 10;
       this.autoplaySpeed = parseInt(this.dataset["autoplaySpeed"]) || 3000;
-      this.direction = this.carouselElement.dataset["direction"] || "ltr";
+      this.direction = this.splideElement.dataset["direction"] || "ltr";
       this.mobilePaddingLeft =
-        this.carouselElement.dataset["mobilepaddingleft"] || "0";
+        this.splideElement.dataset["mobilepaddingleft"] || "0";
       this.mobilePaddingRight =
-        this.carouselElement.dataset["mobilepaddingright"] || "0";
+        this.splideElement.dataset["mobilepaddingright"] || "0";
       this.desktopPaddingLeft =
-        this.carouselElement.dataset["desktoppaddingleft"] || "0";
+        this.splideElement.dataset["desktoppaddingleft"] || "0";
       this.desktopPaddingRight =
-        this.carouselElement.dataset["desktoppaddingright"] || "0";
+        this.splideElement.dataset["desktoppaddingright"] || "0";
 
       // Data attribute string matching for correct boolean value
       // The fallback is used if the developer make mistake the code is forgiving
       // Read more here https://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript
       this.showarrows =
-        this.carouselElement.dataset["showarrows"] === "true" || false;
+        this.splideElement.dataset["showarrows"] === "true" || false;
       this.autoplay =
-        this.carouselElement.dataset["autoplay"] === "true" || false;
+        this.splideElement.dataset["autoplay"] === "true" || false;
       this.showarrowsonmobile =
-        this.carouselElement.dataset["showarrowsonmobile"] === "true" || false;
+        this.splideElement.dataset["showarrowsonmobile"] === "true" || false;
       this.showdots =
-        this.carouselElement.dataset["showdots"] === "true" || false;
+        this.splideElement.dataset["showdots"] === "true" || false;
       this.showdotsonmobile =
-        this.carouselElement.dataset["showdotsonmobile"] === "true" || true;
+        this.splideElement.dataset["showdotsonmobile"] === "true" || false;
       this.isNavigation =
-        this.carouselElement.dataset["isnavigation"] === "true" || false;
+        this.splideElement.dataset["isnavigation"] === "true" || false;
       this.disableDrag =
-        this.carouselElement.dataset["disabledrag"] === "true" || false;
+        this.splideElement.dataset["disabledrag"] === "true" || false;
       this.destroyOnMobile =
-        this.carouselElement.dataset["enableonmobile"] == "false" || false;
+        this.splideElement.dataset["enableonmobile"] == "false" || false;
       this.destroyOnDesktop =
-        this.carouselElement.dataset["enableondesktop"] == "false" || false;
+        this.splideElement.dataset["enableondesktop"] == "false" || false;
 
-      this.sync = this.carouselElement.dataset["carouselsyncselector"] || false;
+      this.sync = this.splideElement.dataset["carouselsyncselector"] || false;
 
       this.initCarousel();
     }
@@ -58,7 +58,7 @@ if (!customElements.get("splider-component")) {
       // More option available here https://splidejs.com/documents/
       // This slider can be customized as require check the above doc before adding any new
       // Slider library.
-      this.carousel = new Splide(this.carouselElement, {
+      this.carousel = new Splide(this.splideElement, {
         perPage: this.desktopPerPage,
         type: this.type,
         autoplay: this.autoplay,
