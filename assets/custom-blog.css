@@ -1,4 +1,4 @@
-body{
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,7 +6,9 @@ body{
 .blog-wrapper--header-wrapper {
   margin-bottom: 35px;
 }
-
+.blog-post-heading {
+  margin-bottom: 20px;
+}
 .blog-wrapper--view-all-button {
   background-color: #3a837e;
   border: none;
@@ -37,8 +39,6 @@ body{
   z-index: 1;
 }
 
-
-
 .blog-wrapper--blog-card--blog-text--read-more-wrapper--read-more {
   color: #3a837e;
   text-decoration: none;
@@ -51,7 +51,7 @@ body{
 }
 
 .blog-wrapper--blog-card--blog-text--read-more-wrapper--line::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 100%;
   margin-left: 10px;
@@ -62,33 +62,31 @@ body{
   background-color: #3a837e;
 }
 
-
-.blog-posts-wrapper .splide__slide{
+.blog-posts-wrapper .splide__slide {
   margin-bottom: 21px;
 }
 
-.blog-card{
-    background-color: #fff;
+.blog-card {
+  background-color: #fff;
   box-shadow: 0 0 6px #cecece;
+}
+.blog-image-wrapper img {
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+.blog-wrapper--blog-card--blog-text {
+  padding: 14px;
+}
 
-}
-.blog-image-wrapper img{
-    width: 100%;
-    display: block;
-    height: 100%;
-}
-.blog-wrapper--blog-card--blog-text{
-    padding: 14px;
-}
-
-@media screen and (min-width:900px) and(max-width:1200px) {
-  .blog-card{
+@media screen and (min-width: 900px) and(max-width:1200px) {
+  .blog-card {
     width: 50%;
   }
 }
 
-@media screen and (max-width:900px) {
-  .blog-card{
+@media screen and (max-width: 900px) {
+  .blog-card {
     width: 100%;
   }
 }
