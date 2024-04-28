@@ -34,7 +34,6 @@
         "slide_DXxUEc",
         "slide_FFijCz"
       ],
-      "disabled": true,
       "settings": {
         "autoplay": true,
         "show_pagination": true,
@@ -78,7 +77,6 @@
         "image_box_Pm98Yc",
         "image_box_BwVwfy"
       ],
-      "disabled": true,
       "settings": {
         "topheading": "Why Choose Effortless?"
       }
@@ -117,7 +115,6 @@
         "featured_collection_6gKRKc",
         "featured_collection_JEGtTf"
       ],
-      "disabled": true,
       "settings": {
         "title": "Collections",
         "fontSize": 39,
@@ -144,7 +141,6 @@
       "block_order": [
         "slider_EbCEd6"
       ],
-      "disabled": true,
       "settings": {
         "topheading": "Best Sellers"
       }
@@ -177,7 +173,6 @@
         "block_eU7YK7",
         "block_97ymz3"
       ],
-      "disabled": true,
       "settings": {
         "header": "Photo flex section"
       }
@@ -230,7 +225,6 @@
         "block_xbn6zb",
         "block_VnPcNE"
       ],
-      "disabled": true,
       "custom_css": [
         "h2 {color: white;}"
       ],
@@ -420,7 +414,6 @@
         "image_picker_gBPJNQ",
         "image_picker_byDUX4"
       ],
-      "disabled": true,
       "settings": {
         "heading": "Our Story",
         "text": "Effortless was designed and developed by leading ecommerce professionals who are passionate about design and user experience, creating intuitive, user-friendly layouts that are optimized for success and sure to delight our customers.",
