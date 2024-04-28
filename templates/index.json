@@ -141,6 +141,7 @@
       "block_order": [
         "slider_EbCEd6"
       ],
+      "disabled": true,
       "settings": {
         "topheading": "Best Sellers"
       }
@@ -173,6 +174,7 @@
         "block_eU7YK7",
         "block_97ymz3"
       ],
+      "disabled": true,
       "settings": {
         "header": "Photo flex section"
       }
@@ -225,6 +227,7 @@
         "block_xbn6zb",
         "block_VnPcNE"
       ],
+      "disabled": true,
       "custom_css": [
         "h2 {color: white;}"
       ],
