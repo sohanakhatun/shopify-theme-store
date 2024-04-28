@@ -10,8 +10,7 @@
           "settings": {
             "announcement": "An Effortless Shipping Experience",
             "navigation_text": "Learn More",
-            "navigation_url": "",
-            "underline_color": "#06aaa1"
+            "navigation_url": ""
           }
         },
         "slide_MUeGe4": {
@@ -19,8 +18,7 @@
           "settings": {
             "announcement": "An Effortless Shipping Experience",
             "navigation_text": "Learn More",
-            "navigation_url": "",
-            "underline_color": "#06aaa1"
+            "navigation_url": ""
           }
         },
         "slide_cDhLTb": {
@@ -28,8 +26,7 @@
           "settings": {
             "announcement": "An Effortless Shipping Experience",
             "navigation_text": "Learn More",
-            "navigation_url": "",
-            "underline_color": "#06aaa1"
+            "navigation_url": ""
           }
         }
       },
@@ -39,10 +36,10 @@
         "slide_cDhLTb"
       ],
       "settings": {
+        "backgrond_color": "#000000",
         "auto_play": true,
-        "show_pagination": false,
         "show_arrows": true,
-        "auto_play_duration": 4,
+        "auto_play_duration": 2000,
         "font_size_for_mobile": 12,
         "fontsize_for_desktop": 20,
         "text_color": "#ffffff",

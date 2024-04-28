@@ -19,7 +19,15 @@
 
 <section class="section-{{ section.id }}-padding">
   <div class="page-width blog-posts-wrapper">
-    <div class="splide">
+    <splider-component
+      class="splide"
+      data-desktopPerPage="{{section.settings.columns_desktop}}"
+      data-mobilePerPage="1"
+      data-autoplay="{{ section.settings.auto_play }}"
+      data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+      data-showArrows="{{ section.settings.show_arrows }}"
+      data-showDots="{{section.settings.show_pagination}}"
+    >
       <div class="splide__track">
         <ul class="splide__list">
           {% for article in section.settings.blog.articles %}
@@ -49,7 +57,7 @@
           {% endfor %}
         </ul>
       </div>
-    </div>
+    </splider-component>
   </div>
 
   <div>
@@ -59,29 +67,7 @@
   </div>
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var splideInstance = new Splide('.blog-posts-wrapper .splide', {
-      type: 'slide',
-      perPage: {{section.settings.columns_desktop}},
-      autoplay: true,
-      arrows: false,
-      interval: 2000,
-      gap: 30,
-      pagination: true,
-      perMove: 1,
-      breakpoints: {
-        1200: {
-          perPage: 2,
-        },
-
-        900: {
-          perPage: 1,
-        },
-      },
-    }).mount();
-  });
-</script>
+<script src="{{'custom-splide.js' |  asset_url}}" defer></script>
 
 {% schema %}
 {
@@ -178,6 +164,38 @@
       "unit": "px",
       "label": "Padding Bottom",
       "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_play",
+      "label": "Enable Autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Arrows",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "auto_play_duration",
+      "label": "Autoplay duration",
+      "min": 1000,
+      "max": 5000,
+      "step": 1000,
+      "unit": "ms",
+      "default": 2000
     }
   ],
   "presets": [

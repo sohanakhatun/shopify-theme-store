@@ -1,23 +1,22 @@
 {{ 'custom-reviews.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  .custom-reviews--{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-  }
+.custom-reviews--{{ section.id }} {
+padding-top: {{ section.settings.padding_top }}px;
+padding-bottom: {{ section.settings.padding_bottom }}px;
+}
 
-  @media screen and (min-width: 749px) {
-    .custom-reviews--{{ section.id }} {
-      padding-top: {{ section.settings.padding_top |  divided_by: 2 }}px;
-      padding-bottom: {{ section.settings.padding_bottom |  divided_by: 2 }}px;
-    }
-  }
+@media screen and (min-width: 749px) {
+.custom-reviews--{{ section.id }} {
+padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+}
+}
 {% endstyle %}
 
+
 {% assign show_customer_name = section.settings.show_customer_name %}
-{% assign show_pagination = section.settings.show_pagination %}
-{% assign auto_play_duration = section.settings.auto_play_duration %}
-{% assign show_arrows = section.settings.show_arrows %}
+
 <section class="review-slider-wrapper container">
   <div class="custom-reviews--{{ section.id }} custom-reviews-wrapper" id="reviews-slider">
     <div class="page-width">
@@ -25,165 +24,148 @@
     </div>
     <div class="page-width">
       <div class="custom-reviews-wrapper--reviews-slider">
-        <div class="splide">
+        <splider-component class="splide" data-desktopPerPage="3" data-mobilePerPage="1"
+          data-autoplay="{{ section.settings.auto_play }}"
+          data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+          data-showArrows="{{ section.settings.show_arrows }}" data-showDots="{{section.settings.show_pagination}}">
           <div class="splide__track">
             <ul class="splide__list">
               {% for block in section.blocks %}
-                <li class="splide__slide slide-list">
-                  <div class="custom-reviews-wrapper--reviews-slider--review-card">
-                    <div class="custom-reviews-wrapper--reviews-slider--review-card--review-image">
-                      {% render 'ratings-star' %}
-                    </div>
-
-                    <p>{{ block.settings.review  }}</p>
-                    {% if show_customer_name %}
-                      <h3>- {{ block.settings.customer_name }}</h3>
-                    {% endif %}
+              <li class="splide__slide slide-list">
+                <div class="custom-reviews-wrapper--reviews-slider--review-card">
+                  <div class="custom-reviews-wrapper--reviews-slider--review-card--review-image">
+                    {% render 'ratings-star' %}
                   </div>
-                </li>
+
+                  <p>{{ block.settings.review }}</p>
+                  {% if show_customer_name %}
+                  <h3>- {{ block.settings.customer_name }}</h3>
+                  {% endif %}
+                </div>
+              </li>
               {% endfor %}
             </ul>
           </div>
-        </div>
+        </splider-component>
         <div class="view-all-wrapper">
           <button class="primary-button">View all</button>
         </div>
-      
       </div>
     </div>
-
-
   </div>
 </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var splideInstance = new Splide('#reviews-slider .splide', {
-        type: 'slide',
-        perPage: 3,
-        autoplay: true,
-    
-        arrows: {{show_arrows}},
-        interval: {{auto_play_duration}},
-        gap: 2,
-        pagination: {{show_pagination}},
-        perMove: 1,
-        breakpoints: {
-          900: {
-            perPage: 2,
-          },
-          780: {
-            perPage: 1,
-          },
-        },
-      }).mount();
-    });
-</script>
+<script src="{{ 'custom-splider.js' | asset_url }}" defer></script>
 {% schema %}
-  {
-    "name": "custom-reviews",
-    "class": "section",
-    "settings": [
-      {
-        "type": "inline_richtext",
-        "id": "heading",
-        "default": "Reviews",
-        "label": "Reviews"
-      },
-      {
-        "type": "select",
-        "id": "heading_size",
-        "options": [
-          {
-            "value": "h2",
-            "label": "Small"
-          }, {
-            "value": "h1",
-            "label": "Medium"
-          }, {
-            "value": "h0",
-            "label": "Large"
-          }
-        ],
-        "default": "h1",
-        "label": "Medium"
-      },
-      {
-        "type": "header",
-        "content": "Ratings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_customer_name",
-        "label": "Show Customer Name",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_pagination",
-        "label": "Show dots",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_arrows",
-        "label": "Show Arrows",
-        "default": false
-      }, {
-        "type": "range",
-        "id": "auto_play_duration",
-        "label": "Autoplay duration",
-        "min": 1000,
-        "max": 5000,
-        "step": 1000,
-        "unit": "ms",
-        "default": 2000
-      }, {
-        "type": "header",
-        "content": "Section Padding"
-      }, {
-        "type": "range",
-        "id": "padding_top",
-        "label": "Padding Top",
-        "min": 0,
-        "max": 100,
-        "step": 10,
-        "unit": "px",
-        "default": 0
-      }, {
-        "type": "range",
-        "id": "padding_bottom",
-        "label": "Padding Bottom",
-        "min": 0,
-        "max": 100,
-        "step": 10,
-        "unit": "px",
-        "default": 0
-      }
-    ],
-    "blocks": [
-      {
-        "type": "ratings",
-        "name": "Review",
-        "settings": [
-          {
-            "type": "textarea",
-            "id": "review",
-            "label": "Review",
-            "default": "Give your Review Here",
-            "info": "Please limit your review till 10 characters."
-          }, {
-            "type": "text",
-            "id": "customer_name",
-            "label": "Customer Name",
-            "default": "Verified Customer"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Customer Reviews",
-        "category": "Custom"
-      }
-    ]
-  }
+{
+"name": "custom-reviews",
+"class": "section",
+"settings": [
+{
+"type": "inline_richtext",
+"id": "heading",
+"default": "Reviews",
+"label": "Reviews"
+},
+{
+"type": "select",
+"id": "heading_size",
+"options": [
+{
+"value": "h2",
+"label": "Small"
+}, {
+"value": "h1",
+"label": "Medium"
+}, {
+"value": "h0",
+"label": "Large"
+}
+],
+"default": "h1",
+"label": "Medium"
+},
+{
+"type": "header",
+"content": "Ratings"
+},
+{
+"type": "checkbox",
+"id": "show_customer_name",
+"label": "Show Customer Name",
+"default": true
+}, {
+"type": "checkbox",
+"id": "auto_play",
+"label": "Enable Autoplay",
+"default": true
+}, {
+"type": "checkbox",
+"id": "show_pagination",
+"label": "Show dots",
+"default": true
+}, {
+"type": "checkbox",
+"id": "show_arrows",
+"label": "Show Arrows",
+"default": false
+}, {
+"type": "range",
+"id": "auto_play_duration",
+"label": "Autoplay duration",
+"min": 1000,
+"max": 5000,
+"step": 1000,
+"unit": "ms",
+"default": 2000
+}, {
+"type": "header",
+"content": "Section Padding"
+}, {
+"type": "range",
+"id": "padding_top",
+"label": "Padding Top",
+"min": 0,
+"max": 100,
+"step": 10,
+"unit": "px",
+"default": 0
+}, {
+"type": "range",
+"id": "padding_bottom",
+"label": "Padding Bottom",
+"min": 0,
+"max": 100,
+"step": 10,
+"unit": "px",
+"default": 0
+}
+],
+"blocks": [
+{
+"type": "ratings",
+"name": "Review",
+"settings": [
+{
+"type": "textarea",
+"id": "review",
+"label": "Review",
+"default": "Give your Review Here",
+"info": "Please limit your review till 10 characters."
+}, {
+"type": "text",
+"id": "customer_name",
+"label": "Customer Name",
+"default": "Verified Customer"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Customer Reviews",
+"category": "Custom"
+}
+]
+}
 {% endschema %}
