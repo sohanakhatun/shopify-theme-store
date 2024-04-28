@@ -1,40 +1,67 @@
-.custom-reviews-wrapper--reviews-slider--view-all {
-  background-color: rgb(56, 131, 126);
-  border: none;
-  color: white;
-  padding: 12px;
-  border-radius: 12px;
-  appearance: none;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  width: 12rem;
-  justify-content: center;
-  margin: 80px auto auto;
-  font-weight: 700;
-  font-size: medium;
-  text-transform: capitalize;
+.container{
+ padding: 4rem;
 }
 
-.custom-reviews-wrapper--reviews-slider--view-all:hover {
-  cursor: pointer;
+
+@media screen and (max-width:768px) {
+    .container {
+        padding: 3rem;
+    }
 }
 
-.custom-reviews-wrapper--reviews-slider {
-  margin-top: 23px;
+.view-all-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+  
 }
-
+.primary-button{
+    padding: 13px;
+    border: none;
+    background-color: rgb(58, 131, 126);
+    margin: auto;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: medium;
+}
+.custom-reviews-wrapper .custom-reviews-wrapper--reviews-slider .splide__slide{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    height: 250px;
+}
+.slide-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .custom-reviews-wrapper--reviews-slider--review-card {
-  box-sizing: border-box;
-  height: fit-content;
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 4px 4px 6px #cecece;
-  padding: 22px;
-width: 100%;
-
+    padding: 6rem 1rem;
+    box-shadow: 0 0 12px #cecece;
+    margin: 12px;
+    width: auto;
+    flex: 1; /* Allow flex items to grow and shrink equally */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange flex items vertically */
 }
 
+.custom-reviews-wrapper--reviews-slider--review-card > * {
+    flex: 1; /* Allow all children to occupy equal space */
+    margin: 0; /* Remove default margin */
+}
+.custom-reviews-wrapper--reviews-slider .splide__pagination {
+    bottom: -2.5em;
+    left: 0;
+    padding: 0 1em;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+.custom-reviews-wrapper--reviews-slider--review-card--review-image{
+    max-width: 22rem;
+    margin: 0 auto 1rem;
+}

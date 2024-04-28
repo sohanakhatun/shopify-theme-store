@@ -3,7 +3,6 @@ if (!customElements.get("carousel-component")) {
     constructor() {
       super();
       this.carouselElement = this;
-
       if (!this.carouselElement.classList.contains("splide")) return;
       document.addEventListener("DOMContentLoaded", function () {
         var testimonialSlider;
@@ -23,6 +22,7 @@ if (!customElements.get("carousel-component")) {
             }).mount();
           }
         });
+
         // Sync testimonial slider with main image slider
         if (testimonialSlider && mainImageSlider) {
           testimonialSlider.on("moved", function (newIndex) {

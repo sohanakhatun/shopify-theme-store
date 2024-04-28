@@ -1,0 +1,36 @@
+  .featuredIn-section .splide__arrows--ltr {
+    display: none;
+  }
+  .featuredIn-section .splide__pagination__page.is-active {
+    background: #3a837e;
+    opacity: 1;
+  }
+  .featuredIn-section .splide__pagination__page {
+    background: #3a837e;
+    opacity: 0.5;
+    margin: 5px;
+  }
+  .featuredIn-section .splide__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .featuredIn-section .slide-content {
+    padding-bottom: 50px;
+  }
+  .featuredIn-section {
+    background-color: #2d2d2d;
+  }
+  .featuredIn-section .heading h1 {
+    color: #ffffff;
+    margin: 0;
+  }
+  .featuredIn-section .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .splide__slide img {
+    vertical-align: bottom;
+    object-fit: contain;
+}

@@ -1,0 +1,25 @@
+body { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.custom-announcementbar--splide-container {
+    max-width: 100%;
+    margin: 0 auto;
+    width: 1200px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#customSlideshow .splide__arrow {
+    background: transparent;
+}
+
+#customSlideshow .splide__arrow svg {
+    fill: #ffffff;
+    height: 18px;
+    width: 18px;
+}
+
