@@ -9,6 +9,7 @@ if (!customElements.get("splider-component")) {
 
       this.desktopPerPage = this.splideElement.dataset["desktopperpage"] || 3;
       this.mobilePerPage = this.splideElement.dataset["mobileperpage"] || 1;
+      this.tabletPerPage = this.splideElement.dataset["tabletperpage"] || 2;
       this.focus = this.splideElement.dataset["focus"] || "center";
       this.type = this.splideElement.dataset["type"] || "slide";
       this.gap = this.splideElement.dataset["gapbetweenslides"] || 10;
@@ -30,6 +31,10 @@ if (!customElements.get("splider-component")) {
       // Read more here https://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript
       this.showarrows =
         this.splideElement.dataset["showarrows"] === "true" || false;
+      this.showarrowsontablet =
+        this.splideElement.dataset["showarrowsontablet"] === "true" || false;
+      this.showarrows =
+        this.splideElement.dataset["showarrows"] === "true" || false;
       this.autoplay =
         this.splideElement.dataset["autoplay"] === "true" || false;
       this.showarrowsonmobile =
@@ -38,6 +43,8 @@ if (!customElements.get("splider-component")) {
         this.splideElement.dataset["showdots"] === "true" || false;
       this.showdotsonmobile =
         this.splideElement.dataset["showdotsonmobile"] === "true" || false;
+      this.showdotsontablet =
+        this.splideElement.dataset["showdotsontablet"] === "true" || false;
       this.isNavigation =
         this.splideElement.dataset["isnavigation"] === "true" || false;
       this.disableDrag =
@@ -55,9 +62,6 @@ if (!customElements.get("splider-component")) {
     initCarousel() {
       if (this.destroyOnMobile && this.destroyOnDesktop) return;
 
-      // More option available here https://splidejs.com/documents/
-      // This slider can be customized as require check the above doc before adding any new
-      // Slider library.
       this.carousel = new Splide(this.splideElement, {
         perPage: this.desktopPerPage,
         type: this.type,
@@ -75,6 +79,11 @@ if (!customElements.get("splider-component")) {
           right: this.desktopPaddingRight,
         },
         breakpoints: {
+          1000: {
+            perPage: this.tabletPerPage,
+            arrows: this.showarrowsontablet,
+            pagination: this.showdotsontablet,
+          },
           750: {
             padding: {
               left: this.mobilePaddingLeft,
@@ -88,7 +97,7 @@ if (!customElements.get("splider-component")) {
           },
         },
       });
-
+      console.log(this.carousel);
       if (this.sync) {
         this.initCarouselSync();
       } else {
@@ -99,7 +108,6 @@ if (!customElements.get("splider-component")) {
     initCarouselSync() {
       this.syncElement = document.querySelector(this.sync);
       this.direction = this.syncElement.dataset["direction"] || "ltr";
-
       this.carouselSync = new Splide(this.sync, {
         updateOnMove: true,
         perPage: this.syncElement.dataset["desktopperpage"] || 5,

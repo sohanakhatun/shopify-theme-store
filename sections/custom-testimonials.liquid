@@ -12,17 +12,19 @@
     }
   }
 {% endstyle %}
-<section class="custom-testimonials--{{section.id}}">
-  <div class="custom-testimonials-wrapper page-width" id="testimonial-slider">
+<section class="custom-testimonials--{{section.id}} page-width">
+  <div class="custom-testimonials-wrapper " id="testimonial-slider">
     <splider-component
       class="splide"
       data-desktopPerPage="1"
       data-mobilePerPage="1"
+      data-tabletPerPage="1"
       data-autoplay="{{ section.settings.auto_play }}"
       data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
       data-showArrows="{{ section.settings.show_arrows }}"
       data-showDots="{{section.settings.show_pagination}}"
-      data-showdotsonmobile="{{section.settings.show_dots_mobile}}">
+      data-showdotsonmobile="{{section.settings.show_pagination_mobile}}"
+      data-showdotsontablet="{{section.settings.show_pagination_tablet}}">
       <div class="splide__track">
         <ul class="splide__list">
           {% for block in section.blocks %}
@@ -99,13 +101,28 @@
         "default": true
       }, {
         "type": "checkbox",
-        "id": "show_dots_mobile",
-        "label": "Show Dots On Mobile",
+        "id": "show_pagination_mobile",
+        "label": "Show dots On Mobile",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_pagination_tablet",
+        "label": "Show dots On Tablet",
         "default": true
       }, {
         "type": "checkbox",
         "id": "show_arrows",
         "label": "Show Arrows",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "show_arrows_mobile",
+        "label": "Show Arrows On Mobile",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "show_arrows_tablet",
+        "label": "Show Arrows On Tablet",
         "default": false
       }, {
         "type": "range",

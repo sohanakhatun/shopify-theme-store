@@ -1,59 +1,81 @@
 {{ 'customherobanner.css' | asset_url | stylesheet_tag }}
-<section class="custom-heroshow  custom-slideshow-wrapper custom-slideshow--{{ section.id }}">
-  <div id="herosectionslider" class="custom-heroshow--splide splide">
-    <div class="custom-hero-show--track splide__track ">
-      <ul class="custom-hero-show--splide-list splide__list">
-        {% for block in section.blocks %}
-          <li class="custom-hero-show-splide-slide splide__slide">
-            {% if block.settings.desktop_image != blank %}
-              {% comment %} 
-                {% render 'responsive-picture', 
-                desktopImage: block.settings.desktop_image, 
-                mobileImage: block.settings.mobile_image
-                %} 
-              {% endcomment %}
-              <img
-                src="{{ block.settings.desktop_image | image_url }}"
-                alt="Slide Image"
-                height="300"
-                width="300">
-            {% endif %}
-            <div class="custom-herosection-splidecontent slide-content">
-              {% if block.settings.pre_heading != blank %}
-                <h1>{{ block.settings.pre_heading }}</h1>
+
+
+{% style %}
+  .custom-padding--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+  }
+  .active-slide {
+    background: {{ section.blocks.first.settings.color_active }};
+  }
+  /* mobile first approach */
+  @media screen and (min-width: 749px) {
+    .custom-padding--{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="custom-heroshow custom-slideshow-wrapper custom-slideshow--{{ section.id }}">
+  <splider-component
+    class="splide"
+    data-desktopPerPage="1"
+    data-mobilePerPage="1"
+    data-tabletPerPage="1"
+    data-autoplay="{{ section.settings.auto_play }}"
+    data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+    data-showArrows="{{ section.settings.show_arrows }}"
+    data-showDots="{{section.settings.show_pagination}}"
+    data-showdotsonmobile="{{section.settings.show_dots_mobile}}">
+    <section id="herosectionslider" class="custom-heroshow--splide">
+      <div class="custom-hero-show--track splide__track">
+        <ul class="custom-hero-show--splide-list splide__list">
+          {% for block in section.blocks %}
+            <li class="custom-hero-show-splide-slide splide__slide">
+              {% if block.settings.desktop_image != blank %}
+                <img
+                  src="{{ block.settings.desktop_image | image_url }}"
+                  alt="Slide Image"
+                  height="auto"
+                  width="auto">
               {% endif %}
-              {% if block.settings.heading_two != blank %}
-                <p>{{ block.settings.heading_two }}</p>
-              {% endif %}
-              {% if block.settings.button_label != blank %}
-                <button>{{ block.settings.button_label }}</button>
-              {% endif %}
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</section>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      new Splide('#herosectionslider.splide', {
-        pagination: true,
-        perPage: 1,
-        gap: '60px',
-        arrows: false,
-        breakpoints: {
-          425: {
-            perPage: 1,
-            gap: '20px',
-          },
-          768: {
-            perPage: 1,
-          },
-        },
-      }).mount();
-    });
-</script>
+              <div class="custom-herosection-splidecontent slide-content text-position-{{ block.settings.text_position_selector | default: 'center-center' }} ">
+                {% if block.settings.pre_heading != blank %}
+                  {% if forloop.index == 9 %}
+                    <h1
+                      class="moved-heading"
+                      data-aos="fade-up"
+                      data-aos-duration="3000">{{ block.settings.pre_heading }}</h1>
+                  {% else %}
+                    <div
+                      class="custom-hero-description"
+                      data-aos="fade-up"
+                      data-aos-duration="3000">
+                      <h1>{{ block.settings.pre_heading | strip_html }}</h1>
+                      <span>
+                        {{ block.settings.heading_two | strip_html }}</span>
+
+                      <div class="custom-herobutton">
+                        <button>{{ block.settings.button_label }}</button>
+                      </div>
+                    </div>
+                  {% endif %}
+
+
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  </splider-component>
+</div>
+
+<script src="{{ 'custom-splider.js' | asset_url }}" defer></script>
+
 {% schema %}
   {
     "name": "Hero Slideshow",
@@ -80,7 +102,7 @@
         "type": "checkbox",
         "id": "show_arrows",
         "label": "Show Arrows",
-        "default": true
+        "default": false
       }, {
         "type": "range",
         "id": "auto_play_duration",
@@ -161,17 +183,17 @@
             "type": "text",
             "id": "pre_heading",
             "label": "Pre Heading",
-            "default": "Women's Apparel"
+            "default": "An Effortless Shopping Experience"
           }, {
             "type": "richtext",
             "id": "heading_two",
             "label": "Heading",
-            "default": "<p>Heading Text</p>"
+            "default": "<p> Start Selling More Online </p>"
           }, {
             "type": "text",
             "id": "button_label",
             "label": "Button Label",
-            "default": "Explore More"
+            "default": "Shop Now"
           }, {
             "type": "url",
             "id": "button_link",
@@ -245,84 +267,3 @@
     ]
   }
 {% endschema %}
-<style>
-  .custom-heroshow {
-    width: 100%;
-  }
-  #herosectionslider {
-    position: relative;
-  }
-  .custom-hero-show-splide-slide > .slide-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding-top: 100px;
-    padding-left: 70px;
-    width: 50%;
-    height: 100%;
-  }
-  .custom-hero-show--splide-list > .splide__slide img {
-    width: 100%;
-    height: 100%;
-  }
-  .custom-herosection-splidecontent > h1 {
-    font-size: 40px;
-    width: 100%;
-  }
-  .custom-herosection-splidecontent > p {
-    color: rgb(0, 0, 0, 0.8);
-    font-size: 17px;
-  }
-  .custom-herosection-splidecontent > button {
-    padding: 15px 40px;
-    background-color: rgb(58, 131, 126, 1);
-    color: white;
-    border: none;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 8px;
-  }
-  @media screen and (max-width: 750px) {
-    .custom-hero-show-splide-slide > .slide-content {
-      padding-top: 0;
-      padding-left: 10px;
-    }
-    .custom-herosection-splidecontent > h1 {
-      font-size: 17px;
-      width: 100%;
-    }
-    .custom-herosection-splidecontent > p {
-      font-size: 14px;
-    }
-    .custom-herosection-splidecontent > button {
-      padding: 12px 20px;
-      font-size: 14px;
-    }
-  }
-  @media screen and (max-width: 450px) {
-    .custom-hero-show-splide-slide > .slide-content {
-      padding-top: 0;
-      padding-left: 10px;
-      padding-bottom: 10px;
-    }
-    .custom-herosection-splidecontent > h1 {
-      font-size: 12px;
-    }
-    .custom-herosection-splidecontent > p {
-      font-size: 12px;
-    }
-    .custom-herosection-splidecontent > button {
-      padding: 10px;
-      font-size: 12px;
-    }
-  }
-  @media screen and (max-width: 330px) {
-    .custom-hero-show-splide-slide > .slide-content {
-      padding-bottom: 20px;
-    }
-  }
-
-
-</style>

@@ -41,6 +41,7 @@
       class="splide  custom-announcement-bar--splide-container"
       data-desktopPerPage="1"
       data-mobilePerPage="1"
+      data-tabletPerPage = "1"
       data-autoplay="{{ section.settings.auto_play }}"
       data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
       data-showArrows="{{ section.settings.show_arrows }}"
@@ -95,8 +96,7 @@
         "id": "show_arrows",
         "label": "Show arrows",
         "default": false
-      }, 
-      {
+      }, {
         "type": "checkbox",
         "id": "show_dots_mobile",
         "label": "Show Dots On Mobile",
@@ -130,7 +130,7 @@
         "step": 1,
         "unit": "px",
         "label": "Fontsize for desktop",
-        "default": 13
+        "default": 12
       }, {
         "type": "color",
         "id": "text_color",
