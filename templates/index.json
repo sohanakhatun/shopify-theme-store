@@ -7,7 +7,7 @@
           "type": "slide",
           "settings": {
             "desktop_image": "shopify:\/\/shop_images\/hero_section_2160x_1a03bc81-0aa0-4b5b-8e03-5b1afbb97e2d.webp",
-            "mobile_image": "shopify:\/\/shop_images\/hero_section_2160x_5373bf84-3c37-40e7-8441-7039eb9c5c8f.webp",
+            "mobile_image": "shopify:\/\/shop_images\/hero_section_2160x_3.webp",
             "pre_heading": "An Effortless Shopping Experience",
             "heading_two": "<p>Start Selling More Online<\/p>",
             "button_label": "Shop Now",
@@ -37,6 +37,8 @@
       "settings": {
         "autoplay": true,
         "show_pagination": true,
+        "show_dots_tablet": true,
+        "show_dots_mobile": true,
         "show_arrows": false,
         "auto_play_duration": 2000,
         "animation": "fade",
@@ -292,6 +294,7 @@
         "auto_play": true,
         "show_pagination": true,
         "show_dots_mobile": true,
+        "show_dots_tablet": true,
         "show_arrows": false,
         "auto_play_duration": 3000,
         "padding_top": 20,
