@@ -237,77 +237,53 @@
         "ratings_WUipCp": {
           "type": "ratings",
           "settings": {
-            "review": "Give your Review Here",
+            "review": "Modern, clean and easily customizable",
             "customer_name": "Verified Customer"
           }
         },
-        "ratings_EnFDXj": {
+        "ratings_Qtr6NH": {
           "type": "ratings",
           "settings": {
-            "review": "Give your Review Here",
+            "review": "Modern, clean and easily customizable",
             "customer_name": "Verified Customer"
           }
         },
-        "ratings_PqETkJ": {
+        "ratings_zw6mQb": {
           "type": "ratings",
           "settings": {
-            "review": "Give your Review Here",
+            "review": "Modern, clean and easily customizable",
             "customer_name": "Verified Customer"
           }
         },
-        "ratings_dwHN3Q": {
+        "ratings_b8nkiV": {
           "type": "ratings",
           "settings": {
-            "review": "Give your Review Here",
+            "review": "Modern, clean and easily customizable",
             "customer_name": "Verified Customer"
           }
         },
-        "ratings_8BU4GL": {
+        "ratings_gnH9FQ": {
           "type": "ratings",
           "settings": {
-            "review": "Give your Review Here",
+            "review": "Modern, clean and easily customizable",
             "customer_name": "Verified Customer"
           }
         },
-        "ratings_gzVCz3": {
+        "ratings_zCzzRe": {
           "type": "ratings",
           "settings": {
-            "review": "Give your Review Here",
-            "customer_name": "Verified Customer"
-          }
-        },
-        "ratings_PheQ6F": {
-          "type": "ratings",
-          "settings": {
-            "review": "Give your Review Here",
-            "customer_name": "Verified Customer"
-          }
-        },
-        "ratings_3wULaq": {
-          "type": "ratings",
-          "settings": {
-            "review": "Give your Review Here",
-            "customer_name": "Verified Customer"
-          }
-        },
-        "ratings_c9Wi9K": {
-          "type": "ratings",
-          "settings": {
-            "review": "Give your Review Here",
+            "review": "Modern, clean and easily customizable",
             "customer_name": "Verified Customer"
           }
         }
       },
       "block_order": [
         "ratings_WUipCp",
-        "ratings_EnFDXj",
-        "ratings_PqETkJ",
-        "ratings_dwHN3Q",
-        "ratings_8BU4GL",
-        "ratings_gzVCz3",
-        "ratings_PheQ6F",
-        "ratings_3wULaq",
-        "ratings_c9Wi9K"
+        "ratings_Qtr6NH",
+        "ratings_zw6mQb",
+        "ratings_b8nkiV",
+        "ratings_gnH9FQ",
+        "ratings_zCzzRe"
       ],
       "settings": {
         "heading": "Reviews",
