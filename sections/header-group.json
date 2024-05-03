@@ -39,10 +39,12 @@
         "backgrond_color": "#000000",
         "auto_play": true,
         "show_arrows": true,
+        "show_dots_mobile": false,
         "auto_play_duration": 2000,
         "font_size_for_mobile": 12,
-        "fontsize_for_desktop": 20,
+        "fontsize_for_desktop": 12,
         "text_color": "#ffffff",
+        "underline_color": "#06aaa1",
         "font_weight": 300,
         "padding_top": 20,
         "padding_bottom": 20
