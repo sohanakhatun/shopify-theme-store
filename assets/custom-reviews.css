@@ -1,71 +1,70 @@
-.container {
-  padding: 4rem;
-}
-.customer-name {
-  margin-top: 14px;
+.container{
+ padding: 4rem;
 }
 
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 3rem;
-  }
+
+@media screen and (max-width:768px) {
+    .container {
+        padding: 3rem;
+    }
 }
 
-.view-all-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 60px;
+.view-all-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+  
 }
-.primary-button {
-  padding: 13px;
-  border: none;
-  background-color: rgb(58, 131, 126);
-  margin: auto;
-  border-radius: 8px;
-  color: white;
-  font-weight: 700;
-  font-size: medium;
+.primary-button{
+    padding: 13px;
+    border: none;
+    background-color: rgb(58, 131, 126);
+    margin: auto;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: medium;
 }
-.custom-reviews-wrapper .custom-reviews-wrapper--reviews-slider .splide__slide {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  padding: 20px;
-  height: 250px;
+.custom-reviews-wrapper .custom-reviews-wrapper--reviews-slider .splide__slide{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    height: 250px;
 }
-.slide-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.slide-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .custom-reviews-wrapper--reviews-slider--review-card {
-  padding: 8rem 0rem;
-  box-shadow: 0 0 12px #cecece;
-  width: auto;
-  flex: 1; /* Allow flex items to grow and shrink equally */
-  display: flex; /* Use flexbox layout */
-  flex-direction: column; /* Arrange flex items vertically */
+    padding: 8rem 0rem;
+    box-shadow: 0 0 12px #cecece;
+    width: auto;
+    flex: 1; /* Allow flex items to grow and shrink equally */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange flex items vertically */
 }
 
 .custom-reviews-wrapper--reviews-slider--review-card > * {
-  flex: 1;
-  margin: 0;
+    flex: 1; 
+    margin: 0; 
 }
 .custom-reviews-wrapper--reviews-slider .splide__pagination {
-  bottom: -2.5em;
-  left: 0;
-  padding: 0 1em;
-  position: absolute;
-  right: 0;
-  z-index: 1;
-  margin: 5px;
+    bottom: -2.5em;
+    left: 0;
+    padding: 0 1em;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    margin: 5px;
 }
-.custom-reviews-wrapper--reviews-slider .splide__pagination__page.is-active {
-  background-color: #333333;
+.custom-reviews-wrapper--reviews-slider .splide__pagination__page.is-active{
+ background-color: #333333;
 }
 
-.custom-reviews-wrapper--reviews-slider--review-card--review-image {
-  max-width: 22rem;
-  margin: 0 auto 1rem;
+.custom-reviews-wrapper--reviews-slider--review-card--review-image{
+    max-width: 22rem;
+    margin: 0 auto 1rem;
 }
