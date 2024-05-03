@@ -47,38 +47,38 @@
     "custom_whychoose_xcjcjL": {
       "type": "custom-whychoose",
       "blocks": {
-        "image_box_VqQDNG": {
-          "type": "imageBox",
+        "column_EaADC6": {
+          "type": "column",
           "settings": {
-            "image_select": "shopify:\/\/shop_images\/svgviewer-output_1.svg",
-            "header": "Quality",
-            "para_view": "Exceptional quality from top\n\nto bottom."
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_12.svg",
+            "title": "Quality",
+            "description": "Exceptional quality from topto bottom."
           }
         },
-        "image_box_Pm98Yc": {
-          "type": "imageBox",
+        "column_xqHVHA": {
+          "type": "column",
           "settings": {
-            "image_select": "shopify:\/\/shop_images\/svgviewer-output_2.svg",
-            "header": "Delivery",
-            "para_view": "Fast and free delivery\n\nworldwide."
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_13.svg",
+            "title": "Delivery",
+            "description": "Fast and free delivery worldwide."
           }
         },
-        "image_box_BwVwfy": {
-          "type": "imageBox",
+        "column_bjfYff": {
+          "type": "column",
           "settings": {
-            "image_select": "shopify:\/\/shop_images\/svgviewer-output_5.svg",
-            "header": "Guarantee",
-            "para_view": "100% customer satisfaction  guaranteed."
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_14.svg",
+            "title": "Guarantee",
+            "description": "100% customer satisfaction guaranteed."
           }
         }
       },
       "block_order": [
-        "image_box_VqQDNG",
-        "image_box_Pm98Yc",
-        "image_box_BwVwfy"
+        "column_EaADC6",
+        "column_xqHVHA",
+        "column_bjfYff"
       ],
       "settings": {
-        "topheading": "Why Choose Effortless?"
+        "heading": "Why Choose Effortless?"
       }
     },
     "custom_collections_VLE8gR": {
@@ -133,7 +133,6 @@
           "type": "slider",
           "settings": {
             "collection_handle": "best-sellers",
-            "Quicklink_view": "Quick View",
             "button_link": "shopify:\/\/collections\/all"
           }
         }
@@ -341,87 +340,12 @@
         "padding_bottom": 36,
         "auto_play": true,
         "show_pagination": true,
+        "show_pagination_mobile": true,
+        "show_pagination_tablet": true,
+        "show_arrows_mobile": false,
         "show_arrows": false,
+        "show_arrows_tablet": false,
         "auto_play_duration": 2000
-      }
-    },
-    "ours_story_section_DbFYrz": {
-      "type": "ours-story-section",
-      "blocks": {
-        "image_picker_wXAd4W": {
-          "type": "image_picker",
-          "settings": {
-            "Image_id": "shopify:\/\/shop_images\/images_3_768x_5e7d7030-ee0f-4b41-af34-417f3e877364.webp",
-            "first_checkbox": true,
-            "first_product": "flower-printed-casual-shirt",
-            "first_hotspot_top_position": 15,
-            "first_hotspot_left_position": 29,
-            "first_card_top_position": 29,
-            "first_card_left_position": 15,
-            "first_card_link": "",
-            "second_checkbox": true,
-            "second_product": "nylon-holdall-bag",
-            "second_hotspot_top_position": 29,
-            "second_hotspot_left_position": 67,
-            "second_card_top_position": 42,
-            "second_card_left_position": 46,
-            "second_card_link": ""
-          }
-        },
-        "image_picker_gBPJNQ": {
-          "type": "image_picker",
-          "settings": {
-            "Image_id": "shopify:\/\/shop_images\/our-story-group_768x_302b08f2-7989-47eb-b754-b11d973c36bc.webp",
-            "first_checkbox": true,
-            "first_product": "cotton-pure-t-shirt",
-            "first_hotspot_top_position": 33,
-            "first_hotspot_left_position": 36,
-            "first_card_top_position": 44,
-            "first_card_left_position": 49,
-            "first_card_link": "",
-            "second_checkbox": false,
-            "second_product": "",
-            "second_hotspot_top_position": 0,
-            "second_hotspot_left_position": 0,
-            "second_card_top_position": 0,
-            "second_card_left_position": 0,
-            "second_card_link": ""
-          }
-        },
-        "image_picker_byDUX4": {
-          "type": "image_picker",
-          "settings": {
-            "Image_id": "shopify:\/\/shop_images\/our-story_768x_ad28ec44-990e-49a3-a0b6-c400550a6e02.webp",
-            "first_checkbox": true,
-            "first_product": "men-solid-denim-jacket",
-            "first_hotspot_top_position": 42,
-            "first_hotspot_left_position": 26,
-            "first_card_top_position": 25,
-            "first_card_left_position": 41,
-            "first_card_link": "",
-            "second_checkbox": false,
-            "second_product": "",
-            "second_hotspot_top_position": 0,
-            "second_hotspot_left_position": 0,
-            "second_card_top_position": 0,
-            "second_card_left_position": 0,
-            "second_card_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_picker_wXAd4W",
-        "image_picker_gBPJNQ",
-        "image_picker_byDUX4"
-      ],
-      "settings": {
-        "heading": "Our Story",
-        "text": "Effortless was designed and developed by leading ecommerce professionals who are passionate about design and user experience, creating intuitive, user-friendly layouts that are optimized for success and sure to delight our customers.",
-        "button_label": "Shop Now",
-        "button_linkEl": "",
-        "backgrond_color": "#2d2d2d",
-        "padding_top": 40,
-        "padding_bottom": 40
       }
     },
     "custom_testimonials_tBPgh4": {
@@ -462,8 +386,11 @@
         "heading_size": "h1",
         "show_customer_name": true,
         "show_pagination": true,
-        "show_dots_mobile": true,
+        "show_pagination_mobile": true,
+        "show_pagination_tablet": true,
         "show_arrows": false,
+        "show_arrows_mobile": false,
+        "show_arrows_tablet": false,
         "auto_play_duration": 2000,
         "padding_top": 60,
         "padding_bottom": 60
@@ -479,7 +406,6 @@
     "featured_in_NxprFy",
     "custom_reviews_bGe6QG",
     "custom_blog_reKUq4",
-    "ours_story_section_DbFYrz",
     "custom_testimonials_tBPgh4"
   ]
 }
