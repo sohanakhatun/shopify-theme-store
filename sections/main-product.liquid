@@ -454,6 +454,47 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                {% comment %} Variant Coupon Code {% endcomment %}
+
+              {%- when 'Variant-offer' -%}
+                <div id="coupon">
+                  {% if product.selected_or_first_available_variant.metafields.custom.variant_coupon_code != blank %}
+                    <variant-offer class="coupon">
+                      <div class="left">
+                        <div>{{ block.settings.offer_title }}</div>
+                      </div>
+                      <div class="center">
+                        <div>
+                          <h2
+                            class="coupon-code"
+                            id="coupon-code-{{ section.id }}"
+                            data-code="{{  product.selected_or_first_available_variant.metafields.custom.variant_coupon_code }}"
+                          >
+                            {{ product.selected_or_first_available_variant.metafields.custom.variant_coupon_code }}
+                          </h2>
+                          <h3>Coupon</h3>
+                          <button id="copy-coupon">Copy</button>
+                        </div>
+                      </div>
+                      <div class="right">
+                        <div>87878521112</div>
+                      </div>
+                    </variant-offer>
+                  {% endif %}
+                </div>
+
+              {%- when 'pincode-checker' -%}
+                <pincode-checker>
+                  <div class="pincode-checker">
+                    <input type="text" id="inputpincode" placeholder="Enter Pincode" maxlength="6">
+                    <button id="checkButton">Check</button>
+                    <div id="infoToast" class="show-green"></div>
+                    <div id="infoToast" class="show-red"></div>
+                    <div id="infoToast" class="show-blue"></div>
+
+                  </div>
+                </pincode-checker>
+              
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -942,6 +983,22 @@
           "default": "circle"
         }
       ]
+    },
+    {
+      "type": "Variant-offer",
+      "name": "Variant offer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "offer_title",
+          "label": "Offer Title",
+          "default": "Coupon Offer"
+        }
+      ]
+    },
+    {
+      "type": "pincode-checker",
+      "name": "Pincode Checker"
     },
     {
       "type": "buy_buttons",
