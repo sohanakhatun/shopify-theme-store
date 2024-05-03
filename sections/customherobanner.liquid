@@ -28,7 +28,8 @@
     data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
     data-showArrows="{{ section.settings.show_arrows }}"
     data-showDots="{{section.settings.show_pagination}}"
-    data-showdotsonmobile="{{section.settings.show_dots_mobile}}">
+    data-showdotsonmobile="{{section.settings.show_dots_mobile}}"
+    data-showdotsontablet="{{section.settings.show_dots_tablet}}">
     <section id="herosectionslider" class="custom-heroshow--splide">
       <div class="custom-hero-show--track splide__track">
         <ul class="custom-hero-show--splide-list splide__list">
@@ -98,6 +99,17 @@
         "label": "Show dots",
         "default": true
       },
+      {
+        "type": "checkbox",
+        "id": "show_dots_tablet",
+        "label": "Show Dots On Tablet",
+        "default": true
+      },  {
+        "type": "checkbox",
+        "id": "show_dots_mobile",
+        "label": "Show Dots On Mobile",
+        "default": true
+      }, 
       {
         "type": "checkbox",
         "id": "show_arrows",
