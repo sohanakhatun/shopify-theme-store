@@ -9,6 +9,38 @@
     },
     "week-5": {
       "type": "week-5",
+      "blocks": {
+        "collections_cbPfh4": {
+          "type": "Collections",
+          "settings": {
+            "feature_collection": "best-sellers"
+          }
+        },
+        "collections_KYCKmC": {
+          "type": "Collections",
+          "settings": {
+            "feature_collection": "mens-accessories"
+          }
+        },
+        "collections_tFQE8Y": {
+          "type": "Collections",
+          "settings": {
+            "feature_collection": "mens-swimwear"
+          }
+        },
+        "collections_LNqjKW": {
+          "type": "Collections",
+          "settings": {
+            "feature_collection": "mens-underwear"
+          }
+        }
+      },
+      "block_order": [
+        "collections_cbPfh4",
+        "collections_KYCKmC",
+        "collections_tFQE8Y",
+        "collections_LNqjKW"
+      ],
       "settings": {
         "heading": "Fresh From The Source"
       }
