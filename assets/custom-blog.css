@@ -6,7 +6,9 @@ body{
 .blog-wrapper--header-wrapper {
   margin-bottom: 35px;
 }
-
+.blog-post-heading{
+    font-weight:800;
+}
 .blog-wrapper--view-all-button {
   background-color: #3a837e;
   border: none;
