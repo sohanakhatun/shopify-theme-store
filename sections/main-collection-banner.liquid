@@ -10,12 +10,66 @@
 {%- endstyle -%}
 
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+  <div class="collection-hero__inner {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
-      </h1>
+      {% unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' %}
+        {% assign t = template | split: '.' | first %}
+
+        <nav class="breadcrumbs page-width" role="navigation" aria-label="breadcrumbs">
+          <ol class="breadcrumbs-list">
+            <li class="breadcrumbs-item home-breadcrumbs-link">
+              <a class="breadcrumbs-link" href="/" title="Home">Home</a>
+            </li>
+
+            {% case t %}
+             
+
+              {% when 'collection' and collection.handle %}
+                {% if current_tags %}
+                  <li class="breadcrumbs-item">{{ collection.title }}</li>
+                  <li class="breadcrumbs-item">
+                    {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+                    <a class="breadcrumbs-link" href="{{ tag_url }}" aria-current="page">
+                      {{- current_tags | join: ' + ' -}}
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="breadcrumbs-item collection-title-breadcrumbs-link">
+                    <a class="breadcrumbs-link" href="{{ collection.url }}" aria-current="page" >
+                      {{- collection.title -}}
+                    </a>
+                  </li>
+                {% endif %}
+
+              {% when 'blog' %}
+                {% if current_tags %}
+                  <li class="breadcrumbs-item">{{ blog.title }}</li>
+                  <li class="breadcrumbs-item">
+                    {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+                    <a class="breadcrumbs-link" href="{{ tag_url }}" aria-current="page">
+                      {{- current_tags | join: ' + ' -}}
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="breadcrumbs-item">
+                    <a class="breadcrumbs-link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+                  </li>
+                {% endif %}
+
+              {% when 'article' %}
+                <li class="breadcrumbs-item">{{ blog.title }}</li>
+                <li class="breadcrumbs-item">
+                  <a class="breadcrumbs-link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+                </li>
+
+              {% else %}
+                <li class="breadcrumbs-item">
+                  <a class="breadcrumbs-link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+                </li>
+            {% endcase %}
+          </ol>
+        </nav>
+      {% endunless %}
 
       {%- if section.settings.show_collection_description -%}
         <div class="collection-hero__description rte">{{ collection.description }}</div>
@@ -37,11 +91,15 @@
           src="{{ collection.image | image_url: width: 750 }}"
           sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
           alt="{{ collection.image.alt | escape }}"
-          width="{{ collection.image.width }}"
-          height="{{ collection.image.height }}"
+          width="auto"
+          height="auto"
         >
       </div>
     {%- endif -%}
+
+    <div class="collection-wrapper">
+      <h1>Collections</h1>
+     </div>
   </div>
 </div>
 
@@ -63,7 +121,7 @@
     {
       "type": "checkbox",
       "id": "show_collection_image",
-      "default": false,
+      "default": true,
       "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
       "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
     },
