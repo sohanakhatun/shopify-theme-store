@@ -49,6 +49,17 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "pincode_checker_w7V9tM": {
+          "type": "pincode-checker",
+          "settings": {
+          }
+        },
+        "variant_offer_tJP6HC": {
+          "type": "Variant-offer",
+          "settings": {
+            "offer_title": "Coupon Offer"
+          }
         }
       },
       "block_order": [
@@ -59,7 +70,9 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "share"
+        "share",
+        "pincode_checker_w7V9tM",
+        "variant_offer_tJP6HC"
       ],
       "custom_css": [
         "button {border: none;}"
