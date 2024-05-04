@@ -123,6 +123,7 @@
   width: 80%;
   border: none;
   cursor: pointer;
+  box-shadow: 0 0 21px #0000006b;
 }
 .custom--best-sellers{
   position: relative;

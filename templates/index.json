@@ -37,50 +37,11 @@
       "settings": {
         "autoplay": true,
         "show_pagination": true,
-        "show_dots_tablet": true,
-        "show_dots_mobile": true,
         "show_arrows": false,
         "auto_play_duration": 2000,
         "animation": "fade",
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "custom_whychoose_zLMiGW": {
-      "type": "custom-whychoose",
-      "blocks": {
-        "column_MWQLn4": {
-          "type": "column",
-          "settings": {
-            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_12.svg",
-            "title": "Quality",
-            "description": "Exceptional quality from top to bottom."
-          }
-        },
-        "column_cXp4wz": {
-          "type": "column",
-          "settings": {
-            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_12.svg",
-            "title": "Quality",
-            "description": "Exceptional quality from top to bottom."
-          }
-        },
-        "column_AFCwA8": {
-          "type": "column",
-          "settings": {
-            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_12.svg",
-            "title": "Quality",
-            "description": "Exceptional quality from top to bottom."
-          }
-        }
-      },
-      "block_order": [
-        "column_MWQLn4",
-        "column_cXp4wz",
-        "column_AFCwA8"
-      ],
-      "settings": {
-        "heading": "Why Choose Effortless?"
       }
     },
     "custom_collections_VLE8gR": {
@@ -315,10 +276,7 @@
         "heading": "Reviews",
         "heading_size": "h1",
         "show_customer_name": true,
-        "auto_play": true,
         "show_pagination": true,
-        "show_dots_mobile": true,
-        "show_dots_tablet": true,
         "show_arrows": false,
         "auto_play_duration": 3000,
         "padding_top": 20,
@@ -363,25 +321,62 @@
         "heading_size": "h1",
         "show_customer_name": true,
         "show_pagination": true,
-        "show_pagination_mobile": true,
-        "show_pagination_tablet": true,
         "show_arrows": false,
-        "show_arrows_mobile": false,
-        "show_arrows_tablet": false,
         "auto_play_duration": 2000,
         "padding_top": 60,
         "padding_bottom": 60
+      }
+    },
+    "week_7_hbYRXt": {
+      "type": "week-7",
+      "blocks": {
+        "image_eC3K9c": {
+          "type": "Image",
+          "settings": {
+            "first_checkbox": true,
+            "first_product": "cotton-pure-t-shirt",
+            "first_hotspot_top_position": 50,
+            "first_hotspot_left_position": 50,
+            "first_card_top_position": 23,
+            "first_card_left_position": 19,
+            "first_card_link": "",
+            "second_checkbox": true,
+            "second_product": "flower-printed-casual-shirt",
+            "second_hotspot_top_position": 14,
+            "second_hotspot_left_position": 18,
+            "second_card_top_position": 22,
+            "second_card_left_position": 16,
+            "second_card_link": "",
+            "selected_products": [
+              "flower-printed-casual-shirt",
+              "men-long-sleeve",
+              "men-soft-cotton-dress"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "image_eC3K9c"
+      ],
+      "settings": {
+        "heading": "<strong>Shop The Look<\/strong>",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "auto_play": false,
+        "show_arrows": true,
+        "auto_play_duration": 1000,
+        "slide_type": "slide"
       }
     }
   },
   "order": [
     "customherobanner_zH8iqB",
-    "custom_whychoose_zLMiGW",
     "custom_collections_VLE8gR",
     "custombestsellers_NPz3U7",
     "photo_flex_yXaDzV",
     "featured_in_NxprFy",
     "custom_reviews_bGe6QG",
-    "custom_testimonials_tBPgh4"
+    "custom_testimonials_tBPgh4",
+    "week_7_hbYRXt"
   ]
 }

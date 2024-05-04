@@ -1,156 +1,169 @@
-
 {% liquid
-    assign current_variant = product.selected_or_first_available_variant
-    assign featured_image = current_variant.image | default: product.featured_image
-    assign secondary_image = product.images[1] | default: product.featured_image
-    assign discountAmount = current_variant.compare_at_price | minus: current_variant.price
-    assign discountPercentage = discountAmount | times: 100 | divided_by: current_variant.compare_at_price
-  %}
-  
-  <product-card 
-    class="product-card"
-    data-product-handle="{{ product.handle}}" 
-    data-section-id="{{ section_id }}"
-  >
-    <a href="{{ product.url }}" class="product-card__link position-relative">
-      
-      <div class="custom--best-sellers ">
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_image = current_variant.image | default: product.featured_image
+  assign secondary_image = product.images[1] | default: product.featured_image
+  assign discountAmount = current_variant.compare_at_price | minus: current_variant.price
+  assign discountPercentage = discountAmount | times: 100 | divided_by: current_variant.compare_at_price
+%}
+
+<product-card
+  class="product-card"
+  data-product-handle="{{ product.handle}}"
+  data-section-id="{{ section_id }}"
+>
+  <a href="{{ product.url }}" class="product-card__link position-relative">
+    <div class="custom--best-sellers ">
       <div class="image-hover-swap  product-card__image custom-border-radius">
-     
-        {% render 'image',
-          desktopImage: featured_image,
-          class: 'media media--portrait'
-        %}
+        {% render 'image', desktopImage: featured_image, class: 'media media--portrait' %}
         <div class="product-card__secondary-image">
-          {% render "image", desktopImage: secondary_image, class:"media media--portrait" %}
+          {% render 'image', desktopImage: secondary_image, class: 'media media--portrait' %}
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" class="eye-icon" viewBox="0 0 24 24" width="24" height="24">
           <path d="M19.875 9.625c-.125-.25-4.5-5.875-9.875-5.875S.25 9.375.125 9.625a.797.797 0 0 0 0 .75c.125.25 4.5 5.875 9.875 5.875s9.75-5.625 9.875-5.875a.797.797 0 0 0 0-.75ZM10 15c-4 0-7.5-3.75-8.625-5C2.5 8.75 6 5 10 5s7.5 3.75 8.625 5C17.5 11.25 14 15 10 15Z"></path>
           <path d="M10 6.875A3.095 3.095 0 0 0 6.875 10 3.095 3.095 0 0 0 10 13.125 3.095 3.095 0 0 0 13.125 10 3.095 3.095 0 0 0 10 6.875Zm0 5C9 11.875 8.125 11 8.125 10S9 8.125 10 8.125 11.875 9 11.875 10 11 11.875 10 11.875Z"></path>
         </svg>
-   
-      <button class="quickviewlink">Quick Link</button>
-    
+
+        <button class="quickviewlink">Quick View</button>
       </div>
-  
-  
     </div>
-      
-      {% if current_variant.inventory_quantity != 0 %}
-        <div class="product-card__quick-view position-absolute">
-          {% form 'product', product %}
-            <input type="hidden" name="id" value="{{ current_variant.id }}">
-            {% comment %} <button type="submit" class="button product-card__quick-view-button custom-button-cart">
-              Add to cart
-          </button> {% endcomment %}
-          <button type="submit"  class="custom-button-cart product-card__new-mobile-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffffff" viewBox="0 0 576 512">
-              <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-            </svg>
-          </button>
-          {% endform %}
-        </div>
-     {% endif %} 
-      
-    
+  </a>
 
-    </a>
-  
-    <div class="product-card__info">
-      {% comment %} product title {% endcomment %}
-      <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>     
+  <div class="product-card__info">
+    {% comment %} product title {% endcomment %}
+    <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
 
-{% comment %} product price {% endcomment %}
+    {% comment %} product price {% endcomment %}
 
-<div class="product-card__prices">
-  {% if product.price_varies %}
-    <span class="product-card__price-amount"> From {{ product.price_min | money_with_currency }}</span>
-  {% else %}
-    <span class="product-card__price-amount">  {{ product.price | money_with_currency }}</span>   
-  {% endif %}                
+    <div class="product-card__prices">
+      {% if product.price_varies %}
+        <span class="product-card__price-amount"> From {{ product.price_min | money_with_currency }}</span>
+      {% else %}
+        <span class="product-card__price-amount"> {{ product.price | money_with_currency }}</span>
+      {% endif %}
 
-  {% if current_variant.compare_at_price > current_variant.price %}
-  <s class="product-card__compareprice">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</s>
-  {% endif %}
+      {% if current_variant.compare_at_price > current_variant.price %}
+        <s class="product-card__compareprice">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</s>
+      {% endif %}
 
-<div class="custom--best-seller-slide--content">
-  {% if product.tags != blank %}
-    <p class="productviewtags">{{ product.tags }}</p>
-  {% endif %}
-
-  {% if product.tags contains 'Sale' %}
-    <p class="productviewtags1">{{ product.tags }}</p>
-  {% endif %}
-</div>
-</div>
-
-{% comment %} product color swatch {% endcomment %}
-
-        <div class="product-card__form">
-          {% form 'product', product %}
-            <input type="hidden" name="id" value="{{ current_variant.id }}">          
-              {% if product.options_with_values %}
-                  <div class="product-card__options">
-                      {% for product_option in product.options_with_values %}
-                          {% if product_option.name == "Color" or product_option.name == "color"%}
-                              <div class="product-card__option">
-                                  <ul class="product-card__list">
-                                    {% for option_value in product_option.values %}
-                                      {% assign isOptionOutOfStock = false %}
-                                      
-                                      {% if current_variant.inventory_quantity == 0 and product_option.selected_value == option_value %}
-                                          {% assign isOptionOutOfStock = true %}
-                                      {% endif %}
-                                      
-                                      <li data-value={{ option_value }} class="product-card__color-dot item-swatch{% if isOptionOutOfStock %} out-of-stock{% endif %}" style="{% if product_option.selected_value == option_value %}border: 1px solid red;{% endif %}">
-                                          <input 
-                                              id="{{ current_variant.id | append: option_value }}"
-                                              type="radio" 
-                                              name="option-{{ product_option.name | handleize }}" 
-                                              value="{{ option_value }}"
-                                              {% if product_option.selected_value == option_value %}checked{% endif %}
-                                          >
-                                          <label data-value="{{ option_value }}" for="{{ current_variant.id | append: option_value }}"></label> 
-                                          {% if isOptionOutOfStock %}
-                                              <div class="product-variant-options__cross-line"></div>
-                                          {% endif %}
-                                      </li>
-                                  {% endfor %}
-                                  </ul>                                  
-                              </div>
-                          {% endif %}
-                      {% endfor %}
-                  </div>
-              {% endif %}
-
-          
-          {% endform %}
-        </div>
-        {% if product.type != blank %}
-          <button class="productinfotags">
-            {% if product.type == 'Quick Dry' %}
-              <img src="https://effortless-theme-demo.myshopify.com/cdn/shop/files/sparkle_20x20.webp?v=1668642168" class="quickdryimages" alt="Quick Dry" width="" height="">
-              {% endif %}
-              {% if product.type == 'Cooling' %}
-                <img src="https://effortless-theme-demo.myshopify.com/cdn/shop/files/img_353738_20x20.png?v=1668642289" class="quickdryimages" alt="Quick Dry" width="" height="">
-                {% endif %}
-                {% if product.type == 'Natural' %}
-                  <img src="https://effortless-theme-demo.myshopify.com/cdn/shop/files/leaf_20x20.webp?v=1668642718" class="quickdryimages" alt="Quick Dry" width="" height="">
-                  {% endif %}
-         <div class="button-type-view">
-           {{ product.type }}
-        </div>
-          </button>
+      <div class="custom--best-seller-slide--content">
+        {% if product.tags != blank %}
+          <p class="productviewtags">{{ product.tags }}</p>
         {% endif %}
 
+        {% if product.tags contains 'Sale' %}
+          <p class="productviewtags1">{{ product.tags }}</p>
+        {% endif %}
+      </div>
+    </div>
+    {% comment %} product color swatch {% endcomment %}
+   {% comment %} <div class="product-card__form">
+     {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {% if product.options_with_values %}
+          <div class="product-card__options">
+            {% for product_option in product.options_with_values %}
+              {% if product_option.name == 'Color' or product_option.name == 'color' %}
+                <div class="product-card__option">
+                  <ul class="product-card__list">
+                    {% for option_value in product_option.values %}
+                      {% assign isOptionOutOfStock = false %}
 
+                      {% if current_variant.inventory_quantity == 0 and product_option.selected_value == option_value %}
+                        {% assign isOptionOutOfStock = true %}
+                      {% endif %}
+
+                      <li
+                        data-value="{{ option_value }}"
+                        class="product-card__color-dot item-swatch{% if isOptionOutOfStock %} out-of-stock{% endif %}"
+                        style="{% if product_option.selected_value == option_value %}border: 1px solid red;{% endif %}"
+                      >
+                        <input
+                          id="{{ current_variant.id | append: option_value }}"
+                          type="radio"
+                          name="option-{{ product_option.name | handleize }}"
+                          value="{{ option_value }}"
+                          {% if product_option.selected_value == option_value %}
+                            checked
+                          {% endif %}
         
+                        >
+                        <label
+                          data-value="{{ option_value }}"
+                          for="{{ current_variant.id | append: option_value }}"
+                        ></label>
+                        {% if isOptionOutOfStock %}
+                          <div class="product-variant-options__cross-line"></div>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endform %} 
+    </div>  {% endcomment %}
+    {% if product.type != blank %}
+      <button class="productinfotags">
+        {% if product.type == 'Quick Dry' %}
+          <img
+            src="https://effortless-theme-demo.myshopify.com/cdn/shop/files/sparkle_20x20.webp?v=1668642168"
+            class="quickdryimages"
+            alt="Quick Dry"
+            width=""
+            height=""
+          >
+        {% endif %}
+        {% if product.type == 'Cooling' %}
+          <img
+            src="https://effortless-theme-demo.myshopify.com/cdn/shop/files/img_353738_20x20.png?v=1668642289"
+            class="quickdryimages"
+            alt="Quick Dry"
+            width=""
+            height=""
+          >
+        {% endif %}
+        {% if product.type == 'Natural' %}
+          <img
+            src="https://effortless-theme-demo.myshopify.com/cdn/shop/files/leaf_20x20.webp?v=1668642718"
+            class="quickdryimages"
+            alt="Quick Dry"
+            width=""
+            height=""
+          >
+        {% endif %}
+        <div class="button-type-view">
+          {{ product.type }}
+        </div>
+      </button>
+    {% endif %}
+  </div>
 
-       </div>
-  
-    <script>  
-      {{ product.variants | json }}
-    </script>
-  </product-card>
+  <script>
+    {
+      product.variants | json
+    }
+  </script>
+</product-card>
 
-  
+{% style %}
+  .product-card__color-dot {
+  display: inline-block;
+  width: {{ settings.swatchSize }}px;
+  height: {{ settings.swatchSize }}px;
+  border-radius: {% case settings.swatchStyle %}
+    {% when 'round' %}
+      50%;
+    {% when 'square' %}
+      0;
+    {% when 'square-round-corners' %}
+      4px;
+    {% when 'portrait' %}
+      /* Adjust for portrait style */
+    {% endcase %}
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+{% endstyle %}
