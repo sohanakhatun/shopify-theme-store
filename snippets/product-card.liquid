@@ -92,7 +92,7 @@
               {% if product.options_with_values %}
                   <div class="product-card__options">
                       {% for product_option in product.options_with_values %}
-                          {% if product_option.name == "Color" %}
+                          {% if product_option.name == "Color" or product_option.name == "color"%}
                               <div class="product-card__option">
                                   <ul class="product-card__list">
                                     {% for option_value in product_option.values %}
