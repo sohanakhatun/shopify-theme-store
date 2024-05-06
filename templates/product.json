@@ -49,6 +49,11 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "pincode_checker_kHe4dr": {
+          "type": "pincode-checker",
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -59,7 +64,8 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "share"
+        "share",
+        "pincode_checker_kHe4dr"
       ],
       "custom_css": [
         "button {border: none;}"
