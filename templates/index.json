@@ -471,7 +471,7 @@
         "show_arrows_mobile": false,
         "show_arrows_tablet": false,
         "auto_play_duration": 2000,
-        "padding_top": 60,
+        "padding_top": 100,
         "padding_bottom": 60
       }
     }
