@@ -47,7 +47,7 @@
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-
+    <script src="{{ 'product-card.js' | asset_url }}" defer></script>
     {{ content_for_header }}
 
     {%- liquid
@@ -350,6 +350,7 @@ body {
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
+    {% section 'color-swatch' %}
     {% sections 'header-group' %}
 
     <main
