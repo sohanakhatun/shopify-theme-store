@@ -1642,7 +1642,15 @@ a.product__text {
   cursor: pointer;
 }
 
-
+.is-success{
+  background-color: #4CAF50;
+}
+.is-error{
+  background-color: #f44336;
+}
+.is-hidden{
+  display: none;
+}
 #infoToast {
   display: none;
   position: fixed;

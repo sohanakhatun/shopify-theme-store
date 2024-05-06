@@ -1,7 +1,7 @@
 class CartDrawer extends HTMLElement {
   constructor() {
     super();
-
+// CLOSE THE CART DRAWER ON CLICK OF ESC KEY
     this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
     this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this));
     this.setHeaderCartIconAccessibility();

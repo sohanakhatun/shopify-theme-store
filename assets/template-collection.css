@@ -97,3 +97,23 @@
 .collection__view-all a:not(.link) {
   margin-top: 1rem;
 }
+
+.product-grid-container{
+  margin-top: 50px;
+}
+
+.collection-tab-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+  justify-content: start;
+  width: 580px;
+
+}
+.all-collections-title{
+  font-size: 20px;
+  font-weight: 500;
+}
+#collectionTab:hover{
+  cursor: pointer;
+}
