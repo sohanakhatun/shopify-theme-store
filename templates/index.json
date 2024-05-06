@@ -325,6 +325,29 @@
         "padding_bottom": 50
       }
     },
+    "custom_blog_jEtnLW": {
+      "type": "custom-blog",
+      "settings": {
+        "heading": "Our Journal",
+        "heading_size": "h1",
+        "blog": "how-to-wear-streetwear-like-a-grown-up-men-s-fashion",
+        "columns_desktop": 3,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "auto_play": true,
+        "show_pagination": true,
+        "show_pagination_mobile": true,
+        "show_pagination_tablet": true,
+        "show_arrows_mobile": false,
+        "show_arrows": false,
+        "show_arrows_tablet": false,
+        "auto_play_duration": 2000
+      }
+    },
     "custom_slider_with_text_q7UDpy": {
       "type": "custom-slider-with-text",
       "blocks": {
@@ -461,6 +484,7 @@
     "photo_flex_yXaDzV",
     "featured_in_NxprFy",
     "custom_reviews_bGe6QG",
+    "custom_blog_jEtnLW",
     "custom_slider_with_text_q7UDpy",
     "custom_testimonials_tBPgh4"
   ]
