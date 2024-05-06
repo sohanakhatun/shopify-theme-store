@@ -46,6 +46,43 @@
         "padding_bottom": 0
       }
     },
+    "custom_whychoose_YknAQ4": {
+      "type": "custom-whychoose",
+      "blocks": {
+        "column_BeGxf9": {
+          "type": "column",
+          "settings": {
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_12.svg",
+            "title": "Quality",
+            "description": "Exceptional quality from top to bottom."
+          }
+        },
+        "column_KfEGrq": {
+          "type": "column",
+          "settings": {
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_13.svg",
+            "title": "Delivery",
+            "description": "Fast and free delivery worldwide."
+          }
+        },
+        "column_x3y4ay": {
+          "type": "column",
+          "settings": {
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_14.svg",
+            "title": "Guarantee",
+            "description": "100% customer satisfaction guaranteed."
+          }
+        }
+      },
+      "block_order": [
+        "column_BeGxf9",
+        "column_KfEGrq",
+        "column_x3y4ay"
+      ],
+      "settings": {
+        "heading": "Why Choose Effortless?"
+      }
+    },
     "custom_collections_VLE8gR": {
       "type": "custom-collections",
       "blocks": {
@@ -339,6 +376,7 @@
   },
   "order": [
     "customherobanner_zH8iqB",
+    "custom_whychoose_YknAQ4",
     "custom_collections_VLE8gR",
     "custombestsellers_NPz3U7",
     "photo_flex_yXaDzV",
