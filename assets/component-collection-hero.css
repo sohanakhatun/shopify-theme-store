@@ -1,4 +1,9 @@
+body,html{
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 
+}
 .collection-hero__inner {
   display: flex;
   flex-direction: column;
@@ -124,7 +129,6 @@
   }
 }
 
-/* BREADCRUMBS */
 .page-width {
   max-width: 100%;
   margin: 0 auto;
@@ -168,6 +172,22 @@
   font-weight: 400;
 }
 
+/* collections heading */
+
+.collection-wrapper {
+  z-index: 3;
+  background-color: #2d2d2d;
+  width: 35%;
+  padding: 4rem 1rem 4rem 3rem;
+  position: relative;
+  bottom: 80px;
+  left: 5%;
+}
+
+.collection-wrapper>h1 {
+  color: white;
+}
+
 .collectiontabs{
   /* border: 1px solid red; */
   display: flex;
@@ -208,20 +228,6 @@
     min-height: 35rem;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -130,47 +130,6 @@
         "settings": {
           "color_scheme": "scheme-1"
         }
-      },
-      "color-swatch": {
-        "type": "color-swatch",
-        "blocks": {
-          "color_settings_YkXJjD": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "Black",
-              "color_code": "#000000"
-            }
-          },
-          "color_settings_bXbxaQ": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "Blue",
-              "color_code": "#0000ff"
-            }
-          },
-          "color_settings_FMEtgt": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "White",
-              "color_code": "#fff"
-            }
-          },
-          "color_settings_YafXNn": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "Burlywood",
-              "color_code": "#deb887"
-            }
-          }
-        },
-        "block_order": [
-          "color_settings_YkXJjD",
-          "color_settings_bXbxaQ",
-          "color_settings_FMEtgt",
-          "color_settings_YafXNn"
-        ],
-        "settings": {
-        }
       }
     },
     "content_for_index": [
@@ -247,7 +206,7 @@
         "settings": {
           "background": "#ebe309",
           "background_gradient": "",
-          "text": "#ffffff",
+          "text": "#fff",
           "button": "#121212",
           "button_label": "#ffffff",
           "secondary_button_label": "#121212",

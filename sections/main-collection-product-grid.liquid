@@ -2,7 +2,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'custombestsellers.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'Custom-tabs.js'  | asset_url }}" defer></script>
+
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
@@ -27,20 +27,13 @@
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
-  {%- paginate collection.products by section.settings.products_per_page -%}
+<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}" id="product-grid-container">
+
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
         <form class="facets-vertical-form" id="FacetSortForm">
           <div class="facet-filters sorting caption">
-            {% comment %} <div class="collection-tab-wrapper">
-              {% for collection in collections %}
-                <div class="all-collections-title">
-                  <div id="collectionTab" data-collection-id="{{ collection.id }}">{{ collection.title }}</div>
-                </div>
-              {% endfor %}
-            </div> {% endcomment %}
             <div class="facet-filters__field">
               <div class="select">
                 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
@@ -89,7 +82,7 @@
             enable_filtering: section.settings.enable_filtering,
             enable_sorting: section.settings.enable_sorting,
             filter_type: section.settings.filter_type,
-            paginate: paginate
+           
           %}
         </aside>
       {%- endif -%}
@@ -97,41 +90,32 @@
       <div
         class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         id="ProductGridContainer"
-        data-collection-id="{{collection.id}}"
         {% if settings.animations_reveal_on_scroll %}
           data-cascade
         {% endif %}
       >
-
       {% assign currentPath = request.path %}
+
           <custom-tabs class="collection-tabs-container ">
             <div class="collectionpages">
               <h1 class="collectionstitles">{{ collection.title }}</h1>
             </div>
             <div class="collectiontabs">
             {% for collection in collections %}
+            
               {% if collection.url == currentPath %}
                   <div class="listsofvarient ">
                     <span class="collection-tabs active" data-path="{{ collection.url }}"  data-section-id="{{ section.id }}" >{{ collection.title }}</span>
                   </div>
                   {% else %}
                   <div class="listsofvarient">
-                  <span class="collection-tabs " data-path="{{ collection.url }}"  data-section-id="{{ section.id }}" >{{ collection.title }}</span>
+                  <span class="collection-tabs" data-path="{{ collection.url }}"  data-section-id="{{ section.id }}" >{{ collection.title }}</span>
                 </div>
                 {% endif %}
               {% endfor %}
             </div>
           </custom-tabs>
-          {% comment %} MetaField {% endcomment %}
-          {% comment %} {%- if collection.metafields.custom.sub_collection_link != blank -%}
-            <div class="collection--links-container">
-              {%- for item in collection.metafields.custom.sub_collection_link.value -%}
-                <div class="collection--links-wrapper">
-                  <a href="{{ item.url }}" class="collection--links-link">{{ item.title }}</a>
-                </div>
-              {%- endfor -%}
-            </div>
-          {%- endif -%} {% endcomment %}
+         
         {%- if collection.products.size == 0 -%}
           <div
             class="collection collection--empty page-width"
@@ -174,25 +158,25 @@
                     style="--animation-order: {{ forloop.index }};"
                   {% endif %}
                 >
-                {% render 'product-card', product: product, section_id: section.id%}
+                {% render 'product-card', product: product%}
              
                 </li>
               {%- endfor -%}
             </ul>
 
-            {%- if paginate.pages > 1 -%}
+            {% comment %} {%- if paginate.pages > 1 -%}
               {% render 'pagination', paginate: paginate, anchor: '' %}
-            {%- endif -%}
+            {%- endif -%} {% endcomment %}
           </div>
         {%- endif -%}
       </div>
     </div>
-  {%- endpaginate -%}
+ 
   {% if section.settings.image_shape == 'arch' %}
     {% render 'mask-arch' %}
   {%- endif -%}
 </div>
-
+<script src="{{ 'Custom-tabs.js'  | asset_url }}" defer></script>
 {% schema %}
 {
   "name": "t:sections.main-collection-product-grid.name",

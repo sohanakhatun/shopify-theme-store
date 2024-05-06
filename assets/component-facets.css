@@ -36,7 +36,7 @@
   display: flex;
   grid-column: 2;
   grid-row: 1;
-  padding-left: 2.5rem;
+  padding-left: 2rem;
 }
 
 @media screen and (min-width: 990px) {
@@ -323,7 +323,7 @@
 /* Hover/focus state */
 .facets-layout-list .facets__label:hover .facet-checkbox__text,
 .facets-layout-list input:focus ~ .facet-checkbox__text {
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .facets-layout-grid > * {
