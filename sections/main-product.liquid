@@ -9,6 +9,8 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
+ 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -64,98 +66,83 @@
       onload="this.media='all'"
     >
   {%- endif -%}
-  {% comment %} breadcrumbs {% endcomment %}
-  <nav
-    class="breadcrumbs page-width"
-    role="navigation"
-    aria-label="breadcrumbs"
-  >
-    <ol class="breadcrumbs-list">
-      <li class="breadcrumbs-item home-breadcrumbs-link">
+{% comment %} breadcrumbs {% endcomment %}
+<nav
+class="breadcrumbs page-width"
+role="navigation"
+aria-label="breadcrumbs">
+<ol class="breadcrumbs-list">
+  <li class="breadcrumbs-item home-breadcrumbs-link">
+    <a
+      class="breadcrumbs-link"
+      href="/"
+      title="Home">Home</a>
+  </li>
+
+  {% case t %}
+    {% when 'collection' and collection.handle %}
+      {% if current_tags %}
+        <li class="breadcrumbs-item">{{ collection.title }}</li>
+        <li class="breadcrumbs-item">
+          {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+          <a
+            class="breadcrumbs-link"
+            href="{{ tag_url }}"
+            aria-current="page">
+            {{- current_tags | join: ' + ' -}}
+          </a>
+        </li>
+      {% else %}
+        <li class="breadcrumbs-item collection-title-breadcrumbs-link">
+          <a
+            class="breadcrumbs-link"
+            href="{{ collection.url }}"
+            aria-current="page">
+            {{- collection.title -}}
+          </a>
+        </li>
+      {% endif %}
+
+    {% when 'blog' %}
+      {% if current_tags %}
+        <li class="breadcrumbs-item">{{ blog.title }}</li>
+        <li class="breadcrumbs-item">
+          {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+          <a
+            class="breadcrumbs-link"
+            href="{{ tag_url }}"
+            aria-current="page">
+            {{- current_tags | join: ' + ' -}}
+          </a>
+        </li>
+      {% else %}
+        <li class="breadcrumbs-item">
+          <a
+            class="breadcrumbs-link"
+            href="{{ blog.url }}"
+            aria-current="page">{{ blog.title }}</a>
+        </li>
+      {% endif %}
+
+    {% when 'article' %}
+      <li class="breadcrumbs-item">{{ blog.title }}</li>
+      <li class="breadcrumbs-item">
         <a
           class="breadcrumbs-link"
-          href="/"
-          title="Home"
-          >Home</a
-        >
+          href="{{ article.url }}"
+          aria-current="page">{{ article.title }}</a>
       </li>
 
-      {% case t %}
-        {% when 'collection' and collection.handle %}
-          {% if current_tags %}
-            <li class="breadcrumbs-item">{{ collection.title }}</li>
-            <li class="breadcrumbs-item">
-              {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
-              <a
-                class="breadcrumbs-link"
-                href="{{ tag_url }}"
-                aria-current="page"
-              >
-                {{- current_tags | join: ' + ' -}}
-              </a>
-            </li>
-          {% else %}
-            <li class="breadcrumbs-item collection-title-breadcrumbs-link">
-              <a
-                class="breadcrumbs-link"
-                href="{{ collection.url }}"
-                aria-current="page"
-              >
-                {{- collection.title -}}
-              </a>
-            </li>
-          {% endif %}
-
-        {% when 'blog' %}
-          {% if current_tags %}
-            <li class="breadcrumbs-item">{{ blog.title }}</li>
-            <li class="breadcrumbs-item">
-              {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
-              <a
-                class="breadcrumbs-link"
-                href="{{ tag_url }}"
-                aria-current="page"
-              >
-                {{- current_tags | join: ' + ' -}}
-              </a>
-            </li>
-          {% else %}
-            <li class="breadcrumbs-item">
-              <a
-                class="breadcrumbs-link"
-                href="{{ blog.url }}"
-                aria-current="page"
-              >
-                {{- blog.title -}}
-              </a>
-            </li>
-          {% endif %}
-
-        {% when 'article' %}
-          <li class="breadcrumbs-item">{{ blog.title }}</li>
-          <li class="breadcrumbs-item">
-            <a
-              class="breadcrumbs-link"
-              href="{{ article.url }}"
-              aria-current="page"
-            >
-              {{- article.title -}}
-            </a>
-          </li>
-
-        {% else %}
-          <li class="breadcrumbs-item">
-            <a
-              class="breadcrumbs-link"
-              href="{{ request.path }}"
-              aria-current="page"
-            >
-              {{- page_title -}}
-            </a>
-          </li>
-      {% endcase %}
-    </ol>
-  </nav>
+    {% else %}
+      <li class="breadcrumbs-item">
+        <a
+          class="breadcrumbs-link"
+          href="{{ request.path }}"
+          aria-current="page">{{ page_title }}</a>
+      </li>
+  {% endcase %}
+</ol>
+</nav>
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
@@ -182,9 +169,10 @@
                 >
                   {{- block.settings.text -}}
                 </p>
-
+                
               {%- when 'title' -%}
                 <div class="product-title" {{ block.shopify_attributes }}>
+                
                   <a href="{{ product.url }}" class="product-title">
                     <p>
                       {{ product.title | escape }}
@@ -226,7 +214,11 @@
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
+               {%when 'size' %}
 
+                  <a class=”trigger-pop-up btn”>See Size Chart</a>
+              
+          
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -318,12 +310,8 @@
                     </div>
                   </details>
                 </div>
-                {% for variant in product.variants %}
-                  {% if variant.options contains 'size' %}
-                    <a class="trigger-pop-up btn">See Size Chart</a>
-                  {% endif %}
-                {% endfor %}
               {%- when 'quantity_selector' -%}
+                
                 <div
                   id="Quantity-Form-{{ section.id }}"
                   class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
@@ -587,36 +575,30 @@
                 </div>
 
               {%- when 'pincode-checker' -%}
-                {% comment %}
-                  <pincode-checker>
-                    <div class="pincode-checker">
-                      <input type="text" id="inputpincode" placeholder="Enter Pincode" maxlength="6">
-                      <button id="checkButton">Check</button>
-                      <div id="infoToast" class="show-green"></div>
-                      <div id="infoToast" class="show-red"></div>
-                      <div id="infoToast" class="show-blue"></div>
-
-                    </div>
-                  </pincode-checker>
-                {% endcomment %}
-
-                <pincode-checker>
+                {% comment %} <pincode-checker>
                   <div class="pincode-checker">
-                    <div class="field pincode-checker__field">
-                      <input
-                        class="field__input"
-                        id="PincodeInput"
-                        type="text"
-                        name="pincode-input"
-                        placeholder="Eg. 560012"
-                      >
-                      <label class="field__label" for="PincodeInput">Enter Pincode</label>
-                    </div>
-                    <button type="button" class="button pincode-checker__button" name="pincode-submit">Check</button>
-                  </div>
-                  <div class="pincode-message text-body is-hidden" name="pincode-message"></div>
-                </pincode-checker>
+                    <input type="text" id="inputpincode" placeholder="Enter Pincode" maxlength="6">
+                    <button id="checkButton">Check</button>
+                    <div id="infoToast" class="show-green"></div>
+                    <div id="infoToast" class="show-red"></div>
+                    <div id="infoToast" class="show-blue"></div>
 
+                  </div>
+                </pincode-checker> {% endcomment %}
+                
+
+
+<pincode-checker>
+    <div class="pincode-checker">
+      <div class="field pincode-checker__field">
+        <input class="field__input" id="PincodeInput" type="text" name="pincode-input" placeholder="Eg. 560012">
+        <label class="field__label" for="PincodeInput">Enter Pincode</label>
+      </div>
+      <button type="button" class="button pincode-checker__button" name="pincode-submit">Check</button>
+    </div>
+    <div class="pincode-message text-body is-hidden" name="pincode-message"></div>
+</pincode-checker>
+  
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -625,44 +607,8 @@
                   section_id: section.id,
                   show_pickup_availability: false
                 -%}
-              {%- when 'rating' -%}
-                {%- if product.metafields.reviews.rating.value != blank -%}
-                  <div class="rating-wrapper">
-                    {% liquid
-                      assign rating_decimal = 0
-                      assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
-                      if decimal >= 0.3 and decimal <= 0.7
-                        assign rating_decimal = 0.5
-                      elsif decimal > 0.7
-                        assign rating_decimal = 1
-                      endif
-                    %}
-                    <div
-                      class="rating"
-                      role="img"
-                      aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}"
-                    >
-                      <span
-                        aria-hidden="true"
-                        class="rating-star"
-                        style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
-                      ></span>
-                    </div>
-                    <p class="rating-text caption">
-                      <span aria-hidden="true">
-                        {{- product.metafields.reviews.rating.value }} /
-                        {{ product.metafields.reviews.rating.value.scale_max -}}
-                      </span>
-                    </p>
-                    <p class="rating-count caption">
-                      <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
-                      <span class="visually-hidden">
-                        {{- product.metafields.reviews.rating_count }}
-                        {{ 'accessibility.total_reviews' | t -}}
-                      </span>
-                    </p>
-                  </div>
-                {%- endif -%}
+          
+               
               {%- when 'complementary' -%}
                 <product-recommendations
                   class="complementary-products quick-add-hidden no-js-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
@@ -799,6 +745,8 @@
           </a>
         </product-info>
       </div>
+
+  
       {%- if section.settings.media_position == 'right' -%}
         {% comment %} Duplicate gallery to display after product content on tablet/desktop breakpoint {% endcomment %}
         <div class="grid__item product__media-wrapper small-hide">
@@ -2479,8 +2427,9 @@
 {% endschema %}
 
 <script>
-    document.querySelector('[name="quantity"]').addEventListener('change', function(event) {
-    var newQuantity = event.target.value;
-    updateSection(newQuantity);
-  });
+  document.querySelector('[name="quantity"]').addEventListener('change', function(event) {
+  var newQuantity = event.target.value;
+  updateSection(newQuantity);
+});
+
 </script>

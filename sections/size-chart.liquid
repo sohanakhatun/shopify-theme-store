@@ -1,65 +1,72 @@
 <style>
+  input {
+    display: none;
+  }
+  div label {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    width: 50px;
+    height: 30px;
+    background: #cccccc;
+    border-radius: 50px;
+    transition: 300ms linear;
+  }
+
+  div label:before {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: left 300ms linear;
+  }
+
+  div input:checked + label {
+    background: #000000;
+  }
+
+  div input:checked + label:before {
+    left: 23px;
+  }
+
   table {
-      width: 100%;
-      border-collapse: collapse;
-      display: none; /* Hide tables by default */
+    width: 100%;
+    border-collapse: collapse;
   }
-  th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
   }
-
+  th {
+    background-color: #f2f2f2;
+  }
   .toggle-container {
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
+    margin-bottom: 20px;
   }
-  .toggle-button {
-      position: relative;
-      width: 60px;
-      height: 34px;
+  .toggle-container label {
+    display: inline-block;
+    background-color: #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
   }
-  .toggle-button input[type="checkbox"] {
-      display: none;
+  .toggle-container input[type="radio"] {
+    display: none;
   }
-  .toggle-button .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      border-radius: 34px;
-      transition: 0.4s;
-  }
-  .toggle-button .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      border-radius: 50%;
-      transition: 0.4s;
-  }
-
-  .toggle-button input:checked + .slider:before {
-      transform: translateX(26px);
-  }
-  .toggle-button .slider.round {
-      border-radius: 34px;
-  }
-  .toggle-button .slider.round:before {
-      border-radius: 50%;
-  }
-  .size-chart-wrapper{
-    padding:0 5rem;
+  .toggle-container input[type="radio"]:checked + label {
+    background-color: #4CAF50;
+    color: white;
   }
 </style>
-
+<h1>Size Chart</h1>
 <div class="size-chart-wrapper">
   <div class="size-chart-wrapper--sizes">
     <button class="sizes">XXS</button>
@@ -71,42 +78,22 @@
   <div class="measurements">
     <p>Measurements</p>
     <div class="toggle-container">
-      <span style="margin-left: 10px;">In</span>
-      <label class="toggle-button">
-        <input type="checkbox" id="unit-toggle" name="unit-toggle">
-        <span class="slider round"></span>
-      </label>
-      <span style="margin-left: 10px;">cm</span>
+      <input
+        type="radio"
+        id="cm-toggle"
+        name="unit-toggle"
+        value="cm"
+        checked>
+      <label for="cm-toggle">cm</label>
+      <input
+        type="radio"
+        id="inch-toggle"
+        name="unit-toggle"
+        value="inch">
+      <label for="inch-toggle">inch</label>
     </div>
 
-    <table id="inch-table">
-      <tr>
-        <th>Area</th>
-        <th>Measurement</th>
-      </tr>
-      <tr>
-        <td>Length</td>
-        <td data-cm="15" data-inch="5.9">5.9 inch</td>
-      </tr>
-      <tr>
-        <td>Chest</td>
-        <td data-cm="20" data-inch="7.9">7.9 inch</td>
-      </tr>
-      <tr>
-        <td>Shoulder</td>
-        <td data-cm="12" data-inch="4.7">4.7 inch</td>
-      </tr>
-      <tr>
-        <td>Front length</td>
-        <td data-cm="40" data-inch="15.7">15.7 inch</td>
-      </tr>
-      <tr>
-        <td>Sleeve length</td>
-        <td data-cm="40" data-inch="15.7">15.7 inch</td>
-      </tr>
-    </table>
-
-    <table id="cm-table">
+    <table id="measurement-table">
       <tr>
         <th>Area</th>
         <th>Measurement</th>
@@ -132,31 +119,37 @@
         <td data-cm="40" data-inch="15.7">40 cm</td>
       </tr>
     </table>
+
+
   </div>
 </div>
 <script>
-  const unitToggle = document.getElementById('unit-toggle');
-  const inchTable = document.getElementById('inch-table');
-  const cmTable = document.getElementById('cm-table');
-
-  function updateMeasurements() {
-      if (unitToggle.checked) {
-          inchTable.style.display = 'none';
-          cmTable.style.display = 'table';
-      } else {
-          inchTable.style.display = 'table';
-          cmTable.style.display = 'none';
-      }
-  }
-
-  unitToggle.addEventListener('change', updateMeasurements);
-
-  // Initial update
-  updateMeasurements();
+    const unitToggles = document.querySelectorAll('input[name="unit-toggle"]');
+    const measurementCells = document.querySelectorAll('#measurement-table td');
+  
+    function updateMeasurements() {
+        let unit;
+        unitToggles.forEach(toggle => {
+            if (toggle.checked) {
+                unit = toggle.value;
+            }
+        });
+  
+        measurementCells.forEach(cell => {
+            const cmValue = cell.getAttribute('data-cm');
+            const inchValue = cell.getAttribute('data-inch');
+            if (unit === 'cm') {
+                cell.textContent = `${cmValue} cm`;
+            } else {
+                cell.textContent = `${inchValue} inch`;
+            }
+        });
+    }
+  
+    unitToggles.forEach(toggle => {
+        toggle.addEventListener('change', updateMeasurements);
+    });
+  
+    // Initial update
+    updateMeasurements();
 </script>
-{% schema %}
-{
-  "name": "Section name",
-  "settings": []
-}
-{% endschema %}
