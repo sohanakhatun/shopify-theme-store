@@ -81,7 +81,7 @@
   position: absolute;
   bottom: -400px; /* Initially hide the button below the image */
   left: 50%; /* Adjust as needed */
-  
+
   transition: bottom 0.3s ease-in-out; /* Animation transition */
 }
 
@@ -141,7 +141,6 @@
   width: 80%;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 21px #0000006b;
 }
 .custom--best-sellers{
   position: relative;
