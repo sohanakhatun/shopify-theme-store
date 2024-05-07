@@ -1,69 +1,43 @@
 <style>
-  input {
-    display: none;
+  body {
+      font-family: Arial, sans-serif;
   }
-  div label {
-    position: relative;
-    cursor: pointer;
-    display: block;
-    width: 50px;
-    height: 30px;
-    background: #cccccc;
-    border-radius: 50px;
-    transition: 300ms linear;
-  }
-
-  div label:before {
-    position: absolute;
-    top: 50%;
-    left: 2px;
-    transform: translateY(-50%);
-    content: "";
-    display: block;
-    width: 25px;
-    height: 25px;
-    background: #ffffff;
-    border-radius: 50%;
-    transition: left 300ms linear;
-  }
-
-  div input:checked + label {
-    background: #000000;
-  }
-
-  div input:checked + label:before {
-    left: 23px;
-  }
-
   table {
-    width: 100%;
-    border-collapse: collapse;
+      width: 100%;
+      border-collapse: collapse;
+      display: none; /* Hide tables by default */
   }
-  th,
-  td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
   }
   th {
-    background-color: #f2f2f2;
+      background-color: #f2f2f2;
   }
   .toggle-container {
-    margin-bottom: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
   }
   .toggle-container label {
-    display: inline-block;
-    background-color: #ddd;
-    border-radius: 20px;
-    padding: 5px 10px;
-    cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 20px 0 0 20px;
   }
-  .toggle-container input[type="radio"] {
-    display: none;
+  .toggle-container input[type="checkbox"] {
+      display: none;
   }
-  .toggle-container input[type="radio"]:checked + label {
-    background-color: #4CAF50;
-    color: white;
+  .toggle-container input[type="checkbox"] + label {
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 0 20px 20px 0;
+  }
+  .toggle-container input[type="checkbox"]:checked + label {
+      background-color: #ddd;
+      color: black;
   }
 </style>
 <h1>Size Chart</h1>
@@ -78,21 +52,9 @@
   <div class="measurements">
     <p>Measurements</p>
     <div class="toggle-container">
-      <input
-        type="radio"
-        id="cm-toggle"
-        name="unit-toggle"
-        value="cm"
-        checked
-      >
-      <label for="cm-toggle">cm</label>
-      <input
-        type="radio"
-        id="inch-toggle"
-        name="unit-toggle"
-        value="inch"
-      >
-      <label for="inch-toggle">inch</label>
+      <label for="unit-toggle">cm</label>
+      <input type="checkbox" id="unit-toggle" name="unit-toggle">
+      <label for="unit-toggle">in</label>
     </div>
 
     <table id="inch-table">
@@ -151,34 +113,24 @@
   </div>
 </div>
 <script>
-    const unitToggles = document.querySelectorAll('input[name="unit-toggle"]');
-    const measurementCells = document.querySelectorAll('#measurement-table td');
-  
-    function updateMeasurements() {
-        let unit;
-        unitToggles.forEach(toggle => {
-            if (toggle.checked) {
-                unit = toggle.value;
-            }
-        });
-  
-        measurementCells.forEach(cell => {
-            const cmValue = cell.getAttribute('data-cm');
-            const inchValue = cell.getAttribute('data-inch');
-            if (unit === 'cm') {
-                cell.textContent = `${cmValue} cm`;
-            } else {
-                cell.textContent = `${inchValue} inch`;
-            }
-        });
-    }
-  
-    unitToggles.forEach(toggle => {
-        toggle.addEventListener('change', updateMeasurements);
-    });
-  
-    // Initial update
-    updateMeasurements();
+  const unitToggle = document.getElementById('unit-toggle');
+  const inchTable = document.getElementById('inch-table');
+  const cmTable = document.getElementById('cm-table');
+
+  function updateMeasurements() {
+      if (unitToggle.checked) {
+          inchTable.style.display = 'none';
+          cmTable.style.display = 'table';
+      } else {
+          inchTable.style.display = 'table';
+          cmTable.style.display = 'none';
+      }
+  }
+
+  unitToggle.addEventListener('change', updateMeasurements);
+
+  // Initial update
+  updateMeasurements();
 </script>
 {% schema %}
 {
