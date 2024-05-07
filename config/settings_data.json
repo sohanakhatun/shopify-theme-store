@@ -130,71 +130,6 @@
         "settings": {
           "color_scheme": "scheme-1"
         }
-      },
-      "color-swatch": {
-        "type": "color-swatch",
-        "blocks": {
-          "color_settings_dTwteJ": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "Black",
-              "color_code": "#000000"
-            }
-          },
-          "color_settings_bdKizJ": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "Blue",
-              "color_code": "#0000ff"
-            }
-          },
-          "color_settings_bhAaGq": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "White",
-              "color_code": "#ffffff"
-            }
-          },
-          "color_settings_Na4jgF": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "Burlywood",
-              "color_code": "#deb887"
-            }
-          },
-          "color_settings_GgQMgT": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "red",
-              "color_code": "#ff0000"
-            }
-          },
-          "color_settings_DXTAeJ": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "yellow",
-              "color_code": "#ffff00"
-            }
-          },
-          "color_settings_kkD4eK": {
-            "type": "colorSettings",
-            "settings": {
-              "title": "green",
-              "color_code": "#008000"
-            }
-          }
-        },
-        "block_order": [
-          "color_settings_dTwteJ",
-          "color_settings_bdKizJ",
-          "color_settings_bhAaGq",
-          "color_settings_Na4jgF",
-          "color_settings_GgQMgT",
-          "color_settings_DXTAeJ",
-          "color_settings_kkD4eK"
-        ],
-        "settings": {
-        }
       }
     },
     "content_for_index": [
@@ -271,7 +206,7 @@
         "settings": {
           "background": "#ebe309",
           "background_gradient": "",
-          "text": "#ffffff",
+          "text": "#fff",
           "button": "#121212",
           "button_label": "#ffffff",
           "secondary_button_label": "#121212",

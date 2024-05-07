@@ -335,6 +335,8 @@ body {
       }
     </script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    
   </head>
 
   <body
@@ -351,6 +353,7 @@ body {
     {%- endif -%}
 
     {% section 'color-swatch' %}
+    {% section 'swatches' %}
     {% sections 'header-group' %}
 
     <main
@@ -419,5 +422,14 @@ body {
     <script>
       AOS.init();
     </script>
+    {% if request.page_type == ‘product’ %}
+
+      {% if product.options contains ‘Size’ %}
+  
+          {% render ‘size-chart’ %}
+  
+      {% endif %}
+  
+  {% endif %}
   </body>
 </html>

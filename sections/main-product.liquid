@@ -64,12 +64,88 @@
       onload="this.media='all'"
     >
   {%- endif -%}
+{% comment %} breadcrumbs {% endcomment %}
+<nav
+class="breadcrumbs page-width"
+role="navigation"
+aria-label="breadcrumbs">
+<ol class="breadcrumbs-list">
+  <li class="breadcrumbs-item home-breadcrumbs-link">
+    <a
+      class="breadcrumbs-link"
+      href="/"
+      title="Home">Home</a>
+  </li>
 
+  {% case t %}
+    {% when 'collection' and collection.handle %}
+      {% if current_tags %}
+        <li class="breadcrumbs-item">{{ collection.title }}</li>
+        <li class="breadcrumbs-item">
+          {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+          <a
+            class="breadcrumbs-link"
+            href="{{ tag_url }}"
+            aria-current="page">
+            {{- current_tags | join: ' + ' -}}
+          </a>
+        </li>
+      {% else %}
+        <li class="breadcrumbs-item collection-title-breadcrumbs-link">
+          <a
+            class="breadcrumbs-link"
+            href="{{ collection.url }}"
+            aria-current="page">
+            {{- collection.title -}}
+          </a>
+        </li>
+      {% endif %}
+
+    {% when 'blog' %}
+      {% if current_tags %}
+        <li class="breadcrumbs-item">{{ blog.title }}</li>
+        <li class="breadcrumbs-item">
+          {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+          <a
+            class="breadcrumbs-link"
+            href="{{ tag_url }}"
+            aria-current="page">
+            {{- current_tags | join: ' + ' -}}
+          </a>
+        </li>
+      {% else %}
+        <li class="breadcrumbs-item">
+          <a
+            class="breadcrumbs-link"
+            href="{{ blog.url }}"
+            aria-current="page">{{ blog.title }}</a>
+        </li>
+      {% endif %}
+
+    {% when 'article' %}
+      <li class="breadcrumbs-item">{{ blog.title }}</li>
+      <li class="breadcrumbs-item">
+        <a
+          class="breadcrumbs-link"
+          href="{{ article.url }}"
+          aria-current="page">{{ article.title }}</a>
+      </li>
+
+    {% else %}
+      <li class="breadcrumbs-item">
+        <a
+          class="breadcrumbs-link"
+          href="{{ request.path }}"
+          aria-current="page">{{ page_title }}</a>
+      </li>
+  {% endcase %}
+</ol>
+</nav>
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}">
-        {% render 'product-media-gallery', variant_images: variant_images %}
+        {% render 'custom-product' %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <product-info
@@ -91,15 +167,22 @@
                 >
                   {{- block.settings.text -}}
                 </p>
+                
               {%- when 'title' -%}
-                <div class="product__title" {{ block.shopify_attributes }}>
-                  <h1>{{ product.title | escape }}</h1>
-                  <a href="{{ product.url }}" class="product__title">
-                    <h2 class="h1">
+                <div class="product-title" {{ block.shopify_attributes }}>
+                
+                  <a href="{{ product.url }}" class="product-title">
+                    <p>
                       {{ product.title | escape }}
-                    </h2>
+                    </p>
                   </a>
                 </div>
+
+                {%- if product.available -%}
+                  <p class="avaliable">Avaliable</p>
+                {%- else -%}
+                  <p class="not-avaliable">Not Avaliable</p>
+                {%- endif -%}
               {%- when 'price' -%}
                 <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -129,6 +212,11 @@
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
+               {%when 'size' %}
+
+                  <a class=”trigger-pop-up btn”>See Size Chart</a>
+              
+          
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -221,6 +309,7 @@
                   </details>
                 </div>
               {%- when 'quantity_selector' -%}
+                
                 <div
                   id="Quantity-Form-{{ section.id }}"
                   class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
@@ -507,14 +596,14 @@
     </div>
     <div class="pincode-message text-body is-hidden" name="pincode-message"></div>
 </pincode-checker>
-              
+  
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
                   product_form_id: product_form_id,
                   section_id: section.id,
-                  show_pickup_availability: true
+                  show_pickup_availability: false
                 -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
@@ -615,16 +704,7 @@
                                     offset: continue
                                   -%}
                                     <li>
-                                      {% render 'card-product',
-                                        card_product: product,
-                                        media_aspect_ratio: block.settings.image_ratio,
-                                        show_secondary_image: false,
-                                        lazy_load: false,
-                                        show_quick_add: block.settings.enable_quick_add,
-                                        section_id: section.id,
-                                        horizontal_class: true,
-                                        horizontal_quick_add: true
-                                      %}
+                                      {% render 'custom-product' %}
                                     </li>
                                   {%- endfor -%}
                                 </ul>
@@ -2377,3 +2457,11 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.querySelector('[name="quantity"]').addEventListener('change', function(event) {
+  var newQuantity = event.target.value;
+  updateSection(newQuantity);
+});
+
+</script>

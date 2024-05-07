@@ -1,0 +1,75 @@
+<style>
+    {% for block in section.blocks %}
+      .custom .color-swatch--{{ block.settings.solid_color_name |  handleize }}{
+        {% comment %} background:{{ block.settings.solid_color }}!important; {% endcomment %}
+        {% if block.settings.images != blank%}
+            background:url("{{ block.settings.images | img_url:"small" }}") fixed no-repeat center/cover;
+            {% else %}
+            background:{{ block.settings.solid_color }} !important;
+            {% endif %}
+
+            
+      }
+    {% endfor %}
+  </style>
+  {% schema %}
+  {
+      "name":"Swatches",
+      "settings": [
+          {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading"
+          }
+      ],
+      "blocks": [
+          {
+              "name":"solid color",
+              "type": "solid-color",
+              "settings": [
+                  {
+                      "type": "text",
+                      "id": "solid_color_name",
+                      "label": "Solid color name"
+                  },
+                  {
+                    "type": "image_picker",
+                    "id": "images",
+                    "label": "Images"
+                  },
+                  {
+                      "type": "color",
+                      "id": "solid_color",
+                      "label": "Solid color"
+                  }
+              ]
+          }
+      ],
+      "presets": [
+          {
+            "name": "Swatches"
+          }
+        ]
+  }
+  {% endschema %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
