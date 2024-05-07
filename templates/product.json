@@ -167,11 +167,18 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "wizaah_recently_viewed_products_BbNHgG": {
+      "type": "wizaah-recently-viewed-products",
+      "settings": {
+        "title": "Recently viewed"
+      }
     }
   },
   "order": [
     "main",
     "custom_reviews_Ghm4mQ",
-    "related-products"
+    "related-products",
+    "wizaah_recently_viewed_products_BbNHgG"
   ]
 }
