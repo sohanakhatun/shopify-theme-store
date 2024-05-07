@@ -330,9 +330,9 @@
     "custom_blog_jjRche": {
       "type": "custom-blog",
       "settings": {
-        "heading": "Blog posts",
+        "heading": "Our Journal",
         "heading_size": "h1",
-        "blog": "",
+        "blog": "how-to-wear-streetwear-like-a-grown-up-men-s-fashion",
         "columns_desktop": 3,
         "show_image": true,
         "show_date": true,
@@ -350,21 +350,83 @@
         "auto_play_duration": 2000
       }
     },
-    "featured_blog_AVk3Be": {
-      "type": "featured-blog",
+    "custom_slider_with_text_QwReDH": {
+      "type": "custom-slider-with-text",
+      "blocks": {
+        "image_picker_ANbeeP": {
+          "type": "image_picker",
+          "settings": {
+            "Image_id": "shopify:\/\/shop_images\/images_3_768x_5e7d7030-ee0f-4b41-af34-417f3e877364.webp",
+            "first_checkbox": true,
+            "first_product": "flower-printed-casual-shirt",
+            "first_hotspot_top_position": 35,
+            "first_hotspot_left_position": 35,
+            "first_card_top_position": 45,
+            "first_card_left_position": 43,
+            "second_checkbox": true,
+            "second_product": "nylon-holdall-bag",
+            "second_hotspot_top_position": 78,
+            "second_hotspot_left_position": 58,
+            "second_card_top_position": 75,
+            "second_card_left_position": 63
+          }
+        },
+        "image_picker_Yqfr8z": {
+          "type": "image_picker",
+          "settings": {
+            "Image_id": "shopify:\/\/shop_images\/our-story-group_768x_302b08f2-7989-47eb-b754-b11d973c36bc.webp",
+            "first_checkbox": true,
+            "first_product": "flower-printed-casual-shirt",
+            "first_hotspot_top_position": 35,
+            "first_hotspot_left_position": 35,
+            "first_card_top_position": 45,
+            "first_card_left_position": 43,
+            "second_checkbox": true,
+            "second_product": "nylon-holdall-bag",
+            "second_hotspot_top_position": 78,
+            "second_hotspot_left_position": 58,
+            "second_card_top_position": 75,
+            "second_card_left_position": 63
+          }
+        },
+        "image_picker_UHG64b": {
+          "type": "image_picker",
+          "settings": {
+            "Image_id": "shopify:\/\/shop_images\/our-story_768x_ad28ec44-990e-49a3-a0b6-c400550a6e02.webp",
+            "first_checkbox": true,
+            "first_product": "flower-printed-casual-shirt",
+            "first_hotspot_top_position": 35,
+            "first_hotspot_left_position": 35,
+            "first_card_top_position": 45,
+            "first_card_left_position": 43,
+            "second_checkbox": true,
+            "second_product": "nylon-holdall-bag",
+            "second_hotspot_top_position": 78,
+            "second_hotspot_left_position": 58,
+            "second_card_top_position": 75,
+            "second_card_left_position": 63
+          }
+        }
+      },
+      "block_order": [
+        "image_picker_ANbeeP",
+        "image_picker_Yqfr8z",
+        "image_picker_UHG64b"
+      ],
       "settings": {
-        "heading": "Blog posts",
-        "heading_size": "h1",
-        "blog": "how-to-wear-streetwear-like-a-grown-up-men-s-fashion",
-        "post_limit": 3,
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_image": true,
-        "show_date": true,
-        "show_author": false,
-        "show_view_all": true,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "backgrond_color": "#2d2d2d",
+        "heading": "Our Story",
+        "text": "Effortless was designed and developed by leading ecommerce professionals who are passionate about design and user experience, creating intuitive, user-friendly layouts that are optimized for success and sure to delight our customers.",
+        "button_label": "Shop Now",
+        "button_linkEl": "",
+        "auto_play": true,
+        "show_pagination": true,
+        "show_dots_mobile": true,
+        "show_dots_tablet": true,
+        "show_arrows": false,
+        "auto_play_duration": 4000,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "custom_testimonials_tBPgh4": {
@@ -466,7 +528,7 @@
     "featured_in_NxprFy",
     "custom_reviews_bGe6QG",
     "custom_blog_jjRche",
-    "featured_blog_AVk3Be",
+    "custom_slider_with_text_QwReDH",
     "custom_testimonials_tBPgh4",
     "week_7_hbYRXt"
   ]
