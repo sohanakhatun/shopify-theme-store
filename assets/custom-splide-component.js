@@ -5,7 +5,7 @@ if (!customElements.get("carousel-component")) {
       this.carouselElement = this;
       if (!this.carouselElement.classList.contains("splide")) return;
       this.initSliders();
-      window.addEventListener('resize', this.handleResize.bind(this));
+      window.addEventListener("resize", this.handleResize.bind(this));
     }
     initSliders() {
       // Define the variables and get slider elements
@@ -16,12 +16,14 @@ if (!customElements.get("carousel-component")) {
       carouselElements.forEach((carouselElement) => {
         // Check if the current device is desktop based on the window width
         var isDesktop = window.innerWidth >= 900;
-        if (carouselElement.classList.contains("slider-wrapper--image-splide")) {
+        if (
+          carouselElement.classList.contains("slider-wrapper--image-splide")
+        ) {
           this.mainImageSlider = new Splide(carouselElement, {
             arrows: true,
             pagination: false,
             perPage: 1,
-            perMove: 1
+            perMove: 1,
           }).mount();
         } else {
           this.thumbnailImageSlider = new Splide(carouselElement, {
@@ -34,7 +36,7 @@ if (!customElements.get("carousel-component")) {
             autoHeight: !isDesktop,
             perPage: 3,
             autoplay: false,
-            arrows: false
+            arrows: false,
           }).mount();
         }
       });
@@ -43,6 +45,7 @@ if (!customElements.get("carousel-component")) {
         this.mainImageSlider.sync(this.thumbnailImageSlider);
       }
     }
+   
     handleResize() {
       // Destroy the existing sliders if they exist
       if (this.mainImageSlider) {
@@ -53,8 +56,10 @@ if (!customElements.get("carousel-component")) {
       }
       // Reinitialize the sliders
       this.initSliders();
+   
     }
   }
+
   window.Carousel = Carousel;
   customElements.define("carousel-component", Carousel);
 }

@@ -1956,13 +1956,14 @@ input[type='checkbox'] {
   flex-shrink: 0;
   font-size: 1.8rem;
   border: 0;
-  background-color: transparent;
+
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgb(var(--color-foreground));
   padding: 0;
+  background-color: #f1f2f4;
 }
 
 .quantity__button:first-child {
@@ -3529,3 +3530,5 @@ details-disclosure>details {
     /* Prevent the border from growing on buttons when this effect is on. */
   }
 }
+
+

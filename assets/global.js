@@ -203,9 +203,14 @@ class QuantityInput extends HTMLElement {
 
   onButtonClick(event) {
     event.preventDefault();
+    let QuantityInput = document.getElementById("Quantityinput");
     const previousValue = this.input.value;
 
     event.target.name === "plus" ? this.input.stepUp() : this.input.stepDown();
+    event.target.name === "plus"
+      ? QuantityInput.stepUp()
+      : QuantityInput.stepDown();
+
     if (previousValue !== this.input.value)
       this.input.dispatchEvent(this.changeEvent);
   }
@@ -1368,6 +1373,21 @@ class VariantSelects extends HTMLElement {
               : this.dataset.section
           }`
         );
+        let updatedaddtocart_view = html.getElementById(
+          "customaddto-cart-view"
+        );
+        console.log("updated ", updatedaddtocart_view);
+        let previousaddtocart_view = document.getElementById(
+          "customaddto-cart-view"
+        );
+        console.log("prev", previousaddtocart_view);
+        if (updatedaddtocart_view && previousaddtocart_view)
+          previousaddtocart_view.innerHTML = updatedaddtocart_view.innerHTML;
+
+        let updatedcolor = html.getElementById("customchangecolor");
+        let previouscolor = document.getElementById("customchangecolor");
+        if (updatedcolor && previouscolor)
+          previouscolor.innerHTML = updatedcolor.innerHTML;
 
         const volumePricingDestination = document.getElementById(
           `Volume-${this.dataset.section}`
@@ -1695,7 +1715,6 @@ class PincodeChecker extends HTMLElement {
           sessionStorage.setItem("pincodeData", sheetData);
         })
         .catch(function (error) {
-          
           console.error("Error:", error);
         });
     }
