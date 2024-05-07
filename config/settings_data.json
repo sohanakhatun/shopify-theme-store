@@ -130,6 +130,37 @@
         "settings": {
           "color_scheme": "scheme-1"
         }
+      },
+      "color-swatch": {
+        "type": "color-swatch",
+        "settings": {
+        }
+      },
+      "swatches": {
+        "type": "swatches",
+        "blocks": {
+          "solid_color_HdtMXt": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "White",
+              "solid_color": "#fff"
+            }
+          },
+          "solid_color_6Nc6gG": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "Burlywood",
+              "solid_color": "#deb887"
+            }
+          }
+        },
+        "block_order": [
+          "solid_color_HdtMXt",
+          "solid_color_6Nc6gG"
+        ],
+        "settings": {
+          "heading": ""
+        }
       }
     },
     "content_for_index": [
@@ -206,7 +237,7 @@
         "settings": {
           "background": "#ebe309",
           "background_gradient": "",
-          "text": "#fff",
+          "text": "#ffffff",
           "button": "#121212",
           "button_label": "#ffffff",
           "secondary_button_label": "#121212",
