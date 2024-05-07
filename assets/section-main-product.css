@@ -1770,3 +1770,32 @@ a.product__text {
 .collection-title-breadcrumbs-link a{
   font-weight: 400;
 }
+
+
+.checked {
+  color: orange;
+}
+
+.fa-star-half-alt {
+  color:rgb(0, 34, 255);
+}
+.rating{
+  margin-top: -25px;
+}
+
+.reviews-container{
+/* background-color: #000; */
+/* color: white; */
+height: 100%;
+width: 100%;
+padding: 5rem 5rem;
+}
+
+.custom-reviews-wrapper--reviews-slider--review-card{
+  background-color: white;
+  color: black;
+
+}
+.reviews-wrapper h1{
+  color: white;
+}
