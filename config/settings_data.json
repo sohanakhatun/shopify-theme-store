@@ -133,6 +133,50 @@
       },
       "color-swatch": {
         "type": "color-swatch",
+        "blocks": {
+          "color_settings_FcHaBw": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "blue",
+              "color_code": "#0000ff"
+            }
+          },
+          "color_settings_py7rYa": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "black",
+              "color_code": "#000000"
+            }
+          },
+          "color_settings_LGGbCh": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "red",
+              "color_code": "#ea1717"
+            }
+          },
+          "color_settings_D3rP8Y": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "white",
+              "color_code": "#ffffff"
+            }
+          },
+          "color_settings_wQFkzP": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "burlywood",
+              "color_code": "#deb887"
+            }
+          }
+        },
+        "block_order": [
+          "color_settings_FcHaBw",
+          "color_settings_py7rYa",
+          "color_settings_LGGbCh",
+          "color_settings_D3rP8Y",
+          "color_settings_wQFkzP"
+        ],
         "settings": {
         }
       },
