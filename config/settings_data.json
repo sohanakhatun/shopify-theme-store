@@ -172,8 +172,15 @@
           "color_settings_DXTAeJ": {
             "type": "colorSettings",
             "settings": {
-              "title": "",
-              "color_code": "#000000"
+              "title": "yellow",
+              "color_code": "#ffff00"
+            }
+          },
+          "color_settings_kkD4eK": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "green",
+              "color_code": "#008000"
             }
           }
         },
@@ -183,7 +190,8 @@
           "color_settings_bhAaGq",
           "color_settings_Na4jgF",
           "color_settings_GgQMgT",
-          "color_settings_DXTAeJ"
+          "color_settings_DXTAeJ",
+          "color_settings_kkD4eK"
         ],
         "settings": {
         }
