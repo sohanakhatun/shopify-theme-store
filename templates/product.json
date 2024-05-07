@@ -136,8 +136,8 @@
       ],
       "settings": {
         "heading": "Reviews",
-        "background_color": "#fff",
-        "text_color": "#000",
+        "background_color": "#121212",
+        "text_color": "#ffffff",
         "heading_size": "h1",
         "show_customer_name": true,
         "auto_play": true,
