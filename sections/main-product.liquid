@@ -10,7 +10,6 @@
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
 
- 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -66,83 +65,98 @@
       onload="this.media='all'"
     >
   {%- endif -%}
-{% comment %} breadcrumbs {% endcomment %}
-<nav
-class="breadcrumbs page-width"
-role="navigation"
-aria-label="breadcrumbs">
-<ol class="breadcrumbs-list">
-  <li class="breadcrumbs-item home-breadcrumbs-link">
-    <a
-      class="breadcrumbs-link"
-      href="/"
-      title="Home">Home</a>
-  </li>
-
-  {% case t %}
-    {% when 'collection' and collection.handle %}
-      {% if current_tags %}
-        <li class="breadcrumbs-item">{{ collection.title }}</li>
-        <li class="breadcrumbs-item">
-          {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
-          <a
-            class="breadcrumbs-link"
-            href="{{ tag_url }}"
-            aria-current="page">
-            {{- current_tags | join: ' + ' -}}
-          </a>
-        </li>
-      {% else %}
-        <li class="breadcrumbs-item collection-title-breadcrumbs-link">
-          <a
-            class="breadcrumbs-link"
-            href="{{ collection.url }}"
-            aria-current="page">
-            {{- collection.title -}}
-          </a>
-        </li>
-      {% endif %}
-
-    {% when 'blog' %}
-      {% if current_tags %}
-        <li class="breadcrumbs-item">{{ blog.title }}</li>
-        <li class="breadcrumbs-item">
-          {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
-          <a
-            class="breadcrumbs-link"
-            href="{{ tag_url }}"
-            aria-current="page">
-            {{- current_tags | join: ' + ' -}}
-          </a>
-        </li>
-      {% else %}
-        <li class="breadcrumbs-item">
-          <a
-            class="breadcrumbs-link"
-            href="{{ blog.url }}"
-            aria-current="page">{{ blog.title }}</a>
-        </li>
-      {% endif %}
-
-    {% when 'article' %}
-      <li class="breadcrumbs-item">{{ blog.title }}</li>
-      <li class="breadcrumbs-item">
+  {% comment %} breadcrumbs {% endcomment %}
+  <nav
+    class="breadcrumbs page-width"
+    role="navigation"
+    aria-label="breadcrumbs"
+  >
+    <ol class="breadcrumbs-list">
+      <li class="breadcrumbs-item home-breadcrumbs-link">
         <a
           class="breadcrumbs-link"
-          href="{{ article.url }}"
-          aria-current="page">{{ article.title }}</a>
+          href="/"
+          title="Home"
+          >Home</a
+        >
       </li>
 
-    {% else %}
-      <li class="breadcrumbs-item">
-        <a
-          class="breadcrumbs-link"
-          href="{{ request.path }}"
-          aria-current="page">{{ page_title }}</a>
-      </li>
-  {% endcase %}
-</ol>
-</nav>
+      {% case t %}
+        {% when 'collection' and collection.handle %}
+          {% if current_tags %}
+            <li class="breadcrumbs-item">{{ collection.title }}</li>
+            <li class="breadcrumbs-item">
+              {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+              <a
+                class="breadcrumbs-link"
+                href="{{ tag_url }}"
+                aria-current="page"
+              >
+                {{- current_tags | join: ' + ' -}}
+              </a>
+            </li>
+          {% else %}
+            <li class="breadcrumbs-item collection-title-breadcrumbs-link">
+              <a
+                class="breadcrumbs-link"
+                href="{{ collection.url }}"
+                aria-current="page"
+              >
+                {{- collection.title -}}
+              </a>
+            </li>
+          {% endif %}
+
+        {% when 'blog' %}
+          {% if current_tags %}
+            <li class="breadcrumbs-item">{{ blog.title }}</li>
+            <li class="breadcrumbs-item">
+              {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+              <a
+                class="breadcrumbs-link"
+                href="{{ tag_url }}"
+                aria-current="page"
+              >
+                {{- current_tags | join: ' + ' -}}
+              </a>
+            </li>
+          {% else %}
+            <li class="breadcrumbs-item">
+              <a
+                class="breadcrumbs-link"
+                href="{{ blog.url }}"
+                aria-current="page"
+              >
+                {{- blog.title -}}
+              </a>
+            </li>
+          {% endif %}
+
+        {% when 'article' %}
+          <li class="breadcrumbs-item">{{ blog.title }}</li>
+          <li class="breadcrumbs-item">
+            <a
+              class="breadcrumbs-link"
+              href="{{ article.url }}"
+              aria-current="page"
+            >
+              {{- article.title -}}
+            </a>
+          </li>
+
+        {% else %}
+          <li class="breadcrumbs-item">
+            <a
+              class="breadcrumbs-link"
+              href="{{ request.path }}"
+              aria-current="page"
+            >
+              {{- page_title -}}
+            </a>
+          </li>
+      {% endcase %}
+    </ol>
+  </nav>
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
@@ -169,10 +183,9 @@ aria-label="breadcrumbs">
                 >
                   {{- block.settings.text -}}
                 </p>
-                
+
               {%- when 'title' -%}
                 <div class="product-title" {{ block.shopify_attributes }}>
-                
                   <a href="{{ product.url }}" class="product-title">
                     <p>
                       {{ product.title | escape }}
@@ -214,11 +227,9 @@ aria-label="breadcrumbs">
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
-               {%when 'size' %}
+              {% when 'size' %}
+                <a class="trigger-pop-up btn">See Size Chart</a>
 
-                  <a class=”trigger-pop-up btn”>See Size Chart</a>
-              
-          
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -311,7 +322,6 @@ aria-label="breadcrumbs">
                   </details>
                 </div>
               {%- when 'quantity_selector' -%}
-                
                 <div
                   id="Quantity-Form-{{ section.id }}"
                   class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
@@ -521,6 +531,25 @@ aria-label="breadcrumbs">
                     </volume-pricing>
                   {%- endif -%}
                 </div>
+                <div class="gift-wrap-wrapper">
+                  <input type="checkbox" id="giftCardCheckbox" class="gift-card-checkbox" name="giftCard">
+                  <label for="giftCardCheckbox">Add Gift Card to this product</label>
+                  <div class="gift-card-div" id="giftCardDiv" style="display: none;">
+                    {% assign desired_type = 'gift-wrap' %}
+                    {% for product in collections.all.products %}
+                      {% if product.type == desired_type %}
+                        <img
+                          src="{{ product.featured_image | image_url }}"
+                          alt="{{ product.title }}"
+                          width="100"
+                          height="100"
+                        >
+                      {% endif %}
+                    {% endfor %}
+                    <textarea id="giftMessage" placeholder="Enter Your Message Here"></textarea>
+                  </div>
+                </div>
+                
               {%- when 'popup' -%}
                 <modal-opener
                   class="product-popup-modal__opener no-js-hidden quick-add-hidden"
@@ -575,30 +604,36 @@ aria-label="breadcrumbs">
                 </div>
 
               {%- when 'pincode-checker' -%}
-                {% comment %} <pincode-checker>
+                {% comment %}
+                  <pincode-checker>
+                    <div class="pincode-checker">
+                      <input type="text" id="inputpincode" placeholder="Enter Pincode" maxlength="6">
+                      <button id="checkButton">Check</button>
+                      <div id="infoToast" class="show-green"></div>
+                      <div id="infoToast" class="show-red"></div>
+                      <div id="infoToast" class="show-blue"></div>
+
+                    </div>
+                  </pincode-checker>
+                {% endcomment %}
+
+                <pincode-checker>
                   <div class="pincode-checker">
-                    <input type="text" id="inputpincode" placeholder="Enter Pincode" maxlength="6">
-                    <button id="checkButton">Check</button>
-                    <div id="infoToast" class="show-green"></div>
-                    <div id="infoToast" class="show-red"></div>
-                    <div id="infoToast" class="show-blue"></div>
-
+                    <div class="field pincode-checker__field">
+                      <input
+                        class="field__input"
+                        id="PincodeInput"
+                        type="text"
+                        name="pincode-input"
+                        placeholder="Eg. 560012"
+                      >
+                      <label class="field__label" for="PincodeInput">Enter Pincode</label>
+                    </div>
+                    <button type="button" class="button pincode-checker__button" name="pincode-submit">Check</button>
                   </div>
-                </pincode-checker> {% endcomment %}
-                
+                  <div class="pincode-message text-body is-hidden" name="pincode-message"></div>
+                </pincode-checker>
 
-
-<pincode-checker>
-    <div class="pincode-checker">
-      <div class="field pincode-checker__field">
-        <input class="field__input" id="PincodeInput" type="text" name="pincode-input" placeholder="Eg. 560012">
-        <label class="field__label" for="PincodeInput">Enter Pincode</label>
-      </div>
-      <button type="button" class="button pincode-checker__button" name="pincode-submit">Check</button>
-    </div>
-    <div class="pincode-message text-body is-hidden" name="pincode-message"></div>
-</pincode-checker>
-  
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -607,8 +642,7 @@ aria-label="breadcrumbs">
                   section_id: section.id,
                   show_pickup_availability: false
                 -%}
-          
-               
+
               {%- when 'complementary' -%}
                 <product-recommendations
                   class="complementary-products quick-add-hidden no-js-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
@@ -746,7 +780,6 @@ aria-label="breadcrumbs">
         </product-info>
       </div>
 
-  
       {%- if section.settings.media_position == 'right' -%}
         {% comment %} Duplicate gallery to display after product content on tablet/desktop breakpoint {% endcomment %}
         <div class="grid__item product__media-wrapper small-hide">
@@ -2427,9 +2460,20 @@ aria-label="breadcrumbs">
 {% endschema %}
 
 <script>
-  document.querySelector('[name="quantity"]').addEventListener('change', function(event) {
-  var newQuantity = event.target.value;
-  updateSection(newQuantity);
-});
+  document.addEventListener("DOMContentLoaded", function() {
+    var giftCardCheckbox = document.getElementById('giftCardCheckbox');
+    var giftCardDiv = document.getElementById('giftCardDiv');
 
+    giftCardCheckbox.addEventListener('change', function() {
+      if (giftCardCheckbox.checked) {
+        giftCardDiv.style.display = 'block';
+      } else {
+        giftCardDiv.style.display = 'none';
+      }
+    });
+  });
+  document.querySelector('[name="quantity"]').addEventListener('change', function (event) {
+    var newQuantity = event.target.value;
+    updateSection(newQuantity);
+  });
 </script>
