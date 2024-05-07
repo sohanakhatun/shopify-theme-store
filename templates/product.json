@@ -20,13 +20,6 @@
             "swatch_shape": "circle"
           }
         },
-        "popup_TQQrUk": {
-          "type": "popup",
-          "settings": {
-            "text": "View Size Chart",
-            "page": "size-chart"
-          }
-        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {
@@ -55,7 +48,6 @@
         "title",
         "price",
         "variant_picker",
-        "popup_TQQrUk",
         "quantity_selector",
         "buy_buttons",
         "description",
