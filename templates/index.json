@@ -37,11 +37,50 @@
       "settings": {
         "autoplay": true,
         "show_pagination": true,
+        "show_dots_tablet": true,
+        "show_dots_mobile": true,
         "show_arrows": false,
         "auto_play_duration": 2000,
         "animation": "fade",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "custom_whychoose_rBBxT6": {
+      "type": "custom-whychoose",
+      "blocks": {
+        "column_AwxGfz": {
+          "type": "column",
+          "settings": {
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_12.svg",
+            "title": "Quality",
+            "description": "Exceptional quality from top to bottom."
+          }
+        },
+        "column_dgTVyM": {
+          "type": "column",
+          "settings": {
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_13.svg",
+            "title": "Delivery",
+            "description": "Fast and free delivery worldwide."
+          }
+        },
+        "column_zkd8x3": {
+          "type": "column",
+          "settings": {
+            "image_picker": "shopify:\/\/shop_images\/svgviewer-output_14.svg",
+            "title": "Guarantee",
+            "description": "100% customer satisfaction guaranteed."
+          }
+        }
+      },
+      "block_order": [
+        "column_AwxGfz",
+        "column_dgTVyM",
+        "column_zkd8x3"
+      ],
+      "settings": {
+        "heading": "Why Choose Effortless?"
       }
     },
     "custom_collections_VLE8gR": {
@@ -274,13 +313,58 @@
       ],
       "settings": {
         "heading": "Reviews",
+        "background_color": "#fff",
+        "text_color": "#000",
         "heading_size": "h1",
         "show_customer_name": true,
+        "auto_play": true,
         "show_pagination": true,
+        "show_dots_mobile": true,
+        "show_dots_tablet": true,
         "show_arrows": false,
         "auto_play_duration": 3000,
         "padding_top": 20,
         "padding_bottom": 50
+      }
+    },
+    "custom_blog_jjRche": {
+      "type": "custom-blog",
+      "settings": {
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "blog": "",
+        "columns_desktop": 3,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "auto_play": true,
+        "show_pagination": true,
+        "show_pagination_mobile": true,
+        "show_pagination_tablet": true,
+        "show_arrows_mobile": false,
+        "show_arrows": false,
+        "show_arrows_tablet": false,
+        "auto_play_duration": 2000
+      }
+    },
+    "featured_blog_AVk3Be": {
+      "type": "featured-blog",
+      "settings": {
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "blog": "how-to-wear-streetwear-like-a-grown-up-men-s-fashion",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "custom_testimonials_tBPgh4": {
@@ -321,7 +405,11 @@
         "heading_size": "h1",
         "show_customer_name": true,
         "show_pagination": true,
+        "show_pagination_mobile": true,
+        "show_pagination_tablet": true,
         "show_arrows": false,
+        "show_arrows_mobile": false,
+        "show_arrows_tablet": false,
         "auto_play_duration": 2000,
         "padding_top": 60,
         "padding_bottom": 60
@@ -371,11 +459,14 @@
   },
   "order": [
     "customherobanner_zH8iqB",
+    "custom_whychoose_rBBxT6",
     "custom_collections_VLE8gR",
     "custombestsellers_NPz3U7",
     "photo_flex_yXaDzV",
     "featured_in_NxprFy",
     "custom_reviews_bGe6QG",
+    "custom_blog_jjRche",
+    "featured_blog_AVk3Be",
     "custom_testimonials_tBPgh4",
     "week_7_hbYRXt"
   ]
