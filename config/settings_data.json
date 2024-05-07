@@ -130,6 +130,69 @@
         "settings": {
           "color_scheme": "scheme-1"
         }
+      },
+      "color-swatch": {
+        "type": "color-swatch",
+        "settings": {
+        }
+      },
+      "swatches": {
+        "type": "swatches",
+        "blocks": {
+          "solid_color_iEHwzh": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "white",
+              "solid_color": "#ffffff"
+            }
+          },
+          "solid_color_ywpkFp": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "black",
+              "solid_color": "#121212"
+            }
+          },
+          "solid_color_bACkK9": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "burlywood",
+              "solid_color": "#deb887"
+            }
+          },
+          "solid_color_LVyVtH": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "blue",
+              "solid_color": "#0000ff"
+            }
+          },
+          "solid_color_CyCw8n": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "red",
+              "solid_color": "#ff0000"
+            }
+          },
+          "solid_color_iiHBJQ": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "green",
+              "solid_color": "#008000"
+            }
+          }
+        },
+        "block_order": [
+          "solid_color_iEHwzh",
+          "solid_color_ywpkFp",
+          "solid_color_bACkK9",
+          "solid_color_LVyVtH",
+          "solid_color_CyCw8n",
+          "solid_color_iiHBJQ"
+        ],
+        "settings": {
+          "heading": ""
+        }
       }
     },
     "content_for_index": [
@@ -206,7 +269,7 @@
         "settings": {
           "background": "#ebe309",
           "background_gradient": "",
-          "text": "#fff",
+          "text": "#ffffff",
           "button": "#121212",
           "button_label": "#ffffff",
           "secondary_button_label": "#121212",
