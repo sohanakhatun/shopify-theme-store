@@ -1,44 +1,67 @@
 <style>
   body {
-      font-family: Arial, sans-serif;
-  }
-  table {
-      width: 100%;
-      border-collapse: collapse;
-      display: none; /* Hide tables by default */
-  }
-  th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-  }
-  th {
-      background-color: #f2f2f2;
-  }
-  .toggle-container {
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-  }
-  .toggle-container label {
-      background-color: #4CAF50;
-      color: white;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 20px 0 0 20px;
-  }
-  .toggle-container input[type="checkbox"] {
-      display: none;
-  }
-  .toggle-container input[type="checkbox"] + label {
-      background-color: #4CAF50;
-      color: white;
-      border-radius: 0 20px 20px 0;
-  }
-  .toggle-container input[type="checkbox"]:checked + label {
-      background-color: #ddd;
-      color: black;
-  }
+       font-family: Arial, sans-serif;
+   }
+   table {
+       width: 100%;
+       border-collapse: collapse;
+       display: none; /* Hide tables by default */
+   }
+   th, td {
+       padding: 8px;
+       text-align: left;
+       border-bottom: 1px solid #ddd;
+   }
+   th {
+       background-color: #f2f2f2;
+   }
+   .toggle-container {
+       margin-bottom: 20px;
+       display: flex;
+       align-items: center;
+   }
+   .toggle-button {
+       position: relative;
+       width: 60px;
+       height: 34px;
+   }
+   .toggle-button input[type="checkbox"] {
+       display: none;
+   }
+   .toggle-button .slider {
+       position: absolute;
+       cursor: pointer;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: #ccc;
+       border-radius: 34px;
+       transition: 0.4s;
+   }
+   .toggle-button .slider:before {
+       position: absolute;
+       content: "";
+       height: 26px;
+       width: 26px;
+       left: 4px;
+       bottom: 4px;
+       background-color: white;
+       border-radius: 50%;
+       transition: 0.4s;
+   }
+   .toggle-button input:checked + .slider {
+       background-color: #4CAF50;
+   }
+   .toggle-button input:checked + .slider:before {
+       transform: translateX(26px);
+   }
+   .toggle-button .slider.round {
+       border-radius: 34px;
+   }
+   .toggle-button .slider.round:before {
+       border-radius: 50%;
+   }
 </style>
 <h1>Size Chart</h1>
 <div class="size-chart-wrapper">
@@ -52,9 +75,11 @@
   <div class="measurements">
     <p>Measurements</p>
     <div class="toggle-container">
-      <label for="unit-toggle">cm</label>
-      <input type="checkbox" id="unit-toggle" name="unit-toggle">
-      <label for="unit-toggle">in</label>
+      <label class="toggle-button">
+        <input type="checkbox" id="unit-toggle" name="unit-toggle">
+        <span class="slider round"></span>
+      </label>
+      <span style="margin-left: 10px;">in</span>
     </div>
 
     <table id="inch-table">
