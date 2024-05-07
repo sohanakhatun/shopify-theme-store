@@ -152,7 +152,7 @@
             "type": "colorSettings",
             "settings": {
               "title": "White",
-              "color_code": "#fff"
+              "color_code": "#ffffff"
             }
           },
           "color_settings_Na4jgF": {
@@ -161,13 +161,29 @@
               "title": "Burlywood",
               "color_code": "#deb887"
             }
+          },
+          "color_settings_GgQMgT": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "red",
+              "color_code": "#ff0000"
+            }
+          },
+          "color_settings_DXTAeJ": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "",
+              "color_code": "#000000"
+            }
           }
         },
         "block_order": [
           "color_settings_dTwteJ",
           "color_settings_bdKizJ",
           "color_settings_bhAaGq",
-          "color_settings_Na4jgF"
+          "color_settings_Na4jgF",
+          "color_settings_GgQMgT",
+          "color_settings_DXTAeJ"
         ],
         "settings": {
         }
