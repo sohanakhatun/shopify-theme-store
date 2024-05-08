@@ -168,6 +168,13 @@
               "title": "burlywood",
               "color_code": "#deb887"
             }
+          },
+          "color_settings_m6pxVK": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "gray",
+              "color_code": "#808080"
+            }
           }
         },
         "block_order": [
@@ -175,7 +182,8 @@
           "color_settings_py7rYa",
           "color_settings_LGGbCh",
           "color_settings_D3rP8Y",
-          "color_settings_wQFkzP"
+          "color_settings_wQFkzP",
+          "color_settings_m6pxVK"
         ],
         "settings": {
         }
