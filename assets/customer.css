@@ -6,6 +6,15 @@
   text-align: center;
 }
 
+#emailHeading{
+  margin: -3.5rem 0;
+  font-family: "One Night Sans Black";
+font-size: 14px;
+font-weight: 300;
+line-height: 16.8px;
+text-align: left;
+
+}
 @media screen and (min-width: 750px) {
   .customer:not(.account):not(.order) {
     max-width: 47.8rem;
@@ -15,6 +24,8 @@
 .customer > h1,
 .customer__title {
   margin-top: 0;
+  font-family: "One Night Sans Black";
+  font-weight: 500;
 }
 
 .customer form {
@@ -333,13 +344,36 @@
   display: block;
   margin: 0 auto;
   width: fit-content;
+  font-family: "One Night Sans Black";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 25.6px;
+    text-align: left;
 }
-
+.login-url a{
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+  font-family: "One Night Sans Black";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 25.6px;
+    text-align: left;
+}
 .login a[href='#recover'] {
   margin-left: 0;
   margin-right: 0;
+  font-family: "One Night Sans Black";
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 25.6px;
+  text-align: left;
 }
 
+#CustomerEmail{
+  font-family: "One Night Sans Black";
+  font-size: 14px;
+}
 .login .field + a {
   margin-top: 1rem;
 }
@@ -379,6 +413,7 @@
 #recover,
 #login {
   scroll-margin-top: 20rem;
+  font-family: "One Night Sans Black";
 }
 
 #recover {
@@ -445,6 +480,7 @@
 
 :is(.account, .order) h1 {
   margin-bottom: 1rem;
+    font-family: "One Night Sans Medium";
 }
 
 :is(.account, .order) h2 {
@@ -752,4 +788,22 @@ li[data-address] > h2 {
 .addresses form > div:nth-of-type(7),
 .addresses form > div:nth-of-type(7) + div[id] {
   margin-top: 1.5rem;
+}
+
+.terms-and-condition-div{
+  display: flex;
+  gap: 3px;
+  align-items: baseline;
+ 
+  text-align: center;
+  justify-content: start;
+/* width: 57rem; */
+}
+.terms-and-condition-div p {
+  font-family: "One Night Sans Black";
+  font-size: 14px;
+  font-weight: 300;
+}
+.terms-and-condition-div span{
+  color: rgba(0, 91, 170, 1);
 }
