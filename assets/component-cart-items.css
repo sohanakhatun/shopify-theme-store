@@ -17,6 +17,8 @@ cart-items .title-wrapper-with-link {
 
 .cart-item__quantity-wrapper {
   display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .cart-item__totals {
@@ -37,7 +39,9 @@ cart-items .title-wrapper-with-link {
 }
 
 .cart-item__image {
-  height: auto;
+  height: 125px;
+  object-fit: cover;
+  max-width: calc(10rem / var(--font-body-scale));
   max-width: calc(10rem / var(--font-body-scale));
 }
 
@@ -78,14 +82,11 @@ cart-items .title-wrapper-with-link {
 
 .cart-item__name {
   text-decoration: none;
-  display: block;
+  font-size: 17px;
+  font-weight: 100;
 }
 
-.cart-item__name:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
-  text-decoration-thickness: 0.2rem;
-}
+
 
 .cart-item__price-wrapper > * {
   display: block;
@@ -122,16 +123,15 @@ cart-items .title-wrapper-with-link {
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .cart-item cart-remove-button {
-    width: 4.5rem;
+    width: 6.5rem;
     height: 4.5rem;
   }
 }
 
 cart-remove-button .button {
-  min-width: calc(4.5rem / var(--font-body-scale));
-  min-height: 4.5rem;
-  padding: 0;
-  margin: 0 0.1rem 0.1rem 0;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  position: relative;
 }
 
 cart-remove-button .button:before,
@@ -151,10 +151,16 @@ cart-remove-button .button:not([disabled]):hover {
 }
 
 cart-remove-button .icon-remove {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2.5rem;
+  width: 5.5rem;
 }
-
+.cart-item{
+  border-bottom: 1px solid;
+  color: rgba(0, 0, 0, 0.429);
+  margin-bottom: 10px;
+  position: relative;
+  bottom: 30px;
+}
 .cart-item .loading__spinner {
   top: 0;
   left: auto;

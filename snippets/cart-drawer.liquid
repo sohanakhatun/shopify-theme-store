@@ -7,6 +7,8 @@
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'custombestsellers.css' | asset_url | stylesheet_tag }}
+
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
@@ -54,13 +56,13 @@
           </div>
           {%- if settings.cart_drawer_collection != blank -%}
             <div class="cart-drawer__collection">
-              {% render 'card-collection', card_collection: settings.cart_drawer_collection, columns: 1 %}
+              {% render 'product-card', card_collection: settings.cart_drawer_collection, columns: 1 %}
             </div>
           {%- endif -%}
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }} ({{ cart.item_count }}) Items </h2>
         <button
           class="drawer__close"
           type="button"
@@ -86,35 +88,13 @@
               <div class="drawer__cart-items-wrapper">
                 <table class="cart-items" role="table">
                   <thead role="rowgroup">
-                    <tr role="row">
-                      <th id="CartDrawer-ColumnProductImage" role="columnheader">
-                        <span class="visually-hidden">{{ 'sections.cart.headings.image' | t }}</span>
-                      </th>
-                      <th
-                        id="CartDrawer-ColumnProduct"
-                        class="caption-with-letter-spacing"
-                        scope="col"
-                        role="columnheader"
-                      >
-                        {{ 'sections.cart.headings.product' | t }}
-                      </th>
-                      <th
-                        id="CartDrawer-ColumnTotal"
-                        class="right caption-with-letter-spacing"
-                        scope="col"
-                        role="columnheader"
-                      >
-                        {{ 'sections.cart.headings.total' | t }}
-                      </th>
-                      <th id="CartDrawer-ColumnQuantity" role="columnheader">
-                        <span class="visually-hidden">{{ 'sections.cart.headings.quantity' | t }}</span>
-                      </th>
-                    </tr>
+      
                   </thead>
 
                   <tbody role="rowgroup">
                     {%- for item in cart.items -%}
-                      <tr id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item" role="row">
+                      
+                      <tr id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item itemviewsdata" role="row">
                         <td class="cart-item__media" role="cell" headers="CartDrawer-ColumnProductImage">
                           {% if item.image %}
                             {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -129,7 +109,7 @@
                             >
                           {% endif %}
                         </td>
-
+                    
                         <td class="cart-item__details" role="cell" headers="CartDrawer-ColumnProduct">
                           {%- if settings.show_vendor -%}
                             <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
@@ -139,6 +119,25 @@
                             {{- item.product.title | escape -}}
                           </a>
 
+
+                          {%- if item.product.has_only_default_variant == false
+                            or item.properties.size != 0
+                            or item.selling_plan_allocation != null
+                          -%}
+                            <dl>
+                              {%- if item.product.has_only_default_variant == false -%}
+                                {%- for option in item.options_with_values -%}
+                                  <div class="product-option">
+                                    <dt>{{ option.name }}:</dt>
+                                    <dd class="detailsviewsbold">
+                                      {{ option.value -}}
+                                      {%- unless forloop.last %}, {% endunless %}
+                                    </dd>
+                                  </div>
+                                {%- endfor -%}
+                              {%- endif -%}
+
+                              
                           {%- if item.original_price != item.final_price -%}
                             <div class="cart-item__discounted-prices">
                               <span class="visually-hidden">
@@ -159,23 +158,6 @@
                               {{ item.original_price | money }}
                             </div>
                           {%- endif -%}
-
-                          {%- if item.product.has_only_default_variant == false
-                            or item.properties.size != 0
-                            or item.selling_plan_allocation != null
-                          -%}
-                            <dl>
-                              {%- if item.product.has_only_default_variant == false -%}
-                                {%- for option in item.options_with_values -%}
-                                  <div class="product-option">
-                                    <dt>{{ option.name }}:</dt>
-                                    <dd>
-                                      {{ option.value -}}
-                                      {%- unless forloop.last %}, {% endunless %}
-                                    </dd>
-                                  </div>
-                                {%- endfor -%}
-                              {%- endif -%}
 
                               {%- for property in item.properties -%}
                                 {%- assign property_first_char = property.first | slice: 0 -%}
@@ -236,10 +218,10 @@
                                   {{ item.final_line_price | money }}
                                 </span>
                               </div>
-                            {%- else -%}
+                            {% comment %} {%- else -%}
                               <span class="price price--end">
                                 {{ item.original_line_price | money }}
-                              </span>
+                              </span> {% endcomment %}
                             {%- endif -%}
 
                             {%- if item.variant.available and item.unit_price_measurement -%}
@@ -449,23 +431,19 @@
       </cart-drawer-items>
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
-          <details id="Details-CartDrawer">
-            <summary>
-              <span class="summary__title">
-                {{ 'sections.cart.note' | t }}
-                {% render 'icon-caret' %}
-              </span>
-            </summary>
-            <cart-note class="cart__note field">
-              <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
-              <textarea
+          
+            <cart-note class="cart__note field fieldaccesscard">
+              <label class="visually-hidden " for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
+              <input
+                placeholder="Enter Your Note (Optional)"
                 id="CartDrawer-Note"
-                class="text-area text-area--resize-vertical field__input"
+                class="text-area text-area--resize-vertical field__input basetextareafield"
                 name="note"
+                col="10"
                 placeholder="{{ 'sections.cart.note' | t }}"
-              >{{ cart.note }}</textarea>
+              >{{ cart.note }}
             </cart-note>
-          </details>
+        
         {%- endif -%}
 
         <!-- Start blocks -->
@@ -487,7 +465,7 @@
           </div>
 
           <div class="totals" role="status">
-            <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
+            <h2 class="totals__total">{{ 'sections.cart.subtotal' | t }}</h2>
             <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
           </div>
 
@@ -504,7 +482,18 @@
           </small>
         </div>
 
+
+        <p >
+          <input type="checkbox" id="agree" />
+          <label for="agree">
+            I agree with the terms and conditions.
+          </label>
+        </p>
+
+        
+
         <!-- CTAs -->
+          <a href="/cart" class="cart__update-buttonviewcart  button">View Cart</a>
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <noscript>
@@ -512,7 +501,6 @@
               {{ 'sections.cart.update' | t }}
             </button>
           </noscript>
-
           <button
             type="submit"
             id="CartDrawer-Checkout"
@@ -525,10 +513,25 @@
           >
             {{ 'sections.cart.checkout' | t }}
           </button>
+       
         </div>
+        <h2>Complete your look</h2>
+
+        <div class="productlist-view">
+          {% for product in settings.product_view_list %}
+        <div class="viewcardproduct">
+  {% render 'product-card', product:product %}
+
+      </div>
+            {%endfor %}
+        </div>
+       
+    
+        
       </div>
     </div>
   </div>
+
 </cart-drawer>
 
 <script>
