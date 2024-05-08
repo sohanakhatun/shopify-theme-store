@@ -118,7 +118,9 @@
       </div>
 
       {%- if form.password_needed -%}
+     
         <div class="field">
+          <p id="emailHeading">Password</p>
           <input
             type="password"
             value=""
@@ -143,7 +145,7 @@
   <input type="checkbox"/>
   <p>By Clicking , I am confirming that I have read and agree with the <span>Terms and Conditons</span> </p>
 </div>
-      <button>
+      <button id="account-page-button">
         {{ 'customer.login_page.sign_in' | t }}
       </button>
 
