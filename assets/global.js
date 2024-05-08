@@ -1389,6 +1389,7 @@ class VariantSelects extends HTMLElement {
         if (updatedcolor && previouscolor)
           previouscolor.innerHTML = updatedcolor.innerHTML;
 
+   
         const volumePricingDestination = document.getElementById(
           `Volume-${this.dataset.section}`
         );
@@ -1779,3 +1780,7 @@ class PincodeChecker extends HTMLElement {
 }
 
 customElements.define("pincode-checker", PincodeChecker);
+
+
+
+

@@ -6,22 +6,23 @@
   text-align: center;
 }
 
-#emailHeading{
-  margin: -3.5rem 0;
+#emailHeading {
+  margin: -20px 0;
   font-family: "One Night Sans Black";
-font-size: 14px;
-font-weight: 300;
-line-height: 16.8px;
-text-align: left;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16.8px;
+  text-align: left;
 
 }
+
 @media screen and (min-width: 750px) {
   .customer:not(.account):not(.order) {
     max-width: 47.8rem;
   }
 }
 
-.customer > h1,
+.customer>h1,
 .customer__title {
   margin-top: 0;
   font-family: "One Night Sans Black";
@@ -63,7 +64,7 @@ text-align: left;
 }
 
 .customer .field {
-  margin: 2rem 0 0 0;
+  margin: 4rem 0 0 0;
 }
 
 .customer .field:first-of-type {
@@ -79,6 +80,11 @@ text-align: left;
   width: 100%;
   font-size: 1.6rem;
   position: relative;
+}
+
+.customer tbody td {
+  text-align: left;
+  vertical-align: middle;
 }
 
 @media screen and (min-width: 750px) {
@@ -116,6 +122,8 @@ text-align: left;
 .customer tbody td {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .customer td:empty {
@@ -133,6 +141,7 @@ text-align: left;
 }
 
 @media screen and (min-width: 750px) {
+
   .customer th,
   .customer td:first-of-type {
     text-align: left;
@@ -144,6 +153,8 @@ text-align: left;
   .customer tbody td {
     padding-top: 2.4rem;
     padding-bottom: 2.4rem;
+    border: 1px solid #D6D6D6;
+    padding-left: 18px;
   }
 
   .customer th:first-of-type,
@@ -152,7 +163,8 @@ text-align: left;
   }
 
   .customer tbody td {
-    vertical-align: top;
+    vertical-align: middle;
+    text-align: left;
   }
 
   .customer tbody td:first-of-type {
@@ -166,7 +178,7 @@ text-align: left;
 
 @media screen and (min-width: 750px) {
   .customer tbody td:last-of-type {
-    padding-bottom: 0;
+    padding-bottom: 17px;
   }
 }
 
@@ -201,6 +213,7 @@ text-align: left;
 }
 
 @media screen and (min-width: 750px) {
+
   .customer tfoot tr:first-of-type td,
   .customer tfoot tr:first-of-type th {
     padding-top: 2.4rem;
@@ -212,6 +225,7 @@ text-align: left;
 }
 
 @media screen and (min-width: 750px) {
+
   .customer tfoot tr:last-of-type td,
   .customer tfoot tr:last-of-type th {
     padding-bottom: 2.4rem;
@@ -231,6 +245,7 @@ text-align: left;
 }
 
 @media screen and (forced-colors: active) {
+
   .customer thead::after,
   .customer tfoot::before {
     background: CanvasText;
@@ -239,6 +254,7 @@ text-align: left;
 
 /* mobile table overrides */
 @media screen and (max-width: 749px) {
+
   .customer thead,
   .customer th,
   .customer tfoot td:first-of-type {
@@ -247,7 +263,7 @@ text-align: left;
 
   .customer td {
     display: flex;
-    text-align: right;
+    text-align: left;
   }
 
   .customer td::before {
@@ -345,21 +361,23 @@ text-align: left;
   margin: 0 auto;
   width: fit-content;
   font-family: "One Night Sans Black";
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 25.6px;
-    text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 25.6px;
+  text-align: left;
 }
-.login-url a{
+
+.login-url a {
   display: block;
   margin: 0 auto;
   width: fit-content;
   font-family: "One Night Sans Black";
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 25.6px;
-    text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 25.6px;
+  text-align: left;
 }
+
 .login a[href='#recover'] {
   margin-left: 0;
   margin-right: 0;
@@ -370,11 +388,12 @@ text-align: left;
   text-align: left;
 }
 
-#CustomerEmail{
+#CustomerEmail {
   font-family: "One Night Sans Black";
   font-size: 14px;
 }
-.login .field + a {
+
+.login .field+a {
   margin-top: 1rem;
 }
 
@@ -393,7 +412,7 @@ text-align: left;
 }
 
 #recover,
-#recover + div {
+#recover+div {
   display: none;
 }
 
@@ -401,12 +420,12 @@ text-align: left;
   display: block;
 }
 
-#recover:target + div {
+#recover:target+div {
   display: block;
 }
 
-#recover:target ~ #login,
-#recover:target ~ #login + div {
+#recover:target~#login,
+#recover:target~#login+div {
   display: none;
 }
 
@@ -421,7 +440,7 @@ text-align: left;
 }
 
 .activate button[name='decline'],
-.addresses li > button,
+.addresses li>button,
 .addresses form button[type] {
   background-color: rgba(var(--color-background), var(--alpha-button-background));
   color: rgb(var(--color-link));
@@ -450,25 +469,25 @@ text-align: left;
 }
 
 @media screen and (min-width: 990px) {
-  :is(.account, .order) > div:nth-of-type(2) {
+  :is(.account, .order)>div:nth-of-type(2) {
     display: flex;
     margin-top: 5rem;
   }
 }
 
 @media screen and (min-width: 990px) {
-  :is(.account, .order) > div:nth-of-type(2) > div:first-of-type {
+  :is(.account, .order)>div:nth-of-type(2)>div:first-of-type {
     flex-grow: 1;
     padding-right: 3.2rem;
   }
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
-  .order > div:nth-of-type(2) > div:last-of-type {
+  .order>div:nth-of-type(2)>div:last-of-type {
     display: flex;
   }
 
-  .order > div:nth-of-type(2) > div:last-of-type div {
+  .order>div:nth-of-type(2)>div:last-of-type div {
     padding-right: 3.2rem;
   }
 }
@@ -480,7 +499,7 @@ text-align: left;
 
 :is(.account, .order) h1 {
   margin-bottom: 1rem;
-    font-family: "One Night Sans Medium";
+  font-family: "One Night Sans Black";
 }
 
 :is(.account, .order) h2 {
@@ -491,10 +510,11 @@ text-align: left;
 @media screen and (min-width: 990px) {
   :is(.account, .order) h2 {
     margin-top: 0;
+    text-transform: capitalize;
   }
 }
 
-.account h1 + a {
+.account h1+a {
   display: inline-flex;
   align-items: center;
 }
@@ -506,9 +526,10 @@ text-align: left;
 }
 
 @media screen and (min-width: 750px) {
+
   .account thead th:last-child,
   .account td:last-child {
-    text-align: right;
+    /* text-align: right; */
   }
 
   .account table td:first-of-type {
@@ -534,6 +555,7 @@ text-align: left;
 }
 
 @media screen and (min-width: 750px) {
+
   .order thead th:nth-last-child(-n + 3),
   .order td:nth-last-child(-n + 3) {
     text-align: right;
@@ -548,6 +570,7 @@ text-align: left;
 }
 
 @media screen and (min-width: 750px) {
+
   .order tfoot tr:last-of-type td,
   .order tfoot tr:last-of-type th {
     padding-bottom: 2.4rem;
@@ -559,17 +582,17 @@ text-align: left;
 }
 
 .order table p,
-.order > div:nth-of-type(2) > div:first-of-type h2,
-.order > div:nth-of-type(2) > div:last-of-type h2 + p {
+.order>div:nth-of-type(2)>div:first-of-type h2,
+.order>div:nth-of-type(2)>div:last-of-type h2+p {
   margin-bottom: 0;
 }
 
-.order > div:nth-of-type(2) > div:first-of-type h2 ~ p {
+.order>div:nth-of-type(2)>div:first-of-type h2~p {
   margin-bottom: 0;
   font-size: 1.4rem;
 }
 
-.order > div:nth-of-type(2) > div:first-of-type h2 ~ p:last-of-type {
+.order>div:nth-of-type(2)>div:first-of-type h2~p:last-of-type {
   margin-bottom: 3rem;
 }
 
@@ -580,7 +603,7 @@ text-align: left;
   flex-direction: column;
 }
 
-.order .item-props > span {
+.order .item-props>span {
   word-break: break-all;
   line-height: calc(1 + 0.2 / var(--font-body-scale));
 }
@@ -634,14 +657,14 @@ text-align: left;
   line-height: calc(1 + 0.3 / var(--font-body-scale));
 }
 
-.order tbody tr:first-of-type td:first-of-type > div {
+.order tbody tr:first-of-type td:first-of-type>div {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
 @media screen and (min-width: 750px) {
-  .order tbody tr:first-of-type td:first-of-type > div {
+  .order tbody tr:first-of-type td:first-of-type>div {
     align-items: flex-start;
   }
 }
@@ -689,18 +712,22 @@ text-align: left;
 }
 
 /* Addresses */
-.addresses li > button {
+.addresses {
+  width: 100%;
+}
+
+.addresses li>button {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
 
-.addresses li > button + button,
-.addresses form button + button {
+.addresses li>button+button,
+.addresses form button+button {
   margin-top: 0rem;
 }
 
 @media screen and (min-width: 750px) {
-  .addresses li > button:first-of-type {
+  .addresses li>button:first-of-type {
     margin-top: 3rem;
   }
 }
@@ -721,26 +748,34 @@ label[for='AddressProvinceNew'] {
   flex-flow: row wrap;
 }
 
-.addresses form > div {
+.addresses form>div {
   width: 100%;
   text-align: left;
 }
 
 .addresses ul {
   list-style: none;
-  padding-left: 0;
-  text-align: center;
+  padding-left: 10px;
+  text-align: left;
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 li[data-address] {
   margin-top: 5rem;
+  border: 1px solid #D6D6D6;
+  border-radius: 17px;
+  padding: 17px;
+  width: 350px;
 }
 
-.addresses [aria-expanded='false'] ~ div[id] {
+.addresses [aria-expanded='false']~div[id] {
   display: none;
 }
 
-.addresses [aria-expanded='true'] ~ div[id] {
+.addresses [aria-expanded='true']~div[id] {
   display: block;
 }
 
@@ -748,14 +783,14 @@ li[data-address] {
   text-align: left;
 }
 
-li[data-address] > h2 {
+li[data-address]>h2 {
   text-align: center;
   font-size: calc(var(--font-heading-scale) * 1.8rem);
   margin-bottom: 0;
 }
 
 @media only screen and (min-width: 750px) {
-  li[data-address] > h2 {
+  li[data-address]>h2 {
     font-size: calc(var(--font-heading-scale) * 2.2rem);
   }
 }
@@ -770,40 +805,192 @@ li[data-address] > h2 {
 }
 
 @media only screen and (min-width: 750px) {
-  .addresses form > div:nth-of-type(1) {
+  .addresses form>div:nth-of-type(1) {
     margin-right: 2rem;
   }
 
-  .addresses form > div:nth-of-type(2) {
+  .addresses form>div:nth-of-type(2) {
     margin-top: 0;
   }
 
-  .addresses form > div:nth-of-type(1),
-  .addresses form > div:nth-of-type(2) {
+  .addresses form>div:nth-of-type(1),
+  .addresses form>div:nth-of-type(2) {
     box-sizing: border-box;
     flex-basis: calc(50% - 1rem);
   }
 }
 
-.addresses form > div:nth-of-type(7),
-.addresses form > div:nth-of-type(7) + div[id] {
+.addresses form>div:nth-of-type(7),
+.addresses form>div:nth-of-type(7)+div[id] {
   margin-top: 1.5rem;
 }
 
-.terms-and-condition-div{
+.terms-and-condition-div {
   display: flex;
   gap: 3px;
   align-items: baseline;
- 
+
   text-align: center;
   justify-content: start;
-/* width: 57rem; */
+  /* width: 57rem; */
 }
+
 .terms-and-condition-div p {
   font-family: "One Night Sans Black";
   font-size: 14px;
   font-weight: 300;
 }
-.terms-and-condition-div span{
+
+.terms-and-condition-div span {
   color: rgba(0, 91, 170, 1);
+}
+
+/* custom account page */
+.tabs-wrapper {
+  /* margin-top: 50px; */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tabs-wrapper a {
+  appearance: none;
+  text-decoration: none;
+}
+
+#tabs {
+  background-color: rgba(217, 217, 217, 0.7);
+  padding: 13px;
+  color: black;
+  display: flex;
+  gap: 9px;
+  width: 286px;
+  margin-top: 0px;
+  justify-content: start;
+  font-family: "One Night Sans Black";
+}
+
+.active-tab {
+  background-color: #005baa !important;
+  color: #fff !important;
+}
+
+#profile {
+  text-align: center;
+  font-family: "One Night Sans Black";
+  font-size: 32px;
+  color: black;
+}
+
+.my-profile-wrapper {
+  display: flex;
+  gap: 64px;
+  align-items: start;
+  font-family: "One Night Sans Black";
+  color: black;
+  text-align: left;
+}
+
+#signoutlink {
+  text-decoration: none;
+  color: rgba(0, 91, 170, 1);
+  font-family: "One Night Sans Black";
+
+}
+
+#signoutlink:hover {
+  cursor: pointer;
+}
+
+#account-details {
+  font-family: "One Night Sans Black";
+  font-size: 15px;
+  color: black;
+}
+
+#profile-table {
+  border: 1px solid rgba(214, 214, 214, 1);
+  border-radius: 20px !important;
+  box-shadow: none;
+
+}
+
+#profile-table-body {
+  border: 1px solid rgba(214, 214, 214, 1);
+}
+
+@media screen and (max-width:749px) {
+  .my-profile-wrapper {
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (max-width:990px) {
+  .addresses ul {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+
+.customer-account-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin-top: 82px;
+
+}
+
+.profile-section {
+  margin-top: 0;
+}
+
+.addres-section {
+  width: 100%;
+}
+
+@media screen and (min-width:749px) {
+  .customer-account-wrapper {
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .address-section {
+    margin-top: -125px;
+  }
+
+  .profile-section {
+    margin-top: -104px;
+  }
+}
+
+#orderhistorytable {
+  box-shadow: none;
+}
+
+#order-id-button {
+  border: none;
+  box-shadow: none;
+}
+
+.save-address-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.cancel-btn {
+  font-family: "One Night Sans Black";
+}
+
+.edit {
+  color: #005baa !important;
+}
+
+#address-delete-btn {
+  /* display: flex; */
+  gap: 5px;
+  font-family: "One Night Sans Black";
 }
