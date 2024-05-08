@@ -113,11 +113,7 @@
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": true,
-    "cart_type": "drawer",
-    "product_view_list": [
-      "cotton-pure-t-shirt",
-      "flower-printed-casual-shirt"
-    ],
+    "cart_type": "notification",
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",

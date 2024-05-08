@@ -135,10 +135,21 @@
         {{ form.errors.messages.password }}.
       </span>
     {%- endif -%}
+    <div class="terms-and-condition-div">
+  <input type="checkbox"/>
+  <p>By Clicking , I am confirming that I have read and agree with the <span>Terms and Conditons</span> </p>
+</div>
     <button>
-      {{ 'customer.register.submit' | t }}
+      Create Account
     </button>
+    <div class="login-url">
+      <a href="{{ routes.account_login_url }}" >
+        Login
+         </a>
+    </div>
+
   {%- endform -%}
+
 </div>
 
 {% schema %}
