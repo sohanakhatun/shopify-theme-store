@@ -114,7 +114,7 @@
                     id="ColumnOrder"
                     scope="col"
                     role="columnheader"
-                    onclick="getOrders({{order.customer_url}})">
+                    >
                     {{ 'customer.orders.order_number' | t }}
                   </th>
                   <th
@@ -150,6 +150,7 @@
                       id="RowOrder"
                       role="cell"
                       headers="ColumnOrder"
+                      onclick="getOrders({{order.customer_url}})"
                       data-label="{{ 'customer.orders.order_number' | t }}">
                       <a
                         href="{{order.customer_url}}"
@@ -256,7 +257,7 @@
         {% endpaginate %}
       </div>
     </div>
-    <div class="order-details-section" style="display: none;"></div>
+  
     <div class="tab-content address-section" style="display: none;">
 
       {%- paginate customer.addresses by 5 -%}

@@ -1780,10 +1780,12 @@ class PincodeChecker extends HTMLElement {
 
 customElements.define("pincode-checker", PincodeChecker);
 
-function getOrders(url) {
+async function getOrders(url) {
+  console.log("clicked")
   fetch(url)
     .then((response) => response.text())
     .then((responseText) => {
+      console.log(responseText)
       const html = new DOMParser().parseFromString(responseText, "text/html");
       let orderSource = html.getElementById("orderDetails");
       let orderDestination = document.getElementById("orderDetails");
