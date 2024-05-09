@@ -1,5 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
-
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -92,22 +92,29 @@
         </div>
       </div>
     </div>
-    <div class="tab-content order-section" id="orderDetails"  style="display: none;">
+    <div
+      class="tab-content order-section"
+      id="orderDetails"
+      style="display: none;">
       <div>
         <h2>{{ 'customer.orders.title' | t }}</h2>
 
         {% paginate customer.orders by 20 %}
           {%- if customer.orders.size > 0 -%}
-            <table role="table" class="order-history" id="orderhistorytable">
+            <table
+              role="table"
+              class="order-history"
+              id="orderhistorytable">
               <caption class="visually-hidden">
-                {{ 'customer.orders.title' | t |  capitalize }}
+                {{ 'customer.orders.title' | t | capitalize }}
               </caption>
               <thead role="rowgroup">
                 <tr role="row">
                   <th
                     id="ColumnOrder"
                     scope="col"
-                    role="columnheader">
+                    role="columnheader"
+                    onclick="getOrders({{order.customer_url}})">
                     {{ 'customer.orders.order_number' | t }}
                   </th>
                   <th
@@ -144,7 +151,8 @@
                       role="cell"
                       headers="ColumnOrder"
                       data-label="{{ 'customer.orders.order_number' | t }}">
-                      <a href="{{order.customer_url}}"
+                      <a
+                        href="{{order.customer_url}}"
                         id="order-id-button"
                         value="{{order.id}}"
                         aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
@@ -250,7 +258,7 @@
     </div>
     <div class="order-details-section" style="display: none;"></div>
     <div class="tab-content address-section" style="display: none;">
-    
+
       {%- paginate customer.addresses by 5 -%}
         <div class="customer addresses section-{{ section.id }}-padding" data-customer-addresses>
           <svg style="display: none">
@@ -264,11 +272,11 @@
           </svg>
           <h1>Address Book</h1>
           {% comment %} 
-            <a href="{{ routes.account_url }}"> 
-            {{ 'customer.account.return' | t }}
-            </a> 
-          {% endcomment %}
-      
+                        <a href="{{ routes.account_url }}"> 
+                        {{ 'customer.account.return' | t }}
+                        </a> 
+                    {% endcomment %}
+
           <div data-address>
             <button
               type="button"
@@ -292,7 +300,7 @@
                   stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg>
-      
+
               {{ 'customer.addresses.add_new' | t }}
             </button>
             <div id="AddAddress">
@@ -444,7 +452,7 @@
               {%- endform -%}
             </div>
           </div>
-      
+
           <ul role="list">
             {%- for address in customer.addresses -%}
               <li data-address>
@@ -452,7 +460,7 @@
                   <h2>{{ 'customer.addresses.default' | t }}</h2>
                 {%- endif -%}
                 {{ address | format_address }}
-      
+
                 <button
                   type="button"
                   id="EditFormButton_{{ address.id }}"
@@ -619,7 +627,7 @@
               </li>
             {%- endfor -%}
           </ul>
-      
+
           {%- if paginate.pages > 1 -%}
             {%- if paginate.parts.size > 0 -%}
               <nav
@@ -643,7 +651,7 @@
                       </a>
                     </li>
                   {%- endif -%}
-      
+
                   {%- for part in paginate.parts -%}
                     <li>
                       {%- if part.is_link -%}
@@ -661,7 +669,7 @@
                       {%- endif -%}
                     </li>
                   {%- endfor -%}
-      
+
                   {%- if paginate.next -%}
                     <li>
                       <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
@@ -686,13 +694,18 @@
       {%- endpaginate -%}
     </div>
     <div class="border"></div>
-    
+
     <div class="tab-content sign-out-section" style="display: none;">
       <a href="/account/logout" id="signoutlink">Sign Out</a>
     </div>
 
   </div>
 </div>
+<script>
+  window.addEventListener('load', () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  });
+</script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
   const tabs = document.querySelectorAll('.tab');
@@ -730,12 +743,12 @@
      const orderId = e.target.value;
   //  orderTable.style.display = "none";
   
- 
-
-
+   
+  
+  
       
-
- 
+  
+   
     })
   })
 </script>
