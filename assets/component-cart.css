@@ -82,8 +82,7 @@ cart-items {
 }
 
 .cart__note {
-  height: fit-content;
-  top: 2.5rem;
+margin-bottom: 20px;
 }
 
 .cart__note label {

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
-
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
@@ -21,29 +20,19 @@
         crossorigin>
     {%- endunless -%}
     <link rel="stylesheet" href="{{'splide.min.css' |  asset_url}}">
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-      <!-- Add the slick-theme.css if you want default styling -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
-    <script src="http://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
-
+    <link rel="stylesheet" href="{{'aos.css' |  asset_url}}">
+    <link href="https://db.onlinewebfonts.com/c/05d9d01becf3f54147f00db19127aa76?family=One+Night+Sans+Black" rel="stylesheet">
     <title>
       {{ page_title }}
       {%- if current_tags %}
-        &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        &ndash; tagged "{{ current_tags | join: ', ' }}"
+      {%- endif -%}
       {%- if current_page != 1 %}
-        &ndash; Page {{ current_page }}{% endif -%}
+        &ndash; Page {{ current_page -}}
+      {%- endif -%}
       {%- unless page_title contains shop.name %}
-        &ndash; {{ shop.name }}{% endunless -%}
+        &ndash; {{ shop.name -}}
+      {%- endunless -%}
     </title>
 
     {% if page_description %}
@@ -58,7 +47,7 @@
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-
+    <script src="{{ 'product-card.js' | asset_url }}" defer></script>
     {{ content_for_header }}
 
     {%- liquid
@@ -90,15 +79,15 @@
           {% endif %}
 
           {% liquid
-          assign background_color = scheme.settings.background
-          assign background_color_brightness = background_color | color_brightness
-          if background_color_brightness <= 26
-            assign background_color_contrast = background_color | color_lighten: 50
-          elsif background_color_brightness <= 65
-            assign background_color_contrast = background_color | color_lighten: 5
-          else
-            assign background_color_contrast = background_color | color_darken: 25
-          endif
+                assign background_color = scheme.settings.background
+                assign background_color_brightness = background_color | color_brightness
+                if background_color_brightness <= 26
+                  assign background_color_contrast = background_color | color_lighten: 50
+                elsif background_color_brightness <= 65
+                  assign background_color_contrast = background_color | color_lighten: 5
+                else
+                  assign background_color_contrast = background_color | color_darken: 25
+                endif
 %}
 
           --color-foreground: {{ scheme.settings.text.red }}, 
@@ -345,9 +334,16 @@ body {
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body
+    class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}"
+    data-aos-easing="ease"
+    data-aos-duration="400"
+    data-aos-delay="0">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -356,6 +352,8 @@ body {
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
+    {% section 'color-swatch' %}
+    {% section 'swatches' %}
     {% sections 'header-group' %}
 
     <main
@@ -383,19 +381,19 @@ body {
         cart_url: '{{ routes.cart_url }}',
         predictive_search_url: '{{ routes.predictive_search_url }}',
       };
-
+      
       window.cartStrings = {
         error: `{{ 'sections.cart.cart_error' | t }}`,
         quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
       };
-
+      
       window.variantStrings = {
         addToCart: `{{ 'products.product.add_to_cart' | t }}`,
         soldOut: `{{ 'products.product.sold_out' | t }}`,
         unavailable: `{{ 'products.product.unavailable' | t }}`,
         unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
       };
-
+      
       window.quickOrderListStrings = {
         itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
         itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
@@ -404,7 +402,7 @@ body {
         viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
         each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
       };
-
+      
       window.accessibilityStrings = {
         imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
         shareSuccess: `{{ 'general.share.success_message' | t }}`,
@@ -419,5 +417,19 @@ body {
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    {% if request.page_type == ‘product’ %}
+
+      {% if product.options contains ‘Size’ %}
+  
+          {% render ‘size-chart’ %}
+  
+      {% endif %}
+  
+  {% endif %}
   </body>
 </html>

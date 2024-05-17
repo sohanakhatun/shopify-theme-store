@@ -1,40 +1,59 @@
 {{ 'custom-reviews.css' | asset_url | stylesheet_tag }}
+
 {% style %}
   .custom-reviews--{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+   
+  }
+  .review-slider-wrapper{
+    background-color:{{section.settings.background_color}};
+
   }
 
   @media screen and (min-width: 749px) {
     .custom-reviews--{{ section.id }} {
-      padding-top: {{ section.settings.padding_top |  divided_by: 2 }}px;
-      padding-bottom: {{ section.settings.padding_bottom |  divided_by: 2 }}px;
+      padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+     
+     
     }
+  }
+  .{{section.settings.heading_size}}{
+    color:{{section.settings.text_color}};
   }
 {% endstyle %}
 
+
 {% assign show_customer_name = section.settings.show_customer_name %}
-{% assign show_pagination = section.settings.show_pagination %}
-{% assign auto_play_duration = section.settings.auto_play_duration %}
-{% assign show_arrows = section.settings.show_arrows %}
-<section>
+
+<section class="review-slider-wrapper container">
   <div class="custom-reviews--{{ section.id }} custom-reviews-wrapper" id="reviews-slider">
     <div class="page-width">
-      <div class="custom-reviews-wrapper--header-wrapper">
-        <div class="{{section.settings.heading_size}}">{{ section.settings.heading }}</div>
-      </div>
+      <div class="{{section.settings.heading_size}} data-aos data-aos--fade-in data-aos--delay-200 aos-animate">{{ section.settings.heading }}</div>
+    </div>
+    <div class="page-width">
       <div class="custom-reviews-wrapper--reviews-slider">
-        <div class="splide">
+        <splider-component
+          class="splide"
+          data-desktopPerPage="3"
+          data-mobilePerPage="1"
+          data-autoplay="{{ section.settings.auto_play }}"
+          data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+          data-showArrows="{{ section.settings.show_arrows }}"
+          data-showDots="{{section.settings.show_pagination}}"
+          data-showdotsonmobile="{{section.settings.show_dots_mobile}}"
+          data-showdotsontablet="{{section.settings.show_dots_tablet}}">
           <div class="splide__track">
             <ul class="splide__list">
               {% for block in section.blocks %}
-                <li class="splide__slide">
+                <li class="splide__slide slide-list">
                   <div class="custom-reviews-wrapper--reviews-slider--review-card">
                     <div class="custom-reviews-wrapper--reviews-slider--review-card--review-image">
                       {% render 'ratings-star' %}
                     </div>
-  
-                    <p>{{ block.settings.review | truncatewords: 10 }}</p>
+
+                    <p>{{ block.settings.review }}</p>
                     {% if show_customer_name %}
                       <h3>- {{ block.settings.customer_name }}</h3>
                     {% endif %}
@@ -43,37 +62,16 @@
               {% endfor %}
             </ul>
           </div>
+        </splider-component>
+        <div class="view-all-wrapper">
+          <button class="primary-button">View all</button>
         </div>
-        <button class="custom-reviews-wrapper--reviews-slider--view-all">View all</button>
       </div>
     </div>
-  
   </div>
 </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var splideInstance = new Splide('#reviews-slider .splide', {
-        type: 'slide',
-        perPage: 3,
-        autoplay: true,
-    
-        arrows: {{show_arrows}},
-        interval: {{auto_play_duration}},
-        gap: 15,
-        pagination: {{show_pagination}},
-        perMove: 1,
-        breakpoints: {
-          900: {
-            perPage: 2,
-          },
-          780: {
-            perPage: 1,
-          },
-        },
-      }).mount();
-    });
-</script>
+<script src="{{ 'custom-splider.js' | asset_url }}" defer></script>
 {% schema %}
   {
     "name": "custom-reviews",
@@ -84,6 +82,18 @@
         "id": "heading",
         "default": "Reviews",
         "label": "Reviews"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "default": "#fff",
+        "label": "Background Color"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "default": "#000",
+        "label": "Text Color"
       },
       {
         "type": "select",
@@ -114,8 +124,23 @@
         "default": true
       }, {
         "type": "checkbox",
+        "id": "auto_play",
+        "label": "Enable Autoplay",
+        "default": true
+      }, {
+        "type": "checkbox",
         "id": "show_pagination",
         "label": "Show dots",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_dots_mobile",
+        "label": "Show Dots On Mobile",
+        "default": true
+      },  {
+        "type": "checkbox",
+        "id": "show_dots_tablet",
+        "label": "Show Dots On Tablet",
         "default": true
       }, {
         "type": "checkbox",
@@ -160,7 +185,7 @@
         "name": "Review",
         "settings": [
           {
-            "type": "text",
+            "type": "textarea",
             "id": "review",
             "label": "Review",
             "default": "Give your Review Here",

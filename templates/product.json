@@ -80,6 +80,76 @@
         "padding_bottom": 12
       }
     },
+    "custom_reviews_Ghm4mQ": {
+      "type": "custom-reviews",
+      "blocks": {
+        "ratings_W8kdK8": {
+          "type": "ratings",
+          "settings": {
+            "review": "Modern Clean and Easily customisable",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_WnEzB9": {
+          "type": "ratings",
+          "settings": {
+            "review": "Modern Clean and Easily customisable",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_BLhHwz": {
+          "type": "ratings",
+          "settings": {
+            "review": "Modern Clean and Easily customisable",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_p7tkUR": {
+          "type": "ratings",
+          "settings": {
+            "review": "Modern Clean and Easily customisable",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_AB7iqb": {
+          "type": "ratings",
+          "settings": {
+            "review": "Modern Clean and Easily customisable",
+            "customer_name": "Verified Customer"
+          }
+        },
+        "ratings_gxdURE": {
+          "type": "ratings",
+          "settings": {
+            "review": "Modern Clean and Easily customisable",
+            "customer_name": "Verified Customer"
+          }
+        }
+      },
+      "block_order": [
+        "ratings_W8kdK8",
+        "ratings_WnEzB9",
+        "ratings_BLhHwz",
+        "ratings_p7tkUR",
+        "ratings_AB7iqb",
+        "ratings_gxdURE"
+      ],
+      "settings": {
+        "heading": "Reviews",
+        "background_color": "#121212",
+        "text_color": "#ffffff",
+        "heading_size": "h1",
+        "show_customer_name": true,
+        "auto_play": true,
+        "show_pagination": true,
+        "show_dots_mobile": true,
+        "show_dots_tablet": true,
+        "show_arrows": false,
+        "auto_play_duration": 2000,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -97,10 +167,18 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "wizaah_recently_viewed_products_BbNHgG": {
+      "type": "wizaah-recently-viewed-products",
+      "settings": {
+        "title": "Recently viewed"
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "custom_reviews_Ghm4mQ",
+    "related-products",
+    "wizaah_recently_viewed_products_BbNHgG"
   ]
 }

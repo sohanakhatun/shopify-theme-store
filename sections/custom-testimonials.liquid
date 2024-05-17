@@ -12,61 +12,50 @@
     }
   }
 {% endstyle %}
-<section>
-  <div class="custom-testimonials--{{section.id}} custom-testimonials-wrapper" id="testimonial-slider">
+<section class="custom-testimonials--{{section.id}} page-width">
+  <div class="custom-testimonials-wrapper " id="testimonial-slider">
+    <splider-component
+      class="splide"
+      data-desktopPerPage="1"
+      data-mobilePerPage="1"
+      data-tabletPerPage="1"
+      data-autoplay="{{ section.settings.auto_play }}"
+      data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+      data-showArrows="{{ section.settings.show_arrows }}"
+      data-showDots="{{section.settings.show_pagination}}"
+      data-showdotsonmobile="{{section.settings.show_pagination_mobile}}"
+      data-showdotsontablet="{{section.settings.show_pagination_tablet}}">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {% for block in section.blocks %}
 
-    <div class="custom-testimonials-wrapper--testimonials-wrapper page-width">
+            <li class="splide__slide custom-testimonials-wrapper--testimonials-wrapper--testimonial-card">
+              <div class="custom-testimonials-wrapper--testimonials-wrapper--testimonial-card--testimonials-quote">
+                <span class="">“</span>
+              </div>
+              {% if block.settings.customer_image != blank %}
+                <img
+                  src="{{ block.settings.customer_image |  image_url }}"
+                  alt="customer_image"
+                  width="400"
+                  height="400" />
+              {% endif %}
+              <div class="custom-testimonials-wrapper--testimonials-wrapper--testimonial-card--testimonial-text">
+                <p>{{ block.settings.review }}</p>
+                {% render 'testimonials_ratings_star' %}
+                <h3>-{{ block.settings.customer_name }}</h3>
+              </div>
 
-      <div class="splide">
-        <div class="splide__track">
-          <ul class="splide__list">
-            {% for block in section.blocks %}
+            </li>
 
-              <li class="splide__slide custom-testimonials-wrapper--testimonials-wrapper--testimonial-card">
-                <div class="custom-testimonials-wrapper--testimonials-wrapper--testimonial-card--testimonials-quote">
-                  <span class="">“</span>
-                </div>
-                {% if block.settings.customer_image != blank %}
-                  <img
-                    src="{{ block.settings.customer_image |  image_url }}"
-                    alt="customer_image"
-                    width="400"
-                    height="400" />
-                {% endif %}
-                <div class="custom-testimonials-wrapper--testimonials-wrapper--testimonial-card--testimonial-text">
-                  <p>{{ block.settings.review }}</p>
-                  {% render 'testimonials_ratings_star' %}
-                  <h3>-{{ block.settings.customer_name }}</h3>
-                </div>
-
-              </li>
-
-            {% endfor %}
-          </ul>
-        </div>
+          {% endfor %}
+        </ul>
       </div>
-    </div>
+    </splider-component>
   </div>
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var splideInstance = new Splide('#testimonial-slider .splide', {
-      type: 'slide',
-      perPage: 1,
-      autoplay: true,
-      arrows: false,
-      interval: 2000,
-      gap: 15, 
-      pagination: true,
-      perMove: 1,
-      animation: 'slide',
-      easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)', 
-    
-    transitionDuration: 1000,
-    }).mount();
-  });
-</script>
+<script src="{{ 'custom-splider.js' | asset_url }}" defer></script>
 {% schema %}
   {
     "name": "custom-testimonials",
@@ -112,8 +101,28 @@
         "default": true
       }, {
         "type": "checkbox",
+        "id": "show_pagination_mobile",
+        "label": "Show dots On Mobile",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_pagination_tablet",
+        "label": "Show dots On Tablet",
+        "default": true
+      }, {
+        "type": "checkbox",
         "id": "show_arrows",
         "label": "Show Arrows",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "show_arrows_mobile",
+        "label": "Show Arrows On Mobile",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "show_arrows_tablet",
+        "label": "Show Arrows On Tablet",
         "default": false
       }, {
         "type": "range",

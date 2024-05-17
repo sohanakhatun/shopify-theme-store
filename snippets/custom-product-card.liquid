@@ -1,13 +1,88 @@
-{% assign cardProduct = product %}
+{% assign card_product_variant = product.selected_or_first_available_variant %}
+{% if card_product_variant.featured_image != blank %}
+  {% assign variant_featured_image = card_product_variant.featured_image %}
+{% else %}
+  {% assign variant_featured_image = product.featured_image %}
+{% endif %}
+{{ 'custom-product-card-tut.css' | asset_url | stylesheet_tag }}
 
-<div class="product-card--wrapper">
-  <a href="{{cardProduct.url}}">
-    <img
-      src="{{cardProduct.featured_image | image_url }}"
-      height="400"
-      width="400" />
-    <p>{{ cardProduct.title }}</p>
-    
-  </a>
-
+<div class="custom-product-card">
+  <div class="custom-product-card-image-wrapper">
+    {% render 'responsive-picture'
+      , desktopImage: variant_featured_image %}
+    {% comment %} badges using metafield {% endcomment %}
+    {% for badge_text in product.metafields.custom.custom_badge.value %}
+      <span class="badge">
+        {{ badge_text }}</span>
+    {% endfor %}
+    {% comment %} badges based on calculation {% endcomment %}
+    {% if card_product_variant.price < card_product_variant.compare_at_price %}
+      <span>{{ 'products.product.on_sale' | t }}</span>
+    {% endif %}
+  </div>
+  <div class="custom-product-card-info">
+    <div class="custom-product-card-variant-select">
+      {% for option in product.options_with_values %}
+        {% if option.name == 'color' or option.name == 'Color' %}
+          <label for="custom-variant-radio--{{forloop.index}}"></label>
+          <input
+            id="custom-variant-radio--{{forloop.index}}"
+            type="radio"
+            name="{{option.name}}"
+            value="{{value}}">
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% comment %} add to cart button {% endcomment %}
+    <product-form data-section-id="{{ section.id }}">
+      {%- form 'product'
+        ,
+ card_product_variant
+        ,
+ id: product_form_id
+        ,
+ class: 'form'
+        ,
+ novalidate: 'novalidate'
+        ,
+ data-type: 'add-to-cart-form'
+      -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ card_product_variant.selected_or_first_available_variant.id }}"
+          class="product-variant-id"
+          {% if card_product_variant.selected_or_first_available_variant.available == false %}
+          disabled
+          {% endif %}>
+        <button
+          id="{{ product_form_id }}-submit"
+          type="submit"
+          name="add"
+          class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+          aria-haspopup="dialog"
+          aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product_variant.id }}"
+          aria-live="polite"
+          data-sold-out-message="true"
+          {% if card_product_variant.selected_or_first_available_variant.available == false %}
+          disabled
+          {% endif %}>
+          <span>
+            {%- if card_product_variant.selected_or_first_available_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </span>
+          <span class="sold-out-message hidden">
+            {{ 'products.product.sold_out' | t }}
+          </span>
+          {%- if horizontal_quick_add -%}
+            <span class="icon-wrap">{% render 'icon-plus' %}</span>
+          {%- endif -%}
+          {%- render 'loading-spinner' -%}
+        </button>
+      {%- endform -%}
+    </product-form>
+  </div>
 </div>

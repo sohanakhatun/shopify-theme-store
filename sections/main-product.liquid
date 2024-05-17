@@ -9,6 +9,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -64,12 +65,103 @@
       onload="this.media='all'"
     >
   {%- endif -%}
+  {% comment %} breadcrumbs {% endcomment %}
+  <nav
+    class="breadcrumbs page-width"
+    role="navigation"
+    aria-label="breadcrumbs"
+  >
+    <ol class="breadcrumbs-list">
+      <li class="breadcrumbs-item home-breadcrumbs-link">
+        <a
+          class="breadcrumbs-link"
+          href="/"
+          title="Home"
+          >Home</a
+        >
+      </li>
 
+      {% case t %}
+        {% when 'collection' and collection.handle %}
+          {% if current_tags %}
+            <li class="breadcrumbs-item">{{ collection.title }}</li>
+            <li class="breadcrumbs-item">
+              {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+              <a
+                class="breadcrumbs-link"
+                href="{{ tag_url }}"
+                aria-current="page"
+              >
+                {{- current_tags | join: ' + ' -}}
+              </a>
+            </li>
+          {% else %}
+            <li class="breadcrumbs-item collection-title-breadcrumbs-link">
+              <a
+                class="breadcrumbs-link"
+                href="{{ collection.url }}"
+                aria-current="page"
+              >
+                {{- collection.title -}}
+              </a>
+            </li>
+          {% endif %}
+
+        {% when 'blog' %}
+          {% if current_tags %}
+            <li class="breadcrumbs-item">{{ blog.title }}</li>
+            <li class="breadcrumbs-item">
+              {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+              <a
+                class="breadcrumbs-link"
+                href="{{ tag_url }}"
+                aria-current="page"
+              >
+                {{- current_tags | join: ' + ' -}}
+              </a>
+            </li>
+          {% else %}
+            <li class="breadcrumbs-item">
+              <a
+                class="breadcrumbs-link"
+                href="{{ blog.url }}"
+                aria-current="page"
+              >
+                {{- blog.title -}}
+              </a>
+            </li>
+          {% endif %}
+
+        {% when 'article' %}
+          <li class="breadcrumbs-item">{{ blog.title }}</li>
+          <li class="breadcrumbs-item">
+            <a
+              class="breadcrumbs-link"
+              href="{{ article.url }}"
+              aria-current="page"
+            >
+              {{- article.title -}}
+            </a>
+          </li>
+
+        {% else %}
+          <li class="breadcrumbs-item">
+            <a
+              class="breadcrumbs-link"
+              href="{{ request.path }}"
+              aria-current="page"
+            >
+              {{- page_title -}}
+            </a>
+          </li>
+      {% endcase %}
+    </ol>
+  </nav>
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
-    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--1-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}">
-        {% render 'product-media-gallery', variant_images: variant_images %}
+        {% render 'custom-product' %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <product-info
@@ -91,15 +183,21 @@
                 >
                   {{- block.settings.text -}}
                 </p>
+
               {%- when 'title' -%}
-                <div class="product__title" {{ block.shopify_attributes }}>
-                  <h1>{{ product.title | escape }}</h1>
-                  <a href="{{ product.url }}" class="product__title">
-                    <h2 class="h1">
+                <div class="product-title" {{ block.shopify_attributes }}>
+                  <a href="{{ product.url }}" class="product-title">
+                    <p>
                       {{ product.title | escape }}
-                    </h2>
+                    </p>
                   </a>
                 </div>
+
+                {%- if product.available -%}
+                  <p class="avaliable">Avaliable</p>
+                {%- else -%}
+                  <p class="not-avaliable">Not Avaliable</p>
+                {%- endif -%}
               {%- when 'price' -%}
                 <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -129,6 +227,9 @@
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
+              {% when 'size' %}
+                <a class="trigger-pop-up btn">See Size Chart</a>
+
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -220,6 +321,7 @@
                     </div>
                   </details>
                 </div>
+
               {%- when 'quantity_selector' -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
@@ -430,6 +532,45 @@
                     </volume-pricing>
                   {%- endif -%}
                 </div>
+                <div class="gift-wrap-wrapper">
+                  <input type="checkbox" id="giftCardCheckbox" class="gift-card-checkbox" name="giftCard">
+                  <label for="giftCardCheckbox">Add Gift Card to this product</label>
+                  <div class="gift-card-div" id="giftCardDiv" style="display: none;">
+                    {% assign desired_type = 'gift-wrap' %}
+                    {% for product in collections.all.products %}
+                      {% if product.type == desired_type %}
+                        <img
+                          src="{{ product.featured_image | image_url }}"
+                          alt="{{ product.title }}"
+                          width="100"
+                          height="100"
+                        >
+                      {% endif %}
+                    {% endfor %}
+                    <textarea id="giftMessage" placeholder="Enter Your Message Here"></textarea>
+                  </div>
+                </div>
+
+                {% comment %} Progress Bar {% endcomment %}
+
+                {% assign total_quantity = product.variants.first.inventory_quantity %}
+
+                {% assign remaining_quantity = product.variants.first.inventory_quantity
+                  | minus: product.variants.first.inventory_quantity_remaining
+                %}
+
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    style="width: {{ remaining_quantity | times: 100 | divided_by: total_quantity }}%;"
+                    aria-valuenow="{{ remaining_quantity }}"
+                    aria-valuemin="0"
+                    aria-valuemax="{{ total_quantity }}"
+                  ></div>
+                </div>
+                <p class="progress-text">{{ remaining_quantity }} out of {{ total_quantity }} left</p>
+
               {%- when 'popup' -%}
                 <modal-opener
                   class="product-popup-modal__opener no-js-hidden quick-add-hidden"
@@ -454,6 +595,66 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                {% comment %} Variant Coupon Code {% endcomment %}
+
+              {%- when 'Variant-offer' -%}
+                <div id="coupon">
+                  {% if product.selected_or_first_available_variant.metafields.custom.variant_coupon_code != blank %}
+                    <variant-offer class="coupon">
+                      <div class="left">
+                        <div>{{ block.settings.offer_title }}</div>
+                      </div>
+                      <div class="center">
+                        <div>
+                          <h2
+                            class="coupon-code"
+                            id="coupon-code-{{ section.id }}"
+                            data-code="{{  product.selected_or_first_available_variant.metafields.custom.variant_coupon_code }}"
+                          >
+                            {{ product.selected_or_first_available_variant.metafields.custom.variant_coupon_code }}
+                          </h2>
+                          <h3>Coupon</h3>
+                          <button id="copy-coupon">Copy</button>
+                        </div>
+                      </div>
+                      <div class="right">
+                        <div>87878521112</div>
+                      </div>
+                    </variant-offer>
+                  {% endif %}
+                </div>
+
+              {%- when 'pincode-checker' -%}
+                {% comment %}
+                  <pincode-checker>
+                    <div class="pincode-checker">
+                      <input type="text" id="inputpincode" placeholder="Enter Pincode" maxlength="6">
+                      <button id="checkButton">Check</button>
+                      <div id="infoToast" class="show-green"></div>
+                      <div id="infoToast" class="show-red"></div>
+                      <div id="infoToast" class="show-blue"></div>
+
+                    </div>
+                  </pincode-checker>
+                {% endcomment %}
+
+                <pincode-checker>
+                  <div class="pincode-checker">
+                    <div class="field pincode-checker__field">
+                      <input
+                        class="field__input"
+                        id="PincodeInput"
+                        type="text"
+                        name="pincode-input"
+                        placeholder="Eg. 560012"
+                      >
+                      <label class="field__label" for="PincodeInput">Enter Pincode</label>
+                    </div>
+                    <button type="button" class="button pincode-checker__button" name="pincode-submit">Check</button>
+                  </div>
+                  <div class="pincode-message text-body is-hidden" name="pincode-message"></div>
+                </pincode-checker>
+
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -461,45 +662,9 @@
                   product_form_id: product_form_id,
                   section_id: section.id,
                   show_pickup_availability: true
+                  
                 -%}
-              {%- when 'rating' -%}
-                {%- if product.metafields.reviews.rating.value != blank -%}
-                  <div class="rating-wrapper">
-                    {% liquid
-                      assign rating_decimal = 0
-                      assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
-                      if decimal >= 0.3 and decimal <= 0.7
-                        assign rating_decimal = 0.5
-                      elsif decimal > 0.7
-                        assign rating_decimal = 1
-                      endif
-                    %}
-                    <div
-                      class="rating"
-                      role="img"
-                      aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}"
-                    >
-                      <span
-                        aria-hidden="true"
-                        class="rating-star"
-                        style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
-                      ></span>
-                    </div>
-                    <p class="rating-text caption">
-                      <span aria-hidden="true">
-                        {{- product.metafields.reviews.rating.value }} /
-                        {{ product.metafields.reviews.rating.value.scale_max -}}
-                      </span>
-                    </p>
-                    <p class="rating-count caption">
-                      <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
-                      <span class="visually-hidden">
-                        {{- product.metafields.reviews.rating_count }}
-                        {{ 'accessibility.total_reviews' | t -}}
-                      </span>
-                    </p>
-                  </div>
-                {%- endif -%}
+
               {%- when 'complementary' -%}
                 <product-recommendations
                   class="complementary-products quick-add-hidden no-js-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
@@ -561,16 +726,7 @@
                                     offset: continue
                                   -%}
                                     <li>
-                                      {% render 'card-product',
-                                        card_product: product,
-                                        media_aspect_ratio: block.settings.image_ratio,
-                                        show_secondary_image: false,
-                                        lazy_load: false,
-                                        show_quick_add: block.settings.enable_quick_add,
-                                        section_id: section.id,
-                                        horizontal_class: true,
-                                        horizontal_quick_add: true
-                                      %}
+                                      {% render 'custom-product' %}
                                     </li>
                                   {%- endfor -%}
                                 </ul>
@@ -645,6 +801,7 @@
           </a>
         </product-info>
       </div>
+
       {%- if section.settings.media_position == 'right' -%}
         {% comment %} Duplicate gallery to display after product content on tablet/desktop breakpoint {% endcomment %}
         <div class="grid__item product__media-wrapper small-hide">
@@ -942,6 +1099,22 @@
           "default": "circle"
         }
       ]
+    },
+    {
+      "type": "Variant-offer",
+      "name": "Variant offer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "offer_title",
+          "label": "Offer Title",
+          "default": "Coupon Offer"
+        }
+      ]
+    },
+    {
+      "type": "pincode-checker",
+      "name": "Pincode Checker"
     },
     {
       "type": "buy_buttons",
@@ -2307,3 +2480,22 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var giftCardCheckbox = document.getElementById('giftCardCheckbox');
+    var giftCardDiv = document.getElementById('giftCardDiv');
+
+    giftCardCheckbox.addEventListener('change', function () {
+      if (giftCardCheckbox.checked) {
+        giftCardDiv.style.display = 'block';
+      } else {
+        giftCardDiv.style.display = 'none';
+      }
+    });
+  });
+  document.querySelector('[name="quantity"]').addEventListener('change', function (event) {
+    var newQuantity = event.target.value;
+    updateSection(newQuantity);
+  });
+</script>
