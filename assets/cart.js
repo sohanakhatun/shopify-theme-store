@@ -1,7 +1,8 @@
 class CartRemoveButton extends HTMLElement {
   constructor() {
     super();
-
+   
+    // EVENT FOR WHEN  CART ITEMS QUANTITY NEEDS TO BE UPDATED.
     this.addEventListener('click', (event) => {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
@@ -17,7 +18,7 @@ class CartItems extends HTMLElement {
     super();
     this.lineItemStatusElement =
       document.getElementById('shopping-cart-line-item-status') || document.getElementById('CartDrawer-LineItemStatus');
-
+// APPLY DEBOUNCING ON ONCHANGE EVENT FOR EVERYTIME THE CART IS UPDATED.
     const debouncedOnChange = debounce((event) => {
       this.onChange(event);
     }, ON_CHANGE_DEBOUNCE_TIMER);
@@ -26,7 +27,7 @@ class CartItems extends HTMLElement {
   }
 
   cartUpdateUnsubscriber = undefined;
-
+// DOUBT--> SUBSCRIBE ??
   connectedCallback() {
     this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
       if (event.source === 'cart-items') {
@@ -46,6 +47,7 @@ class CartItems extends HTMLElement {
     this.updateQuantity(event.target.dataset.index, event.target.value, document.activeElement.getAttribute('name'), event.target.dataset.quantityVariantId);
   }
 
+  // UPDATE CART
   onCartUpdate() {
     if (this.tagName === 'CART-DRAWER-ITEMS') {
       fetch(`${routes.cart_url}?section_id=cart-drawer`)
@@ -102,40 +104,43 @@ class CartItems extends HTMLElement {
       },
     ];
   }
-
+// FUNCTION TO UPDATE CART ITEM QUANTITY
   updateQuantity(line, quantity, name, variantId) {
+    // ENABLE LOADING BEFORE UPDATING THE CART.
     this.enableLoading(line);
-
+// PASS THE UPDATES INTO JSON FORMAT.
     const body = JSON.stringify({
       line,
       quantity,
       sections: this.getSectionsToRender().map((section) => section.section),
       sections_url: window.location.pathname,
     });
-
+// FETCH CALL TO UPDATE THE CART
     fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
       .then((response) => {
+        // SINCE WE ARE DOING SECTION RENDERING,THE RESPONSE IS IN HTML SO .TEXT()
         return response.text();
       })
       .then((state) => {
+        // PARSE THE RESPONSE
         const parsedState = JSON.parse(state);
         const quantityElement =
           document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
         const items = document.querySelectorAll('.cart-item');
-
+// HANDLE THE CASE IF PARSEDITEMS GET ANY ERROR.
         if (parsedState.errors) {
           quantityElement.value = quantityElement.getAttribute('value');
           this.updateLiveRegions(line, parsedState.errors);
           return;
         }
-
+// CASE WHEN CART IS EMPTY.
         this.classList.toggle('is-empty', parsedState.item_count === 0);
         const cartDrawerWrapper = document.querySelector('cart-drawer');
         const cartFooter = document.getElementById('main-cart-footer');
-
+// class 'is-empty' will be added to cartFooter if parsedState.item_count === 0, and removed if it's not.
         if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
         if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
-
+// SECTION RENDERING .
         this.getSectionsToRender().forEach((section) => {
           const elementToReplace =
             document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
@@ -144,17 +149,24 @@ class CartItems extends HTMLElement {
             section.selector
           );
         });
+        // GET THE LAST ITEM AND CHECK IF THERE IS ANY VALUE OR NOT.
         const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
         let message = '';
+        // WHEN NOTHING IS REMOVED BUT THE VALUE OF LAST ELEMENT IS UPDATED.
         if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
+          // WHEN ANY TYPEOF ERROR IS THERE.
           if (typeof updatedValue === 'undefined') {
             message = window.cartStrings.error;
           } else {
+            // ELSE UPDATE THE QUANTITY OF THE ITEM.
             message = window.cartStrings.quantityError.replace('[quantity]', updatedValue);
           }
         }
+        // UPDATE THE CART FOR SCREEN READERS.
         this.updateLiveRegions(line, message);
 
+        // TRAPFOCUS() --> GLOBAL.JS
+        // THIS IS USED TO FOCUS ON CURRENT ITEM
         const lineItem =
           document.getElementById(`CartItem-${line}`) || document.getElementById(`CartDrawer-Item-${line}`);
         if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
@@ -166,7 +178,7 @@ class CartItems extends HTMLElement {
         } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
           trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'));
         }
-
+// DOUBT: PUBLISH ??
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
       })
       .catch(() => {
@@ -179,7 +191,9 @@ class CartItems extends HTMLElement {
       });
   }
 
+// TO UPDATE THE CART FOR SCREEN READERS.
   updateLiveRegions(line, message) {
+    // DISPLAY THE ERROR FOR LINEITEM IF ANY ERROR IS THERE.
     const lineItemError =
       document.getElementById(`Line-item-error-${line}`) || document.getElementById(`CartDrawer-LineItemError-${line}`);
     if (lineItemError) lineItemError.querySelector('.cart-item__error-text').innerHTML = message;
@@ -195,23 +209,28 @@ class CartItems extends HTMLElement {
     }, 1000);
   }
 
+  // GET INNERHTML FOR SECTION RENDERING.
   getSectionInnerHTML(html, selector) {
     return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
   }
 
+  // ENABLE LOADING
   enableLoading(line) {
+    // GET THE CART ITEMS.
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
+    // DISABLE THE CART ITEMS.
     mainCartItems.classList.add('cart__items--disabled');
-
+// GET THE SPINNERS.
     const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading__spinner`);
     const cartDrawerItemElements = this.querySelectorAll(`#CartDrawer-Item-${line} .loading__spinner`);
-
+// REMOVE HIDDEN CLASS FROM THE OVERLAY TO SHOW SPINNERS.
     [...cartItemElements, ...cartDrawerItemElements].forEach((overlay) => overlay.classList.remove('hidden'));
-
+// ADD A BLUR EFFECT.
     document.activeElement.blur();
+
     this.lineItemStatusElement.setAttribute('aria-hidden', false);
   }
-
+// DISABLE LOADING.
   disableLoading(line) {
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
     mainCartItems.classList.remove('cart__items--disabled');

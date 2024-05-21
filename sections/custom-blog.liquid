@@ -16,82 +16,65 @@
 {% assign show_image = section.settings.show_image %}
 {% assign show_author = section.settings.show_author %}
 {% assign show_view_all = section.settings.show_view_all %}
-{% assign post_limit = section.settings.post_limit %}
 
-<section>
-  <div id="blog-slider" class="blog-wrapper section-{{section.id}}-padding">
-<div class="page-width">
-  <div class="blog-wrapper--header-wrapper">
-      <div class="{{section.settings.heading_size}}">{{ section.settings.heading }}</div>
-    </div>
-    <div class="splide">
+<section class="section-{{ section.id }}-padding">
+  <div class="page-width blog-posts-wrapper">
+    <div class="blog-post-heading {{section.settings.heading_size}}">{{ section.settings.heading }}</div>
+    <splider-component
+      class="splide"
+      data-desktopPerPage="{{section.settings.columns_desktop}}"
+      data-mobilePerPage="1"
+      data-autoplay="{{ section.settings.auto_play }}"
+      data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+      data-showArrows="{{ section.settings.show_arrows }}"
+      data-showDots="{{section.settings.show_pagination}}"
+      data-showDotsOnMobile="{{section.settings.show_pagination_mobile}}"
+      data-showDotsOnTablet="{{section.settings.show_pagination_tablet}}"
+      data-showArrowsOnMobile="{{section.settings.show_arrows_mobile}}"
+      data-showArrowsOnTablet="{{section.settings.show_arrows_tablet}}">
       <div class="splide__track">
         <ul class="splide__list">
-          {% for article in section.settings.blog.articles limit: post_limit %}
-            <li class="splide__slide">
-              <div class="blog-wrapper--blog-card">
-                {% if show_image %}
-                  <div class="blog-wrapper--blog-card--blog-image">
-                    <img
-                      src="{{ article.image.src | image_url }}"
-                      alt="{{ article.image.src.alt | escape }}"
-                      width="369"
-                      height="369">
-                  </div>
+          {% for article in section.settings.blog.articles %}
+            <li class="splide__slide blog-card">
+              {% if show_image %}
+                <div class="blog-image-wrapper">
+                  <img
+                    src="{{article.image.src |  image_url }}"
+                    width="399"
+                    height="369">
+                </div>
+              {% endif %}
+              <div class="blog-wrapper--blog-card--blog-text">
+                <h3>{{ article.title }}</h3>
+                {% if show_author %}
+                  <p>{{ article.author }}</p>
                 {% endif %}
-                <div class="blog-wrapper--blog-card--blog-text">
-                  <h3>{{ article.title }}</h3>
-                  {% if show_author %}
-                    <p>{{ article.author }}</p>
-                  {% endif %}
-                  <p>{{ article.published_at | date: '%B %d, %Y' }}</p>
-                  <p>{{ article.content | truncate: 170 }}</p>
-                  <div class="blog-wrapper--blog-card--blog-text--read-more-wrapper">
-                    <a href="#" class="blog-wrapper--blog-card--blog-text--read-more-wrapper--read-more">Read more</a>
-                    <span class="blog-wrapper--blog-card--blog-text--read-more-wrapper--line"></span>
-                  </div>
+                <p>{{ article.published_at | date: '%B %d, %Y' }}</p>
+                <p>{{ article.content | truncate: 130 }}</p>
+                <div class="blog-wrapper--blog-card--blog-text--read-more-wrapper">
+                  <a href="#" class="blog-wrapper--blog-card--blog-text--read-more-wrapper--read-more">Read more</a>
+                  <span class="blog-wrapper--blog-card--blog-text--read-more-wrapper--line"></span>
                 </div>
               </div>
             </li>
           {% endfor %}
         </ul>
       </div>
-    </div>
-    {% if show_view_all or post_limit >= section.settings.blog.articles.size %}
+    </splider-component>
+  </div>
+
+  <div>
+    {% if show_view_all %}
       <a href="{{ section.settings.blog.url }}" class="blog-wrapper--view-all-button">View All</a>
     {% endif %}
-</div>
-  
   </div>
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var splideInstance = new Splide('#blog-slider .splide', {
-      type: 'slide',
-      perPage: 3,
-      autoplay: true,
-      arrows: false,
-      interval: 2000,
-      gap: 30, 
-      pagination: true,
-      perMove: 1,
-      breakpoints: {
-        1076: {
-          perPage: 2,
-        },
-   
-        780: {
-          perPage: 1,
-        },
-      },
-    }).mount();
-  });
-</script>
+<script src="{{'custom-splider.js' |  asset_url}}" defer></script>
 
 {% schema %}
   {
-    "name": "custom-blog",
+    "name": "Custom Blog Post",
     "tag": "section",
     "disabled_on": {
       "groups": ["header", "footer"]
@@ -109,63 +92,54 @@
         "options": [
           {
             "value": "h2",
-            "label": "t:sections.all.heading_size.options__1.label"
+            "label": "Small"
           }, {
             "value": "h1",
-            "label": "t:sections.all.heading_size.options__2.label"
+            "label": "Medium"
           }, {
             "value": "h0",
-            "label": "t:sections.all.heading_size.options__3.label"
+            "label": "Large"
           }
         ],
         "default": "h1",
-        "label": "t:sections.all.heading_size.label"
+        "label": "Medium"
       },
       {
         "type": "blog",
         "id": "blog",
-        "label": "t:sections.featured-blog.settings.blog.label"
+        "label": "Select Your Blog"
       },
       {
-        "type": "range",
-        "id": "post_limit",
-        "min": 2,
-        "max": 4,
-        "step": 1,
-        "default": 3,
-        "label": "t:sections.featured-blog.settings.post_limit.label"
-      }, {
         "type": "range",
         "id": "columns_desktop",
         "min": 1,
         "max": 4,
         "step": 1,
         "default": 3,
-        "label": "t:sections.featured-blog.settings.columns_desktop.label"
+        "label": "Choose how many Columns to show on desktop"
       }, {
         "type": "checkbox",
         "id": "show_image",
         "default": true,
-        "label": "t:sections.featured-blog.settings.show_image.label",
-        "info": "t:sections.featured-blog.settings.show_image.info"
+        "label": "Show Image Of The Blog"
       }, {
         "type": "checkbox",
         "id": "show_date",
         "default": true,
-        "label": "t:sections.featured-blog.settings.show_date.label"
+        "label": "Show Published Date"
       }, {
         "type": "checkbox",
         "id": "show_author",
         "default": false,
-        "label": "t:sections.featured-blog.settings.show_author.label"
+        "label": "Show Author Name"
       }, {
         "type": "checkbox",
         "id": "show_view_all",
         "default": true,
-        "label": "t:sections.featured-blog.settings.show_view_all.label"
+        "label": "Show View All Button"
       }, {
         "type": "header",
-        "content": "t:sections.all.padding.section_padding_heading"
+        "content": "Header Settings"
       }, {
         "type": "range",
         "id": "padding_top",
@@ -173,7 +147,7 @@
         "max": 100,
         "step": 4,
         "unit": "px",
-        "label": "t:sections.all.padding.padding_top",
+        "label": "Padding Top",
         "default": 36
       }, {
         "type": "range",
@@ -182,13 +156,60 @@
         "max": 100,
         "step": 4,
         "unit": "px",
-        "label": "t:sections.all.padding.padding_bottom",
+        "label": "Padding Bottom",
         "default": 36
+      }, {
+        "type": "header",
+        "content": "Slider Settings"
+      }, {
+        "type": "checkbox",
+        "id": "auto_play",
+        "label": "Enable Autoplay",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_pagination",
+        "label": "Show dots",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_pagination_mobile",
+        "label": "Show dots On Mobile",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_pagination_tablet",
+        "label": "Show dots On Tablet",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_arrows_mobile",
+        "label": "Show Arrows On Mobile",
+        "default": false
+      },  {
+        "type": "checkbox",
+        "id": "show_arrows",
+        "label": "Show Arrows",
+        "default": false
+      },  {
+        "type": "checkbox",
+        "id": "show_arrows_tablet",
+        "label": "Show Arrows On Tablet",
+        "default": false
+      }, {
+        "type": "range",
+        "id": "auto_play_duration",
+        "label": "Autoplay duration",
+        "min": 1000,
+        "max": 5000,
+        "step": 1000,
+        "unit": "ms",
+        "default": 2000
       }
     ],
     "presets": [
       {
-        "name": "t:sections.featured-blog.presets.name"
+        "name": "Custom Blogs Post"
       }
     ]
   }

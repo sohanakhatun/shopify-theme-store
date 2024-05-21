@@ -3,7 +3,6 @@ if (!customElements.get("carousel-component")) {
     constructor() {
       super();
       this.carouselElement = this;
-
       if (!this.carouselElement.classList.contains("splide")) return;
       document.addEventListener("DOMContentLoaded", function () {
         var testimonialSlider;

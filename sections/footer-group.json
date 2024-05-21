@@ -72,7 +72,6 @@
         "text_chat",
         "text_help"
       ],
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": false,

@@ -282,6 +282,7 @@
       "remove_title": "Remove {{ title }}",
       "estimated_total": "Estimated total",
       "new_estimated_total": "New estimated total",
+      "subtotal":"Subtotal",
       "note": "Order special instructions",
       "checkout": "Check out",
       "empty": "Your cart is empty",

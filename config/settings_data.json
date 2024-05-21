@@ -6,7 +6,7 @@
     "heading_scale": 105,
     "type_body_font": "montserrat_n5",
     "body_scale": 100,
-    "page_width": 1200,
+    "page_width": 1400,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 12,
@@ -93,9 +93,9 @@
     "drawer_shadow_horizontal_offset": 0,
     "drawer_shadow_vertical_offset": 4,
     "drawer_shadow_blur": 5,
-    "badge_position": "bottom left",
+    "badge_position": "top left",
     "badge_corner_radius": 40,
-    "sale_badge_color_scheme": "scheme-4",
+    "sale_badge_color_scheme": "scheme-2ce22579-a361-4bed-9151-596a0e4c27b1",
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "",
     "brand_description": "<p><\/p>",
@@ -129,6 +129,121 @@
         "type": "main-password-footer",
         "settings": {
           "color_scheme": "scheme-1"
+        }
+      },
+      "color-swatch": {
+        "type": "color-swatch",
+        "blocks": {
+          "color_settings_FcHaBw": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "blue",
+              "color_code": "#0000ff"
+            }
+          },
+          "color_settings_py7rYa": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "black",
+              "color_code": "#000000"
+            }
+          },
+          "color_settings_LGGbCh": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "red",
+              "color_code": "#ea1717"
+            }
+          },
+          "color_settings_D3rP8Y": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "white",
+              "color_code": "#ffffff"
+            }
+          },
+          "color_settings_wQFkzP": {
+            "type": "colorSettings",
+            "settings": {
+              "title": "burlywood",
+              "color_code": "#deb887"
+            }
+          }
+        },
+        "block_order": [
+          "color_settings_FcHaBw",
+          "color_settings_py7rYa",
+          "color_settings_LGGbCh",
+          "color_settings_D3rP8Y",
+          "color_settings_wQFkzP"
+        ],
+        "settings": {
+        }
+      },
+      "swatches": {
+        "type": "swatches",
+        "blocks": {
+          "solid_color_iEHwzh": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "white",
+              "solid_color": "#ffffff"
+            }
+          },
+          "solid_color_ywpkFp": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "black",
+              "solid_color": "#121212"
+            }
+          },
+          "solid_color_bACkK9": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "burlywood",
+              "solid_color": "#deb887"
+            }
+          },
+          "solid_color_LVyVtH": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "blue",
+              "solid_color": "#0000ff"
+            }
+          },
+          "solid_color_CyCw8n": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "red",
+              "solid_color": "#ff0000"
+            }
+          },
+          "solid_color_iiHBJQ": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "green",
+              "solid_color": "#008000"
+            }
+          },
+          "solid_color_KijRjx": {
+            "type": "solid-color",
+            "settings": {
+              "solid_color_name": "gray",
+              "solid_color": "#808080"
+            }
+          }
+        },
+        "block_order": [
+          "solid_color_iEHwzh",
+          "solid_color_ywpkFp",
+          "solid_color_bACkK9",
+          "solid_color_LVyVtH",
+          "solid_color_CyCw8n",
+          "solid_color_iiHBJQ",
+          "solid_color_KijRjx"
+        ],
+        "settings": {
+          "heading": ""
         }
       }
     },
@@ -196,6 +311,17 @@
           "background": "#ffffff",
           "background_gradient": "linear-gradient(0deg, rgba(121, 252, 211, 1), rgba(12, 27, 29, 1) 4%, rgba(215, 204, 250, 1) 100%, rgba(247, 197, 204, 1) 100%)",
           "text": "#121415",
+          "button": "#121212",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-2ce22579-a361-4bed-9151-596a0e4c27b1": {
+        "settings": {
+          "background": "#ebe309",
+          "background_gradient": "",
+          "text": "#ffffff",
           "button": "#121212",
           "button_label": "#ffffff",
           "secondary_button_label": "#121212",

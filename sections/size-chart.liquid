@@ -1,0 +1,155 @@
+<style>
+  input {
+    display: none;
+  }
+  div label {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    width: 50px;
+    height: 30px;
+    background: #cccccc;
+    border-radius: 50px;
+    transition: 300ms linear;
+  }
+
+  div label:before {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: left 300ms linear;
+  }
+
+  div input:checked + label {
+    background: #000000;
+  }
+
+  div input:checked + label:before {
+    left: 23px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .toggle-container {
+    margin-bottom: 20px;
+  }
+  .toggle-container label {
+    display: inline-block;
+    background-color: #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .toggle-container input[type="radio"] {
+    display: none;
+  }
+  .toggle-container input[type="radio"]:checked + label {
+    background-color: #4CAF50;
+    color: white;
+  }
+</style>
+<h1>Size Chart</h1>
+<div class="size-chart-wrapper">
+  <div class="size-chart-wrapper--sizes">
+    <button class="sizes">XXS</button>
+    <button class="sizes">XS</button>
+    <button class="sizes">S</button>
+    <button class="sizes">M</button>
+    <button class="sizes">L</button>
+  </div>
+  <div class="measurements">
+    <p>Measurements</p>
+    <div class="toggle-container">
+      <input
+        type="radio"
+        id="cm-toggle"
+        name="unit-toggle"
+        value="cm"
+        checked>
+      <label for="cm-toggle">cm</label>
+      <input
+        type="radio"
+        id="inch-toggle"
+        name="unit-toggle"
+        value="inch">
+      <label for="inch-toggle">inch</label>
+    </div>
+
+    <table id="measurement-table">
+      <tr>
+        <th>Area</th>
+        <th>Measurement</th>
+      </tr>
+      <tr>
+        <td>Length</td>
+        <td data-cm="15" data-inch="5.9">15 cm</td>
+      </tr>
+      <tr>
+        <td>Chest</td>
+        <td data-cm="20" data-inch="7.9">20 cm</td>
+      </tr>
+      <tr>
+        <td>Shoulder</td>
+        <td data-cm="12" data-inch="4.7">12 cm</td>
+      </tr>
+      <tr>
+        <td>Front length</td>
+        <td data-cm="40" data-inch="15.7">40 cm</td>
+      </tr>
+      <tr>
+        <td>Sleeve length</td>
+        <td data-cm="40" data-inch="15.7">40 cm</td>
+      </tr>
+    </table>
+
+
+  </div>
+</div>
+<script>
+    const unitToggles = document.querySelectorAll('input[name="unit-toggle"]');
+    const measurementCells = document.querySelectorAll('#measurement-table td');
+  
+    function updateMeasurements() {
+        let unit;
+        unitToggles.forEach(toggle => {
+            if (toggle.checked) {
+                unit = toggle.value;
+            }
+        });
+  
+        measurementCells.forEach(cell => {
+            const cmValue = cell.getAttribute('data-cm');
+            const inchValue = cell.getAttribute('data-inch');
+            if (unit === 'cm') {
+                cell.textContent = `${cmValue} cm`;
+            } else {
+                cell.textContent = `${inchValue} inch`;
+            }
+        });
+    }
+  
+    unitToggles.forEach(toggle => {
+        toggle.addEventListener('change', updateMeasurements);
+    });
+  
+    // Initial update
+    updateMeasurements();
+</script>

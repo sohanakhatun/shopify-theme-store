@@ -9,10 +9,11 @@
   Usage:
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
+
 {%- unless product.has_only_default_variant -%}
   <variant-selects
     id="variant-selects-{{ section.id }}"
-    class="no-js-hidden"
+    class="custom no-js-hidden"
     data-section="{{ section.id }}"
     data-url="{{ product.url }}"
     {% if update_url == false %}
@@ -35,9 +36,9 @@
       -%}
       {%- if picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
-          <legend class="form__label">
-            {{ option.name }}:
+          <legend class="form__label" id="ProductSelect-{{ section_id }}">
             <span data-selected-swatch-value="{{ option.name }}">
+              {{ option.name }}:
               {{- option.selected_value -}}
             </span>
           </legend>
@@ -50,7 +51,13 @@
         </fieldset>
       {%- elsif picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
+          <span
+            class="form__label swatch_label"
+            id="customchangecolor"
+            data-color="{{option.selected_value}}"
+          >
+            {{- option.name }}:<span class="selected_value">{{ option.selected_value }}</span>
+          </span>
           {% render 'product-variant-options',
             product: product,
             option: option,
@@ -65,10 +72,7 @@
           </label>
           <div class="select">
             {%- if picker_type == 'swatch_dropdown' -%}
-              <span
-                data-selected-dropdown-swatch="options[{{ option.name | escape }}]"
-                class="dropdown-swatch"
-              >
+              <span data-selected-dropdown-swatch="options[{{ option.name | escape }}]" class="dropdown-swatch">
                 {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
               </span>
             {%- endif -%}

@@ -1,0 +1,424 @@
+{{ 'custom-slider-with-text.css' | asset_url | stylesheet_tag }}
+{% style %}
+  .custom-slider-with-text--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | divided_by:2 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | divided_by:2 }}px;
+    background-color: {{ section.settings.backgrond_color }};
+    min-height: 95vh;
+  }
+  @media screen and (min-width: 1000px) {
+    .custom-slider-with-text--{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      min-height: 95vh;
+    }
+  }
+  {% for block in section.blocks %}
+    {% if block.settings.first_checkbox == true %}
+      .custom-slider-with-text--product-tag-circle-top-{{ forloop.index }} {
+        top: {{ block.settings.first_hotspot_top_position }}%;
+        left: {{ block.settings.first_hotspot_left_position }}%;
+      }
+      .custom-slider-with-text--top-card-hover-show-{{ forloop.index }} {
+        top: {{ block.settings.first_card_top_position }}%;
+        left: {{ block.settings.first_card_left_position }}%;
+      }
+    {% endif %}
+    {% if block.settings.second_checkbox == true %}
+      .custom-slider-with-text--product-tag-circle-bottom-{{ forloop.index }} {
+        top: {{ block.settings.second_hotspot_top_position }}%;
+        left: {{ block.settings.second_hotspot_left_position }}%;
+      }
+      .custom-slider-with-text--bottom-card-hover-show-{{ forloop.index }} {
+        top: {{ block.settings.second_card_top_position }}%;
+        left: {{ block.settings.second_card_left_position }}%;
+      }
+    {% endif %}
+  {% endfor %}
+{% endstyle %}
+
+<div class="custom-slider-with-text--bg-container custom-slider-with-text--{{ section.id }}">
+  <div class="custom-slider-with-text--content-container page-width">
+    <div class="custom-slider-with-text--image-container">
+      <splider-component
+        class="splide"
+        id="ourStorySplider"
+        data-desktopPerPage="1"
+        data-mobilePerPage="1"
+        data-tabletPerPage="1"
+        data-autoplay="{{ section.settings.auto_play }}"
+        data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+        data-showArrows="{{ section.settings.show_arrows }}"
+        data-showDots="{{section.settings.show_pagination}}"
+        data-showdotsonmobile="{{section.settings.show_dots_mobile}}"
+        data-showdotsontablet="{{section.settings.show_dots_tablet}}"
+      >
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for block in section.blocks %}
+              <li class="splide__slide">
+                {% if block.settings.Image_id != blank %}
+                  <img
+                    src="{{ block.settings.Image_id | image_url}}"
+                    height="auto"
+                    width="auto"
+                    class="custom-slider-with-text--img-size"
+                  >
+                {% endif %}
+                {% if block.settings.first_checkbox == true %}
+                  <div class="custom-slider-with-text--hotspot-container hotspot-container-top">
+                    <span
+                      class="custom-slider-with-text--product-tag-circle-top-{{ forloop.index }} hotspot-dot"
+                    ></span>
+                  </div>
+                  <a href="{{ block.settings.first_product.url }}" class="card-container-link-top">
+                    <div class="custom-slider-with-text--top-card-hover-show-{{ forloop.index }} card-hover-show">
+                      <div class="custom-slider-with-text--hover-card-image-container">
+                        <img
+                          src="{{ block.settings.first_product.featured_image | image_url }} "
+                          height="82"
+                          width="82"
+                          class="custom-slider-with-text--hover-card-image"
+                          alt="product-image"
+                        >
+                      </div>
+                      <div class="custom-slider-with-text--card-text-container">
+                        <p class="custom-slider-with-text--product-card-title">
+                          {{ block.settings.first_product.title }}
+                        </p>
+                        <p class="custom-slider-with-text--product-card-price">
+                          BZ${{ block.settings.first_product.price | money_without_currency }}
+                        </p>
+                        <span class="custom-slider-with-text--view-deatails-btn">View full details</span>
+                      </div>
+                    </div>
+                  </a>
+                {% endif %}
+                {% if block.settings.second_checkbox == true %}
+                  <div class="custom-slider-with-text--hotspot-container hotspot-container-bottom">
+                    <span
+                      class="custom-slider-with-text--product-tag-circle-bottom-{{ forloop.index }} hotspot-dot"
+                    ></span>
+                  </div>
+                  <a href="{{ block.settings.second_product.url }}" class="card-container-link-bottom">
+                    <div class="custom-slider-with-text--bottom-card-hover-show-{{ forloop.index }} card-hover-show">
+                      <div class="custom-slider-with-text--hover-card-image-container">
+                        {% if block.settings.second_product.featured_image != blank %}
+                          <img
+                            src="{{ block.settings.second_product.featured_image | image_url }} "
+                            height="82"
+                            width="82"
+                            class="custom-slider-with-text--hover-card-image"
+                            alt="product-image"
+                          >
+                        {% endif %}
+                      </div>
+                      <div class="custom-slider-with-text--card-text-container">
+                        {% if block.settings.second_product.title != blank %}
+                          <p class="custom-slider-with-text--product-card-title">
+                            {{ block.settings.second_product.title }}
+                          </p>
+                        {% endif %}
+                        {% if block.settings.second_product.price != blank %}
+                          <p class="custom-slider-with-text--product-card-price">
+                            BZ${{ block.settings.second_product.price | money_without_currency }}
+                          </p>
+                        {% endif %}
+                        <span class="custom-slider-with-text--view-deatails-btn">View full details</span>
+                      </div>
+                    </div>
+                  </a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </splider-component>
+    </div>
+    <div
+      class="custom-slider-with-text--text-container"
+    
+    >
+      <div class="custom-slider-with-text--heading-container">
+        {% if section.settings.heading != blank %}
+          <h1 class="custom-slider-with-text--heading-Ele">{{ section.settings.heading }}</h1>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <p class="custom-slider-with-text--para-Ele">{{ section.settings.text }}</p>
+        {% endif %}
+        {% if section.settings.button_label != blank %}
+          <div class="custom-slider-with-text--button-container">
+            <a href="{{ section.settings.button_linkEl  }}">
+              <button class="custom-slider-with-text--button-ele">{{ section.settings.button_label }}</button>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ 'custom-splider.js' | asset_url }}" defer></script>
+{% schema %}
+{
+  "name": "Custom slide with text",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_background",
+      "id": "backgrond_color",
+      "label": "Background color",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "header",
+      "content": "Text customization"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Our Story",
+      "label": "t:sections.image-with-text.blocks.heading.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Effortless was designed and developed by leading ecommerce professionals who are passionate about design and user experience, creating intuitive, user-friendly layouts that are optimized for success and sure to delight our customers.",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Shop Now",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_linkEl",
+      "label": "Button Url"
+    },
+    {
+      "type": "header",
+      "content": "Slider options"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_play",
+      "label": "Enable auto play",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots_mobile",
+      "label": "Show dots On Mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots_tablet",
+      "label": "Show dots On Tablet",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "auto_play_duration",
+      "min": 1000,
+      "max": 5000,
+      "step": 1000,
+      "unit": "ms",
+      "label": "Autoplay duration",
+      "default": 4000
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Slider image",
+      "type": "image_picker",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Slider image"
+        },
+        {
+          "type": "image_picker",
+          "id": "Image_id",
+          "label": "Pick an Image"
+        },
+        {
+          "type": "header",
+          "content": "First Hostpot Position"
+        },
+        {
+          "type": "checkbox",
+          "id": "first_checkbox",
+          "label": "Display first Hotspot",
+          "default": false
+        },
+        {
+          "type": "product",
+          "id": "first_product",
+          "label": "First Product"
+        },
+        {
+          "type": "range",
+          "id": "first_hotspot_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "first_hotspot_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Hotspot Left position",
+          "default": 0
+        },
+        {
+          "type": "paragraph",
+          "content": "First Product Card Positions"
+        },
+        {
+          "type": "range",
+          "id": "first_card_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Card Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "first_card_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "First Card Left position",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Second Hotspot Position"
+        },
+        {
+          "type": "checkbox",
+          "id": "second_checkbox",
+          "label": "Display Second Hotspot",
+          "default": false
+        },
+        {
+          "type": "product",
+          "id": "second_product",
+          "label": "Second Product"
+        },
+        {
+          "type": "range",
+          "id": "second_hotspot_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Hotspot Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "second_hotspot_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Hotspot Left position",
+          "default": 0
+        },
+        {
+          "type": "paragraph",
+          "content": "Second Product Card Positions"
+        },
+        {
+          "type": "range",
+          "id": "second_card_top_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Card Top Position",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "second_card_left_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Second Card Left position",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom slide with text",
+      "blocks": [
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

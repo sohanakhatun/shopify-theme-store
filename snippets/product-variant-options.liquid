@@ -1,20 +1,20 @@
-{% comment %}
+{% comment %} 
   Renders product variant options
-
-  Accepts:
-  - product: {Object} product object.
-  - option: {Object} current product_option object.
-  - block: {Object} block object.
+ 
+  Accepts: 
+  - product: {Object} product object. 
+  - option: {Object} current product_option object. 
+  - block: {Object} block object. 
   - picker_type: {String} type of picker to dispay
-
-
+ 
+ 
   Usage:
-  {% render 'product-variant-options',
-    product: product,
-    option: option,
-    block: block
-    picker_type: picker_type
-  %}
+  {% render 'product-variant-options', 
+  product: product, 
+  option: option, 
+  block: block 
+  picker_type: picker_type
+  %} 
 {% endcomment %}
 {%- liquid
   assign variants_available_arr = product.variants | map: 'available'
@@ -71,16 +71,15 @@
     {% if option.selected_value == value %}
       {% assign checked = true %}
     {% endif %}
-    {%
-      render 'swatch-input',
-      id: input_id,
-      name: option.name,
-      value: value | escape,
-      product_form_id: product_form_id,
-      checked: checked,
-      disabled: option_disabled,
-      shape: block.settings.swatch_shape,
-      help_text: label_unavailable
+    {% render 'swatch-input',
+ id: input_id,
+ name: option.name,
+ value: value | escape,
+ product_form_id: product_form_id,
+ checked: checked,
+ disabled: option_disabled,
+ shape: block.settings.swatch_shape,
+ help_text: label_unavailable
     %}
   {%- elsif picker_type == 'button' -%}
     <input
@@ -90,26 +89,30 @@
       value="{{ value | escape }}"
       form="{{ product_form_id }}"
       {% if option.selected_value == value %}
-        checked
+      checked
       {% endif %}
       {% if option_disabled %}
-        class="disabled"
+      class="disabled"
+      {% endif %}>
+    <label
+      {% if option.name=="Color" %}
+      class="color-swatch--{{ value | handleize}}"
       {% endif %}
-    >
-    <label for="{{ input_id }}">
-      {{ value -}}
+      for="{{ input_id }}">
+      {% if option.name != "Color" %}
+        {{value}}
+      {% endif %}
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       value="{{ value | escape }}"
       {% if option.selected_value == value %}
-        selected="selected"
+      selected="selected"
       {% endif %}
       {% if swatch_value and picker_type == 'swatch_dropdown' %}
-        data-option-swatch-value="{{ swatch_value }}"
-      {% endif %}
-    >
+      data-option-swatch-value="{{ swatch_value }}"
+      {% endif %}>
       {% if option_disabled -%}
         {{- 'products.product.value_unavailable' | t: option_value: value -}}
       {%- else -%}

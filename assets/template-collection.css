@@ -1,3 +1,6 @@
+body{
+  overflow-x: clip;
+}
 @media screen and (max-width: 749px) {
   .collection .grid__item:only-child {
     flex: 0 0 100%;
@@ -24,7 +27,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 749px) {
   .collection .loading-overlay {
     left: 0;
   }
@@ -41,7 +44,7 @@
   opacity: 0.7;
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 749px) {
   .collection .loading-overlay {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -96,4 +99,24 @@
 
 .collection__view-all a:not(.link) {
   margin-top: 1rem;
+}
+
+.product-grid-container{
+  margin-top: 50px;
+}
+
+.collection-tab-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+  justify-content: start;
+  width: 580px;
+
+}
+.all-collections-title{
+  font-size: 20px;
+  font-weight: 500;
+}
+#collectionTab:hover{
+  cursor: pointer;
 }

@@ -7,6 +7,7 @@
     "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/online-store\/themes",
     "theme_support_url": "https:\/\/support.shopify.com\/"
   },
+
   {
     "name": "t:settings_schema.logo.name",
     "settings": [
@@ -1435,6 +1436,12 @@
         ],
         "default": "notification",
         "label": "t:settings_schema.cart.settings.cart_type.label"
+      },
+      {
+        "type":"product_list",
+        "id":"product_view_list",
+        "label": "cart Drawer Product List"
+
       },
       {
         "type": "checkbox",

@@ -1,0 +1,471 @@
+{{ 'week-7.css' | asset_url | stylesheet_tag }}
+<script src="{{'custom-splide.js'| asset_url}}" defer></script>
+{% style %}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+  }
+
+  @media screen and (min-width: 749px) {
+    .section--{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    .product-tag-circle-top {
+      top: {{ section.blocks[0].settings.first_hotspot_top_position }}%;
+      left: {{ section.blocks[0].settings.first_hotspot_left_position }}%;
+      transform: translate(-50%);
+    }
+
+    .top-card_hover_show {
+      top: {{ section.blocks[0].settings.first_card_top_position | divided_by: 2 }}%;
+      left: {{ section.blocks[0].settings.first_card_left_position | divided_by: 2 }}%;
+    }
+
+    .product-tag-circle-bottom {
+      top: {{ section.blocks[0].settings.second_hotspot_top_position | divided_by: 2 }}%;
+      left: {{ section.blocks[0].settings.second_hotspot_left_position | divided_by: 2 }}%;
+
+    }
+    .bottom-card_hover_show {
+      top: {{ section.blocks[0].settings.second_card_top_position | divided_by: 2 }}%;
+      left: {{ section.blocks[0].settings.second_card_left_position | divided_by: 2 }}%;
+      transform: translate(-50%)
+    }
+  }
+
+  .product-tag-circle-top {
+    top: {{ section.blocks[0].settings.first_hotspot_top_position | divided_by: 2 }}%;
+    left: {{ section.blocks[0].settings.first_hotspot_left_position | divided_by: 2 }}%;
+    transform: translate(-50%);
+  }
+
+  .top-card_hover_show {
+    top: {{ section.blocks[0].settings.first_card_top_position | divided_by: 2 }}%;
+    left: {{ section.blocks[0].settings.first_card_left_position | divided_by: 2 }}%;
+  }
+
+  .product-tag-circle-bottom {
+    top: {{ section.blocks[0].settings.second_hotspot_top_position | divided_by: 2 }}%;
+    left: {{ section.blocks[0].settings.second_hotspot_left_position | divided_by: 2 }}%;
+
+  }
+  .bottom-card_hover_show {
+    top: {{ section.blocks[0].settings.second_card_top_position | divided_by: 2 }}%;
+    left: {{ section.blocks[0].settings.second_card_left_position | divided_by: 2 }}%;
+    transform: translate(-50%)
+  }
+{% endstyle %}
+<section class="section-{{section.id}}">
+  <div class="page-width heading">{{ section.settings.heading }}</div>
+  <div class="section-wrapper page-width">
+    {% for block in section.blocks %}
+      <div class="section-wrapper--bg-image-container">
+        {% for block in section.blocks %}
+          {% if block.settings.bg_img != blank %}
+            <img
+              src="{{ block.settings.bg_img| image_url}}"
+              height="auto"
+              width="auto"
+              class="bg-img">
+          {% else %}
+            <img
+              src="{{" week-7-bg.png"| asset_url}}"
+              height="auto"
+              width="auto"
+              class="bg-img">
+            {% if block.settings.first_checkbox == true %}
+              <div class="hotspot-container-top">
+                <span class="product-tag-circle-top"></span>
+              </div>
+              <div class="card-container-link-top">
+                <div class="top-card_hover_show">
+                  <div class="hover_card_image_container">
+                    {% if block.settings.first_product.featured_image != blank %}
+                      <img
+                        src="{{ block.settings.first_product.variants.first.featured_image | image_url }} "
+                        height="82"
+                        width="82"
+                        class="hover_card_image"
+                        alt="product-image">
+                    {% endif %}
+                  </div>
+                  <div class="card-text-container">
+                    {% if block.settings.first_product.title != blank %}
+                      <p class="product_card_title">{{ block.settings.first_product.title }}</p>
+                    {% endif %}
+
+                    {% if block.settings.first_product.price != blank %}
+                      <span class="price-span">
+                        <p class="compare_price">
+                          {{ block.settings.first_product.compare_at_price | money_with_currency }}
+                        </p>
+                        <p class="{% if block.settings.first_product.compare_at_price > block.settings.first_product.price %}line-through{% endif %}">
+                          {{ block.settings.first_product.price | money_with_currency }}
+                        </p>
+                      </span>
+                      <form
+                        action="/cart/add"
+                        method="post"
+                        id="product-form-{{ block.settings.first_product.id }}">
+                        <input
+                          type="hidden"
+                          name="id"
+                          value="{{ block.settings.first_product.variants.first.id }}">
+                        <div>
+                          <button
+                            type="submit"
+                            name="add"
+                            class="add-to-bag">
+                            Add to Bag
+                          </button>
+                        </div>
+                      </form>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            <div class="hotspot-container-bottom">
+              <span class="product-tag-circle-bottom"></span>
+            </div>
+            {% if block.settings.second_checkbox == true %}
+              <div class="card-container-link-bottom">
+                <div class="bottom-card_hover_show">
+                  <div class="hover_card_image_container">
+                    {% if block.settings.second_product.featured_image != blank %}
+                      <img
+                        src="{{ block.settings.second_product.featured_image | image_url }} "
+                        height="82"
+                        width="82"
+                        class="hover_card_image"
+                        alt="product-image">
+                    {% endif %}
+                  </div>
+                  <div class="card-text-container">
+                    {% if block.settings.second_product.title != blank %}
+                      <p class="product_card_title">{{ block.settings.second_product.title | truncate: 15 }}</p>
+                    {% endif %}
+                    {% if block.settings.second_product.price != blank %}
+                      <span class="price-span">
+                        <p class="compare_price">
+                          {{ block.settings.second_product.compare_at_price | money_with_currency }}
+                        </p>
+                        <p class="{% if block.settings.second_product.compare_at_price > block.settings.second_product.price %}line-through{% endif %}">
+                          {{ block.settings.second_product.price | money_with_currency }}
+                        </p>
+                      </span>
+                      <form
+                        action="/cart/add"
+                        method="post"
+                        id="product-form-{{ block.settings.second_product.id }}">
+                        <input
+                          type="hidden"
+                          name="id"
+                          value="{{ block.settings.second_product.variants.first.id }}">
+                        <div>
+                          <button
+                            type="submit"
+                            name="add"
+                            class="add-to-bag">
+                            Add to Bag
+                          </button>
+                        </div>
+                      </form>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="section-wrapper--product-slider-wrapper">
+        <div class="product-slider-wrapper--product-slide">
+          <carousel-component
+            class="splide product-slider"
+            data-autoplay="{{ section.settings.auto_play }}"
+            data-showarrows="{{section.settings.show_arrows}}"
+            data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}">
+            <div class="splide__track">
+              <ul class="splide__list">
+                {% for product in block.settings.selected_products %}
+                  <li class="splide__slide">
+                    <div class="product">
+                      {% if product.variants.available %}
+                        {% if product.variants.first.image %}
+                          <img
+                            src="{{ product.variants.first.image.src | img_url: '300x400' }}"
+                            alt="{{ product.variants.first.image.alt | escape }}"
+                            width="300"
+                            height="400">
+                          {% break %}
+                        {% endif %}
+                      {% else %}
+                        {% for image in product.images %}
+                          <img
+                            src="{{ image.src | img_url: '300x400' }}"
+                            alt="{{ image.alt | escape }}"
+                            width="300"
+                            height="400">
+                          {% break %}
+                        {% endfor %}
+                      {% endif %}
+                      <p class="vendor">{{ product.vendor }}</p>
+                      <p class="title">{{ product.title }}</p>
+                      {% assign rating = product.metafields.custom.ratings | plus: 0 %}
+                      {% if rating != blank %}
+                        <div class="rating">
+                          {% assign integer_rating = rating | floor %}
+                          {% assign decimal_rating = rating | minus: integer_rating | times: 10 | round %}
+                          
+                          {% for i in (1..5) %}
+                            {% if i <= integer_rating %}
+                              
+                              <span class="fa fa-star checked"></span>
+                            {% elsif i == integer_rating and decimal_rating > 0 %}
+                              <span class="fa fa-star-half-alt checked"></span>
+                            {% else %}
+                              <span class="fa fa-star"></span>
+                            {% endif %}
+                          {% endfor %}
+                          <span>{{ rating }}</span>
+                        </div>
+                      {% endif %}
+                      
+
+                      {% if product.price != blank %}
+                        <span class="price-span">
+                          <p class="compare_price">
+                            {{ product.compare_at_price | money_with_currency }}
+                          </p>
+                          <p class="{% if product.compare_at_price > product.price %}line-through{% endif %}">
+                            {{ product.price | money_with_currency }}
+                          </p>
+                        </span>
+                      {% endif %}
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </carousel-component>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Shop The Look",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Heading Settings"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "Heading",
+        "label": "Section Heading"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 36
+      }, {
+        "type": "header",
+        "content": "Slider options"
+      }, {
+        "type": "checkbox",
+        "label": "Enable autoplay",
+        "id": "auto_play",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "label": "Show arrows",
+        "id": "show_arrows",
+        "default": true
+      }, {
+        "type": "range",
+        "label": "Autoplay duration",
+        "id": "auto_play_duration",
+        "default": 1000,
+        "min": 1000,
+        "max": 5000,
+        "step": 1000,
+        "unit": "ms"
+      }, {
+        "type": "select",
+        "label": "Slider animation",
+        "id": "slide_type",
+        "default": "slide",
+        "options": [
+          {
+            "label": "Fade",
+            "value": "fade"
+          }, {
+            "label": "Loop",
+            "value": "loop"
+          }, {
+            "label": "Slide",
+            "value": "slide"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "Image",
+        "name": "Hero Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "bg_img",
+            "label": "Choose Background Image"
+          },
+          {
+            "type": "header",
+            "content": "First Hostpot Position"
+          },
+          {
+            "type": "checkbox",
+            "id": "first_checkbox",
+            "label": "Display first Hotspot",
+            "default": false
+          },
+          {
+            "type": "product",
+            "id": "first_product",
+            "label": "First Hotspot Product"
+          }, {
+            "type": "range",
+            "id": "first_hotspot_top_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "First Hotspot Top Position",
+            "default": 50
+          }, {
+            "type": "range",
+            "id": "first_hotspot_left_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "First Hotspot Left position",
+            "default": 50
+          }, {
+            "type": "paragraph",
+            "content": "First Product Card Positions"
+          }, {
+            "type": "range",
+            "id": "first_card_top_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "First Card Top Position",
+            "default": 0
+          }, {
+            "type": "range",
+            "id": "first_card_left_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "First Card Left position",
+            "default": 0
+          }, {
+            "type": "url",
+            "id": "first_card_link",
+            "label": "Add To Cart Button For Product 1"
+          }, {
+            "type": "header",
+            "content": "Second Hotspot Position"
+          }, {
+            "type": "checkbox",
+            "id": "second_checkbox",
+            "label": "Display Second Hotspot",
+            "default": false
+          }, {
+            "type": "product",
+            "id": "second_product",
+            "label": "Second Product"
+          }, {
+            "type": "range",
+            "id": "second_hotspot_top_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Second Hotspot Top Position",
+            "default": 0
+          }, {
+            "type": "range",
+            "id": "second_hotspot_left_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Second Hotspot Left position",
+            "default": 0
+          }, {
+            "type": "paragraph",
+            "content": "Second Product Card Positions"
+          }, {
+            "type": "range",
+            "id": "second_card_top_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Second Card Top Position",
+            "default": 0
+          }, {
+            "type": "range",
+            "id": "second_card_left_position",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Second Card Left position",
+            "default": 0
+          }, {
+            "type": "url",
+            "id": "second_card_link",
+            "label": "Second Card Link"
+          }, {
+            "type": "product_list",
+            "id": "selected_products",
+            "label": "Select Products",
+            "info": "Select the products you want to display"
+          }
+        ]
+      }
+    ],
+
+    "presets": [
+      {
+        "name": "Shop The Look"
+      }
+    ]
+  }
+{% endschema %}

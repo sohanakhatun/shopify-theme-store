@@ -1,0 +1,281 @@
+{{ 'customherobanner.css' | asset_url | stylesheet_tag }}
+
+
+{% style %}
+  .custom-padding--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+  }
+  .active-slide {
+    background: {{ section.blocks.first.settings.color_active }};
+  }
+  /* mobile first approach */
+  @media screen and (min-width: 749px) {
+    .custom-padding--{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="custom-heroshow custom-slideshow-wrapper custom-slideshow--{{ section.id }}">
+  <splider-component
+    class="splide"
+    data-desktopPerPage="1"
+    data-mobilePerPage="1"
+    data-tabletPerPage="1"
+    data-autoplay="{{ section.settings.auto_play }}"
+    data-autoplay-speed="{{ section.settings.auto_play_duration | times: 1000 | default: 3000 }}"
+    data-showArrows="{{ section.settings.show_arrows }}"
+    data-showDots="{{section.settings.show_pagination}}"
+    data-showdotsonmobile="{{section.settings.show_dots_mobile}}"
+    data-showdotsontablet="{{section.settings.show_dots_tablet}}">
+    <section id="herosectionslider" class="custom-heroshow--splide">
+      <div class="custom-hero-show--track splide__track">
+        <ul class="custom-hero-show--splide-list splide__list">
+          {% for block in section.blocks %}
+            <li class="custom-hero-show-splide-slide splide__slide">
+              {% if block.settings.desktop_image != blank %}
+                <img
+                  src="{{ block.settings.desktop_image | image_url }}"
+                  alt="Slide Image"
+                  height="auto"
+                  width="auto">
+              {% endif %}
+              <div class="custom-herosection-splidecontent slide-content text-position-{{ block.settings.text_position_selector | default: 'center-center' }} ">
+                {% if block.settings.pre_heading != blank %}
+                  {% if forloop.index == 9 %}
+                    <h1
+                      class="moved-heading"
+                      data-aos="fade-up"
+                      data-aos-duration="3000">{{ block.settings.pre_heading }}</h1>
+                  {% else %}
+                    <div
+                      class="custom-hero-description"
+                      data-aos="fade-up"
+                      data-aos-duration="3000">
+                      <h1>{{ block.settings.pre_heading | strip_html }}</h1>
+                      <span>
+                        {{ block.settings.heading_two | strip_html }}</span>
+
+                      <div class="custom-herobutton">
+                        <button>{{ block.settings.button_label }}</button>
+                      </div>
+                    </div>
+                  {% endif %}
+
+
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  </splider-component>
+</div>
+
+<script src="{{ 'custom-splider.js' | asset_url }}" defer></script>
+
+{% schema %}
+  {
+    "name": "Hero Slideshow",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Slider Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Enable Autoplay",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_pagination",
+        "label": "Show dots",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_dots_tablet",
+        "label": "Show Dots On Tablet",
+        "default": true
+      },  {
+        "type": "checkbox",
+        "id": "show_dots_mobile",
+        "label": "Show Dots On Mobile",
+        "default": true
+      }, 
+      {
+        "type": "checkbox",
+        "id": "show_arrows",
+        "label": "Show Arrows",
+        "default": false
+      }, {
+        "type": "range",
+        "id": "auto_play_duration",
+        "label": "Autoplay duration",
+        "min": 1000,
+        "max": 5000,
+        "step": 1000,
+        "unit": "ms",
+        "default": 2000
+      }, {
+        "type": "header",
+        "content": "Animation Options"
+      }, {
+        "type": "select",
+        "id": "animation",
+        "label": "Animations",
+        "default": "fade",
+        "options": [
+          {
+            "value": "fade",
+            "label": "fade"
+          }, {
+            "value": "loop",
+            "label": "loop"
+          }, {
+            "value": "slide",
+            "label": "slide"
+          }
+        ]
+      }, {
+        "type": "header",
+        "content": "Section Padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "default": 0
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Media Options"
+          },
+          {
+            "type": "image_picker",
+            "id": "desktop_image",
+            "label": "Desktop Image",
+            "info": "Recommended Size:  1360 x 633 px"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile Image",
+            "info": "Recommended Size:  360 x 282 px"
+          },
+          {
+            "type": "header",
+            "content": "Text Customisation"
+          }, {
+            "type": "text",
+            "id": "pre_heading",
+            "label": "Pre Heading",
+            "default": "An Effortless Shopping Experience"
+          }, {
+            "type": "richtext",
+            "id": "heading_two",
+            "label": "Heading",
+            "default": "<p> Start Selling More Online </p>"
+          }, {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button Label",
+            "default": "Shop Now"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Links"
+          }, {
+            "type": "header",
+            "content": "Text Positions"
+          }, {
+            "type": "select",
+            "id": "text_position_selector",
+            "label": "Select Text Positions",
+            "default": "center-center",
+            "options": [
+              {
+                "value": "top-left",
+                "label": "Top Left"
+              },
+              {
+                "value": "top-right",
+                "label": "Top Right"
+              },
+              {
+                "label": "Top Center",
+                "value": "top-center"
+              },
+              {
+                "label": "Center Left",
+                "value": "Center-left"
+              }, {
+                "label": "Center center",
+                "value": "center-center"
+              }, {
+                "label": "Center Right",
+                "value": "center-right"
+              }, {
+                "label": "Bottom Left",
+                "value": "bottom-left"
+              }, {
+                "label": "Bottom Right",
+                "value": "bottom-right"
+              }, {
+                "label": "Bottom Center",
+                "value": "bottom-center"
+              }
+            ]
+          }, {
+            "type": "select",
+            "id": "desktop_content_allignment",
+            "label": "Desktop Content Allignment",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              }, {
+                "value": "right",
+                "label": "Right"
+              }, {
+                "value": "center",
+                "label": "Center"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Slideshow"
+      }
+    ]
+  }
+{% endschema %}

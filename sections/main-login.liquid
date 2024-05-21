@@ -97,25 +97,30 @@
       {%- endif -%}
 
       <div class="field">
+        <p id="emailHeading">Email</p>
         <input
-          type="email"
-          name="customer[email]"
-          id="CustomerEmail"
-          autocomplete="email"
-          autocorrect="off"
-          autocapitalize="off"
-          {% if form.errors contains 'form' %}
-            aria-invalid="true"
-          {% endif %}
-          placeholder="{{ 'customer.login_page.email' | t }}"
-        >
+        type="email"
+     
+        name="customer[email]"
+        id="CustomerEmail"
+        autocomplete="email"
+        autocorrect="off"
+        autocapitalize="off"
+        {% if form.errors contains 'form' %}
+          aria-invalid="true"
+        {% endif %}
+        placeholder="{{ 'customer.login_page.email' | t }}"
+      >
+      
         <label for="CustomerEmail">
           {{ 'customer.login_page.email' | t }}
         </label>
       </div>
 
       {%- if form.password_needed -%}
+     
         <div class="field">
+          <p id="emailHeading">Password</p>
           <input
             type="password"
             value=""
@@ -136,8 +141,11 @@
           {{ 'customer.login_page.forgot_password' | t }}
         </a>
       {%- endif -%}
-
-      <button>
+<div class="terms-and-condition-div">
+  <input type="checkbox"/>
+  <p>By Clicking , I am confirming that I have read and agree with the <span>Terms and Conditons</span> </p>
+</div>
+      <button id="account-page-button">
         {{ 'customer.login_page.sign_in' | t }}
       </button>
 
