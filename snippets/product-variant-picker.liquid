@@ -1,15 +1,14 @@
-{% comment %} 
+{% comment %}
   Renders product variant-picker
- 
-  Accepts: 
-  - product: {Object} product object. 
-  - block: {Object} passing the block information. 
-  - product_form_id: {String} Id of the product form to which the variant picker is associated. 
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
   - update_url: {Boolean} whether or not to update url when changing variants. If false, the url isn't updated. Default: true (optional).
   Usage:
-  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %} 
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
-
 
 {%- unless product.has_only_default_variant -%}
   <variant-selects
@@ -18,9 +17,10 @@
     data-section="{{ section.id }}"
     data-url="{{ product.url }}"
     {% if update_url == false %}
-    data-update-url="false"
+      data-update-url="false"
     {% endif %}
-    {{ block.shopify_attributes }}>
+    {{ block.shopify_attributes }}
+  >
     {%- for option in product.options_with_values -%}
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
@@ -37,20 +37,16 @@
       {%- if picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
           <legend class="form__label" id="ProductSelect-{{ section_id }}">
-
             <span data-selected-swatch-value="{{ option.name }}">
-              {{ option.name }}: {{- option.selected_value -}}
+              {{ option.name }}:
+              {{- option.selected_value -}}
             </span>
           </legend>
-          {% render 'product-variant-options'
-            ,
- product: product
-            ,
- option: option
-            ,
- block: block
-            ,
- picker_type: picker_type
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
@@ -58,17 +54,15 @@
           <span
             class="form__label swatch_label"
             id="customchangecolor"
-            data-color="{{option.selected_value}}">{{ option.name }}:<span class="selected_value">{{ option.selected_value }}</span>
+            data-color="{{option.selected_value}}"
+          >
+            {{- option.name }}:<span class="selected_value">{{ option.selected_value }}</span>
           </span>
-          {% render 'product-variant-options'
-            ,
- product: product
-            ,
- option: option
-            ,
- block: block
-            ,
- picker_type: picker_type
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
           %}
         </fieldset>
       {%- else -%}
@@ -79,25 +73,20 @@
           <div class="select">
             {%- if picker_type == 'swatch_dropdown' -%}
               <span data-selected-dropdown-swatch="options[{{ option.name | escape }}]" class="dropdown-swatch">
-                {% render 'swatch'
-                  , swatch: option.selected_value.swatch
-                  , shape: block.settings.swatch_shape %}
+                {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
               </span>
             {%- endif -%}
             <select
               id="Option-{{ section.id }}-{{ forloop.index0 }}"
               class="select__select"
               name="options[{{ option.name | escape }}]"
-              form="{{ product_form_id }}">
-              {% render 'product-variant-options'
-                ,
- product: product
-                ,
- option: option
-                ,
- block: block
-                ,
- picker_type: picker_type
+              form="{{ product_form_id }}"
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
               %}
             </select>
             {% render 'icon-caret' %}
@@ -121,16 +110,18 @@
         name="id"
         id="Variants-{{ section.id }}"
         class="select__select"
-        form="{{ product_form_id }}">
+        form="{{ product_form_id }}"
+      >
         {%- for variant in product.variants -%}
           <option
             {% if variant == product.selected_or_first_available_variant %}
-            selected="selected"
+              selected="selected"
             {% endif %}
             {% if variant.available == false %}
-            disabled
+              disabled
             {% endif %}
-            value="{{ variant.id }}">
+            value="{{ variant.id }}"
+          >
             {%- liquid
               echo variant.title
               echo variant.price | money | strip_html | prepend: ' - '

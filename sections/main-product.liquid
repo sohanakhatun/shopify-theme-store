@@ -227,8 +227,7 @@
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
-              {% when 'size' %}
-                <a class="trigger-pop-up btn">See Size Chart</a>
+             
 
               {%- when 'inventory' -%}
                 <p
@@ -523,7 +522,7 @@
                               type="button"
                             >
                               <span class="label-show-more label-text"
-                                ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
+                                ><span aria-hidden="true">+</span>{{ 'products.facets.show_more' | t }}
                               </span>
                             </button>
                           </show-more-button>
@@ -551,25 +550,7 @@
                   </div>
                 </div>
 
-                {% comment %} Progress Bar {% endcomment %}
-
-                {% assign total_quantity = product.variants.first.inventory_quantity %}
-
-                {% assign remaining_quantity = product.variants.first.inventory_quantity
-                  | minus: product.variants.first.inventory_quantity_remaining
-                %}
-
-                <div class="progress">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: {{ remaining_quantity | times: 100 | divided_by: total_quantity }}%;"
-                    aria-valuenow="{{ remaining_quantity }}"
-                    aria-valuemin="0"
-                    aria-valuemax="{{ total_quantity }}"
-                  ></div>
-                </div>
-                <p class="progress-text">{{ remaining_quantity }} out of {{ total_quantity }} left</p>
+            
 
               {%- when 'popup' -%}
                 <modal-opener
@@ -596,7 +577,6 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
                 {% comment %} Variant Coupon Code {% endcomment %}
-
               {%- when 'Variant-offer' -%}
                 <div id="coupon">
                   {% if product.selected_or_first_available_variant.metafields.custom.variant_coupon_code != blank %}
@@ -625,19 +605,6 @@
                 </div>
 
               {%- when 'pincode-checker' -%}
-                {% comment %}
-                  <pincode-checker>
-                    <div class="pincode-checker">
-                      <input type="text" id="inputpincode" placeholder="Enter Pincode" maxlength="6">
-                      <button id="checkButton">Check</button>
-                      <div id="infoToast" class="show-green"></div>
-                      <div id="infoToast" class="show-red"></div>
-                      <div id="infoToast" class="show-blue"></div>
-
-                    </div>
-                  </pincode-checker>
-                {% endcomment %}
-
                 <pincode-checker>
                   <div class="pincode-checker">
                     <div class="field pincode-checker__field">
@@ -805,7 +772,7 @@
       {%- if section.settings.media_position == 'right' -%}
         {% comment %} Duplicate gallery to display after product content on tablet/desktop breakpoint {% endcomment %}
         <div class="grid__item product__media-wrapper small-hide">
-          {% render 'product-media-gallery', variant_images: variant_images, is_duplicate: true %}
+           {% render 'custom-product' %}
         </div>
       {%- endif -%}
     </div>

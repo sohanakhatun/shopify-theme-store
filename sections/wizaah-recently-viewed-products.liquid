@@ -16,33 +16,34 @@
       <h2>{{ section.settings.title | escape }}</h2>
     {%- endif -%}
 
-    <div class="recentlyviewed__container">
+    <div class="recentlyviewed__container mm-recentlyviewed__products splide">
       {%- if template.name == 'search' -%}
-        <div class="grid grid--2-col grid--4-col-desktop">
-          {%- assign parsed_terms = search.terms | split: ' OR ' -%}
-          {%- for parsed_term in parsed_terms -%}
-            {%- assign id = parsed_term | split: 'id:' | last | times: 1 -%}
-
-            {%- for product in search.results -%}
-              {%- if product.id == id -%}
-                <div class="grid__item">
-                  {% render 'product-card'
-                    , product: product
-                    , section_id: section.id %}
-                </div>
-                {%- break -%}
-              {%- endif -%}
+        {%- assign parsed_terms = search.terms | split: ' OR ' -%}
+        <div class="splide__track">
+          <ul class="splide__list">
+            {%- for parsed_term in parsed_terms -%}
+              {%- assign id = parsed_term | split: 'id:' | last | times: 1 -%}
+              <li class="splide__slide">      
+                  {%- for product in search.results -%}
+                    {%- if product.id == id -%}
+                      {% render 'product-card', product: product, section_id: section.id %}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+              </li>
             {%- endfor -%}
-          {%- endfor -%}
+            </ul>
         </div>
+     
       {%- endif -%}
     </div>
+    
   </div>
 </div>
 
 
 {%- comment -%} 
-        By default the section is hidden as we do not know if there are product yet
+              By default the section is hidden as we do not know if there are product yet
     {%- endcomment -%}
 {%- if template.name != 'search' or search.results_count == 0 -%}
   <style>

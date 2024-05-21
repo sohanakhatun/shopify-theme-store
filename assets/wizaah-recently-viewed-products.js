@@ -107,12 +107,24 @@ wizaah.RecentlyViewedProducts = (function () {
 
       // Initialize the Splide slider
       new Splide(parentElement, {
-       
         type: "carousel",
-        perPage: 1,
-        arrows:true
-      
+        perPage: 4,
+        gap:6,
+        arrows: true,
+        pagination:false,
+        breakpoints: {
+          1024: {
+            perPage: 3,
+          },
+          768: {
+            perPage: 2,
+          },
+          480: {
+            perPage: 1,
+          },
+        },
       }).mount();
+      
       console.log("splide is mounted")
     }
   }
