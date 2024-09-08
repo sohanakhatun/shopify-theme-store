@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "customherobanner_zH8iqB": {
@@ -44,6 +53,21 @@
         "animation": "fade",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "mm_countdown_timer_XBmnBX": {
+      "type": "mm-countdown-timer",
+      "settings": {
+        "subheading_text": "Add a tagline",
+        "heading_text": "Countdown Timer",
+        "disable_on_completion": true,
+        "countdown_day": "13",
+        "countdown_month": "1",
+        "countdown_year": "2025",
+        "countdown_hour": "00",
+        "countdown_minute": "00",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "custom_whychoose_rBBxT6": {
@@ -313,8 +337,8 @@
       ],
       "settings": {
         "heading": "Reviews",
-        "background_color": "#fff",
-        "text_color": "#000",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
         "heading_size": "h1",
         "show_customer_name": true,
         "auto_play": true,
@@ -480,6 +504,7 @@
   },
   "order": [
     "customherobanner_zH8iqB",
+    "mm_countdown_timer_XBmnBX",
     "custom_whychoose_rBBxT6",
     "custom_collections_VLE8gR",
     "custombestsellers_NPz3U7",
