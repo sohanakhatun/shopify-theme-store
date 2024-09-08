@@ -1,5 +1,61 @@
-{{ 'marmeto-countdown-timer.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'marmeto-countdown-timer.js' | asset_url }}" defer="defer"></script>
+<style>
+  marmeto-countdown-timer {
+    display: block;
+  }
+
+  .marmeto-countdown-timer__header {
+    margin: 0 0 3rem;
+  }
+
+  .marmeto-countdown-timer__header > * {
+    margin: 0;
+  }
+
+  .marmeto-countdown-timer__header > * + * {
+    margin-top: 1rem;
+  }
+
+  .marmeto-countdown-timer {
+    display: block;
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .marmeto-countdown-timer__flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marmeto-countdown-timer__flexitem {
+    padding: 0 1rem;
+  }
+
+  .marmeto-countdown-timer__dynamic {
+    font-weight: bold;
+    font-size: 3rem;
+    line-height: normal;
+  }
+
+  .marmeto-countdown-timer__static {
+    text-transform: uppercase;
+  }
+
+
+
+  @media only screen and (min-width: 750px) {
+    .marmeto-countdown-timer {
+      padding: 5rem 0;
+    }
+    .marmeto-countdown-timer__flexitem {
+      padding: 0 2rem;
+    }
+
+    .marmeto-countdown-timer__dynamic {
+      font-size: 5rem;
+    }
+  }
+</style>
 
 {%- style -%}
   .section-{{ section.id }} {
@@ -62,6 +118,74 @@
     </div>
   </div>
 </marmeto-countdown-timer>
+
+<script>
+    if (!customElements.get('marmeto-countdown-timer')) {
+    class MarmetoCountdownTimer extends HTMLElement {
+      constructor() {
+        super();
+
+        this.countdownEndDay = this.dataset.countdownDay;
+        this.countdownEndMonth = this.dataset.countdownMonth;
+        this.countdownEndYear = this.dataset.countdownYear;
+        this.countdownEndHour = this.dataset.countdownHour;
+        this.countdownEndMinute = this.dataset.countdownMinute;
+        this.countdownTimezone = this.dataset.countdownTimezone;
+        this.disableSection = this.dataset.disableSection;
+
+        this.countdownDaysElement = this.querySelector('[countdown-days-text]');
+        this.countdownHoursElement = this.querySelector('[countdown-hours-text]');
+        this.countdownMinutesElement = this.querySelector('[countdown-minutes-text]');
+        this.countdownSecondsElement = this.querySelector('[countdown-seconds-text]');
+
+        this.countdownEnded = false;
+        this.init();
+      }
+
+      init() {
+        setInterval(() => {
+          if (!this.countdownEnded) {
+            this.startCountdown();
+          }
+        }, 1000);
+      }
+
+      startCountdown() {
+        this.countdownDateString = this.countdownEndMonth + '/' + this.countdownEndDay + '/' + this.countdownEndYear + ' ' + this.countdownEndHour + ':' + this.countdownEndMinute + ' GMT' + this.countdownTimezone;
+        this.countDownDateInteger = new Date(this.countdownDateString).getTime();
+        this.countdownDifference = this.countDownDateInteger - new Date().getTime();
+
+        const days = Math.floor(this.countdownDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((this.countdownDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((this.countdownDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((this.countdownDifference % (1000 * 60)) / 1000);
+
+        if(this.countdownDifference > 0) {
+          this.countdownDaysElement.innerHTML = this.prependZero(days);
+          this.countdownHoursElement.innerHTML = this.prependZero(hours);
+          this.countdownMinutesElement.innerHTML = this.prependZero(minutes);
+          this.countdownSecondsElement.innerHTML = this.prependZero(seconds);
+        } else {
+          this.countdownDaysElement.innerHTML = '00';
+          this.countdownHoursElement.innerHTML = '00';
+          this.countdownMinutesElement.innerHTML = '00';
+          this.countdownSecondsElement.innerHTML = '00';
+
+          this.countdownEnded = true;
+
+          if(this.disableSection) {
+            this.style.display = 'none';
+          }
+        }
+      }
+
+      prependZero(number) {
+        return (number < 10 && number >= 0) ? "0" + number : number;
+      }
+    }
+    customElements.define('marmeto-countdown-timer', MarmetoCountdownTimer);
+  }
+</script>
 
 {% schema %}
 {
