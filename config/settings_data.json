@@ -1,6 +1,15 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "logo": "shopify:\/\/shop_images\/Effortless_200x_2x_39473403-588b-4839-9a08-025d596bff5c.webp",
+    "logo": "shopify://shop_images/Effortless_200x_2x_39473403-588b-4839-9a08-025d596bff5c.webp",
     "logo_width": 110,
     "type_header_font": "montserrat_n8",
     "heading_scale": 105,
@@ -98,11 +107,11 @@
     "sale_badge_color_scheme": "scheme-2ce22579-a361-4bed-9151-596a0e4c27b1",
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "",
-    "brand_description": "<p><\/p>",
+    "brand_description": "<p></p>",
     "brand_image_width": 100,
-    "social_facebook_link": "https:\/\/facebook.com",
-    "social_instagram_link": "https:\/\/facebook.com",
-    "social_youtube_link": "https:\/\/facebook.com",
+    "social_facebook_link": "https://facebook.com",
+    "social_instagram_link": "https://facebook.com",
+    "social_youtube_link": "https://facebook.com",
     "social_tiktok_link": "",
     "social_twitter_link": "",
     "social_snapchat_link": "",
@@ -177,8 +186,7 @@
           "color_settings_D3rP8Y",
           "color_settings_wQFkzP"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "swatches": {
         "type": "swatches",
@@ -239,9 +247,14 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -478,7 +491,7 @@
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-3",
       "brand_headline": "",
-      "brand_description": "<p><\/p>",
+      "brand_description": "<p></p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",
